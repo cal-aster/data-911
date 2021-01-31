@@ -13,7 +13,7 @@ pip install --upgrade setuptools
 ## Compiles and hot-reloads for development
 ```
 source ../../bin/activate
-uvicorn --reload main:wss
+uvicorn --reload main:app
 ```
 
 ## Dockerize and run locally
