@@ -1,0 +1,29 @@
+# Author:  Meryll Dindin
+# Date:    November 04, 2020
+# Project: CalAster
+
+# Development
+*.pyc
+*.ipynb
+__pycache__
+.ipynb_checkpoints
+
+# WIP
+jupyter/
+
+# Environment
+bin/
+etc/
+lib/
+lib64
+share/
+include/
+pyvenv.cfg
+
+# Sensitive
+aws.pem
+
+# DevOps
+bastion/
+configs/
+control.py

@@ -1,0 +1,16 @@
+# Author:  Meryll Dindin
+# Date:    November 04, 2020
+# Project: CalAster
+
+*
+
+# Application
+!main.py
+!src/
+!routers/
+!requirements.txt
+
+# Instance
+!.ebextensions/
+!Dockerfile
+!Dockerrun.aws.json

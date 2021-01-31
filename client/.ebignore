@@ -1,0 +1,14 @@
+# Author:  Meryll Dindin
+# Date:    November 04, 2020
+# Project: CalAster
+
+*
+
+# Application
+!dist/
+!nginx.conf
+
+# Instance
+!Dockerfile
+!Dockerrun.aws.json
+!.ebextensions/

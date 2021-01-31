@@ -1,0 +1,16 @@
+# Author:  Meryll Dindin
+# Date:    November 04, 2020
+# Project: CalAster
+
+# Development
+dist
+node_modules
+
+# Secrets
+.*.development
+.*.staging
+.*.production
+
+# DevOps
+.ebextensions
+.elasticbeanstalk

@@ -1,0 +1,165 @@
+.headline-1 {
+    font-size: 7rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .headline-2 {
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .headline-3 {
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: var(--v-primary-base);
+  }
+
+  .headline-5 {
+    font-size: 30px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.07;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .quote {
+    font-size: 44px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: 0.44px;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .body {
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .subtitle-1 {
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .subtitle-2 {
+    font-size: 25px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.96;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .subtitle-3 {
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.32px;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .subtitle-4 {
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.32px;
+    text-align: left;
+    color: var(--v-primary-base);
+    word-break: break-word;
+  }
+
+  .subtitle-5 {
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.32px;
+    text-align: left;
+    color: #9798a6;
+    word-break: break-word;
+  }
+
+  @media screen and (max-width: 1600px) {
+    .headline-1 {
+      font-size: 4.8rem;
+      line-height: 1.08;
+    }
+
+    .headline-2 {
+      font-size: 2.4rem;
+      line-height: 1.25;
+    }
+
+    .headline-3 {
+      font-size: 1.6rem;
+      letter-spacing: 0.32px;
+    }
+  }
+
+  @media screen and (max-width: 960px) {
+    .headline-1 {
+      font-size: 3.2rem;
+      line-height: 1.13;
+    }
+
+    .headline-2 {
+      font-size: 2rem;
+      line-height: 1.5;
+      letter-spacing: 0.4px;
+    }
+
+    .headline-3 {
+      font-size: 1.6rem;
+      letter-spacing: 0.32px;
+    }
+  }
