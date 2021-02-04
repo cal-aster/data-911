@@ -28,21 +28,13 @@ class Cache:
 
     def build_weekly(self, city, table, start, end):
 
-        # Delete conflicting entries
+        # Retrieve initial monday
         m_n = parser.parse(start)
         m_n = m_n - timedelta(days=m_n.weekday())
-        m_n = m_n.strftime("%Y-%m-%d")
-        qry = f"DELETE FROM Weekly \
-                WHERE city='{city}' AND monday BETWEEN '{m_n}' AND '{end}'"
-        self.sql.run(qry)
-        # Build the list of mondays
-        qry = f"SELECT MIN(date) AS min_date, MAX(date) AS max_date \
-                FROM Daily WHERE city='{city}' \
-                 AND date BETWEEN '{start}' AND '{end}'"
-        dts = self.sql.unique(qry)
-        m_n = parser.parse(dts.get('min_date'))
-        m_n = m_n - timedelta(days=m_n.weekday())
-        m_x = parser.parse(dts.get('max_date'))
+        # Retrieve unreached monday
+        m_x = parser.parse(end)
+        m_x = m_x + timedelta(days=6 - m_x.weekday())
+        # Build list of weeks
         dts = [
             r.strftime("%Y-%m-%d") for r in dateutil.rrule.rrule(
                 dateutil.rrule.WEEKLY,
@@ -50,12 +42,24 @@ class Cache:
                 dtstart=m_n
             ).between(m_n, m_x, inc=True)
         ]
+        # Recompose boundaries
+        m_n = m_n.strftime("%Y-%m-%d")
+        m_x = m_x.strftime("%Y-%m-%d")
+        # Delete conflicting entries
+        qry = f"DELETE FROM Weekly \
+                WHERE city='{city}' \
+                AND monday BETWEEN '{m_n}' AND '{m_x}'"
+        self.sql.run(qry)
         # Group by weeks
         qry = f"SELECT DISTINCT date, num_calls FROM Daily \
                 WHERE city='{city}' \
-                  AND date BETWEEN '{start}' AND '{end}'"
-        num = {r.get('date'): r.get('num_calls') for r in self.sql.get(qry)}
+                AND date BETWEEN '{m_n}' AND '{m_x}'"
+        num = {
+            r.get('date'): r.get('num_calls')
+            for r in self.sql.get(qry)
+        }
         res = dict(zip(dts, [0 for _ in range(len(dts))]))
+        # Iterate over the weeks
         for dte, num in num.items():
             res[max([d for d in dts if d <= dte])] += num
         # Update Weekly table entry
