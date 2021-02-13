@@ -37,6 +37,7 @@
         no-gutters
         style="
           min-height: calc(100vh - 92px);
+          display: block;
         "
         v-bind:style="{
           padding: $vuetify.breakpoint.smAndDown ? '0' : '0 14px'
@@ -50,7 +51,9 @@
           xl="2"
           v-for="city in fCities"
           :key="city.id"
-          style="max-height: 200px;"
+          style="
+            max-height: 200px;
+          "
           v-bind:style="{
             padding: $vuetify.breakpoint.smAndDown ? '0 10px 20px 10px' : '0px 16px 20px 16px'
           }"
