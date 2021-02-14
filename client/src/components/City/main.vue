@@ -50,28 +50,37 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        tab: 0,
-        city: null,
-        timedMap: false
-      };
-    },
-    created() {
-      this.load()
-    },
-    methods: {
-      load() {
-        this.$http
-        .get("/city/" + this.$route.params.id)
-        .then(response => {
-          this.city = response.data
-          setTimeout(() => {
-            this.timedMap = true
-          }, 200)
-        })
+export default {
+  data() {
+    return {
+      tab: 0,
+      city: {},
+      timedMap: false
+    };
+  },
+  metaInfo() {
+    return {
+      title: `Data911 - ${this.city.city}, ${this.city.state}`,
+      htmlAttrs: {
+        lang: 'en'
       }
     }
-  };
+  },
+  created() {
+    this.load()
+  },
+  methods: {
+    load() {
+      this.$http
+      .get("/city/" + this.$route.params.id)
+      .then(response => {
+        this.city = response.data
+        this.$meta().setOptions({ title: this.city.city })
+        setTimeout(() => {
+          this.timedMap = true
+        }, 200)
+      })
+    }
+  }
+};
 </script>

@@ -14,6 +14,7 @@
     >
       <a
         href="https://github.com/cal-aster/data-911"
+        rel="noopener"
         target="_blank"
         style="
           text-decoration: none;

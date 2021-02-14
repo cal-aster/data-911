@@ -169,14 +169,20 @@
 </style>
 
 <script>
-  export default {
-    data() {
-      return {
-        state: 0
-      }
-    },
-    mounted() {
-      setInterval(() => { this.state = (this.state + 1) % 2}, 3000)
+export default {
+  metaInfo: {
+    title: 'Data911',
+    htmlAttrs: {
+      lang: 'en'
     }
+  },
+  data() {
+    return {
+      state: 0
+    }
+  },
+  mounted() {
+    setInterval(() => { this.state = (this.state + 1) % 2}, 3000)
   }
+}
 </script>

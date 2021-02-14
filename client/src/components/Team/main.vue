@@ -122,3 +122,14 @@
   }
 }
 </style>
+
+<script>
+export default {
+  metaInfo: {
+    title: 'Data911 - Team',
+    htmlAttrs: {
+      lang: 'en'
+    }
+  },
+}
+</script>

@@ -66,48 +66,54 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        search: "",
-        cities: this.$store.state.cities
-      }
-    },
-    computed: {
-      nCalls() {
-        var count = 0
-        this.cities.forEach(x => {
-          count += x.num_calls
-        })
-        return count
-      },
-      fCities() {
-        return this.cities.filter(x => {
-          return x.city.toLowerCase().includes(this.search.toLowerCase())
-        })
-      }
-    },
-    methods: {
-      days( start, end ) {
-        var d_0 = new Date(start)
-        var d_1 = new Date(end)
-        return (d_1.getTime() - d_0.getTime()) / (1000 * 3600 * 24)
-      },
-      update() {
-        this.cities.forEach(x => {
-          if (!this.minDate) {
-            this.minDate = x.min_date
-          } else if (x.min_date < this.minDate) {
-            this.minDate = x.min_date
-          }
-          if (!this.maxDate) {
-            this.maxDate = x.max_date
-          } else if (x.max_date > this.maxDate) {
-            this.maxDate = x.max_date
-          }
-        })
-        this.numDays = this.days(this.minDate, this.maxDate)
-      }
+export default {
+  metaInfo: {
+    title: 'Data911 - Dashboard',
+    htmlAttrs: {
+      lang: 'en'
     }
-  };
+  },
+  data() {
+    return {
+      search: "",
+      cities: this.$store.state.cities
+    }
+  },
+  computed: {
+    nCalls() {
+      var count = 0
+      this.cities.forEach(x => {
+        count += x.num_calls
+      })
+      return count
+    },
+    fCities() {
+      return this.cities.filter(x => {
+        return x.city.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
+  },
+  methods: {
+    days( start, end ) {
+      var d_0 = new Date(start)
+      var d_1 = new Date(end)
+      return (d_1.getTime() - d_0.getTime()) / (1000 * 3600 * 24)
+    },
+    update() {
+      this.cities.forEach(x => {
+        if (!this.minDate) {
+          this.minDate = x.min_date
+        } else if (x.min_date < this.minDate) {
+          this.minDate = x.min_date
+        }
+        if (!this.maxDate) {
+          this.maxDate = x.max_date
+        } else if (x.max_date > this.maxDate) {
+          this.maxDate = x.max_date
+        }
+      })
+      this.numDays = this.days(this.minDate, this.maxDate)
+    }
+  }
+};
 </script>

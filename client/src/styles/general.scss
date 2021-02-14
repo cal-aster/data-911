@@ -4,10 +4,15 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 100%;
-  display: block;
+@font-face {
   font-family: "Roboto";
+  src: local("Roboto"), url(../fonts/roboto.ttf) format("truetype");
+}
+
+html {
+  font-size: 80%;
+  font-family: "Roboto";
+  display: block;
 }
 
 body {

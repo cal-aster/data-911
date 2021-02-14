@@ -45,6 +45,7 @@
                 class="subtitle-3"
                 style="font-weight: bold;"
                 :href="linkedin"
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 LinkedIn

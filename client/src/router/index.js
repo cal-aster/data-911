@@ -1,16 +1,17 @@
 import Vue from 'vue'
-import Meta from 'vue-meta'
+import VueMeta from 'vue-meta'
 import Router from 'vue-router'
 import { routes } from './routes'
 
 Vue.use(Router)
+Vue.use(VueMeta, {
+  refreshOnceOnNavigation: true
+})
 
 const router = new Router({
   base: '/',
   mode: 'history',
   routes: routes
 })
-
-Vue.use(Meta)
 
 export default router

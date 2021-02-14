@@ -7,12 +7,13 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 import VueGtag from "vue-gtag";
 
+Vue.use(VueGtag, {
+  config: { id: "G-ZZDN92GEE8" },
+  enabled: process.env.NODE_ENV === 'production'
+}, router);
+
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
-
-Vue.use(VueGtag, {
-  config: { id: "G-LKKMZ29BBP" }
-}, router);
 
 axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
 axios.defaults.headers.common.Accept = 'application/json';

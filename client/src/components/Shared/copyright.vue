@@ -4,6 +4,7 @@
   >
     <a
       href="https://calaster.com"
+      rel="noopener"
       target="_blank"
       style="
         font-size: 12px;
