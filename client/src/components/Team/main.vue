@@ -22,25 +22,16 @@
           }"
         >
           <div style="width: 100%;">
-            <span
-              class="text--primary"
-              style="
-                display: block;
-                font-size: min(4.5vw, 20px) !important;
-                font-weight: normal;
-                line-height: min(6vw, 30px) !important;
-              "
-            >
-              At <shared-calaster />, we are a team passionate about bringing
-              meaningful change to the emergency response ecosystem. By analyzing emergency
-              calls in real time, we ensure that 911 operators can focus their efforts on
-              providing emotional support to victims during emergencies. By relieving
-              operators of the burden of taking notes and extracting key information from calls,
-              we limit call time, ensuring operators can address the next emergency faster.
-              <br /><br />
-              <shared-calaster /> has built the first visualization platform
-              gathering performance metrics for 911 call centers across the US.
-            </span>
+            <p class="text">
+              The only way to truly empower first responders is by disrupting the workflow
+              in several places simultaneously. CalAster focuses on mental health support, but our work has an even
+              broader scope.
+            </p>
+            <p class="text">
+              CalAster has built the first open-source visualization platform for 911
+              call center data across the US. We are continuously increasing the list of available cities
+              so check it out!
+            </p>
           </div>
         </v-col>
         <v-spacer />
@@ -104,4 +95,30 @@
 </template>
 
 <style style="scss" scoped>
+.text {
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--v-primary-base);
+  word-break: break-word;
+}
+@media only screen and (max-width: 1904px) {
+  .text {
+    font-size: 22px;
+  }
+}
+@media only screen and (max-width: 1264px) {
+  .text {
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 960px) {
+  .text {
+    font-size: 16px;
+  }
+}
 </style>

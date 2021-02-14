@@ -15,6 +15,7 @@
     <v-col
       cols="12"
       lg="6"
+      xl="4"
       style="
         height: calc(100vh - 142px);
         margin: 80px 0px 62px 0px;
@@ -33,9 +34,10 @@
       />
     </v-col>
     <v-col
+      v-if="$vuetify.breakpoint.lgAndUp"
       cols="6"
+      xl="8"
       style="padding: 0; margin: 0;"
-      class="d-none d-md-block"
     >
       <city-map-main
         v-if="city && timedMap"

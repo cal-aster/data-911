@@ -62,7 +62,7 @@
     position: absolute;
     display: flex;
     top: 10px;
-    left: calc(50% + 30px);
+    left: calc(33.3% + 30px);
     z-index: 5;
   }
   .button {
@@ -87,6 +87,11 @@
   }
   .button:hover span {
     color: var(--v-surface-base) !important;
+  }
+  @media only screen and (max-width: 1904px) {
+    .component {
+      left: calc(50% + 30px);
+    }
   }
   @media only screen and (max-width: 1264px) {
     .component {

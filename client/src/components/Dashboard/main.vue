@@ -25,45 +25,43 @@
         right: $vuetify.breakpoint.smAndDown ? '10px' : '30px'
       }"
     />
-    <perfect-scrollbar
-      style="
-        margin: 80px 0px 56px 0px;
-        width: 100%;
-        height: calc(100vh - 142px);
-        max-height: calc(100vh - 142px);
-      "
+    <v-row
+      no-gutters
+      v-bind:style="{
+        padding: $vuetify.breakpoint.smAndDown ? '0' : '0 14px'
+      }"
     >
-      <v-row
-        no-gutters
+      <perfect-scrollbar
         style="
-          min-height: calc(100vh - 92px);
-          display: block;
+          margin: 80px 0px 56px 0px;
+          width: 100%;
+          height: calc(100vh - 142px);
+          max-height: calc(100vh - 142px);
         "
-        v-bind:style="{
-          padding: $vuetify.breakpoint.smAndDown ? '0' : '0 14px'
-        }"
       >
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-          xl="2"
-          v-for="city in fCities"
-          :key="city.id"
-          style="
-            max-height: 200px;
-          "
-          v-bind:style="{
-            padding: $vuetify.breakpoint.smAndDown ? '0 10px 20px 10px' : '0px 16px 20px 16px'
-          }"
-        >
-          <dashboard-city
-            :city="city"
-          />
-        </v-col>
-      </v-row>
-    </perfect-scrollbar>
+        <v-row no-gutters>
+          <v-col
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+            xl="2"
+            v-for="city in fCities"
+            :key="city.id"
+            style="
+              max-height: 232px;
+            "
+            v-bind:style="{
+              padding: $vuetify.breakpoint.smAndDown ? '0 10px 20px 10px' : '0px 16px 32px 16px'
+            }"
+          >
+            <dashboard-city
+              :city="city"
+            />
+          </v-col>
+        </v-row>
+      </perfect-scrollbar>
+    </v-row>
   </div>
 </template>
 

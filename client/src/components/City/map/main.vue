@@ -42,16 +42,24 @@
         </v-row>
       </v-card>
     </v-overlay>
+    <v-overlay
+      v-if="!city.localized"
+      absolute
+      :opacity="0.33"
+      class="overlay"
+    />
     <city-map-toggle
+      v-if="city.localized"
       v-on:toggle="(v) => { type = v }"
     />
     <city-map-dates
-      v-if="isCityReady"
+      v-if="isCityReady && city.localized"
       :city="city"
       :dates="dates"
       v-on:dates="(v) => { dates = v }"
     />
     <city-map-records
+      v-if="city.localized"
       :data="data"
       :records="records"
     />
@@ -82,38 +90,44 @@
 </template>
 
 <style>
-  .mapboxgl-ctrl-bottom-right {
-    display: none !important;
-  }
-  .mapboxgl-ctrl-bottom-left {
-    bottom: 8px !important;
-    left: 50% !important;
-    width: 100px !important;
-  }
+.mapboxgl-ctrl-bottom-right {
+  display: none !important;
+}
+.mapboxgl-ctrl-bottom-left {
+  bottom: 8px !important;
+  left: 50% !important;
+  width: 100px !important;
+}
 </style>
 
 <style type="scss" scoped>
-  .card {
-    width: 25vw;
-    padding: 0 16px;
-    background-color: transparent !important;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-  }
+.card {
+  width: 25vw;
+  padding: 0 16px;
+  background-color: transparent !important;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+.overlay {
+  position: absolute;
+  width: 66.6vw;
+  top: 0;
+  right: 0;
+  left: 33.3vw;
+  z-index: 1;
+}
+@media only screen and (max-width: 1904px) {
   .overlay {
-    position: absolute;
     width: 50vw;
-    top: 0;
-    right: 0;
     left: 50vw;
-    z-index: 1;
   }
-  @media only screen and (max-width: 1264px) {
-    .overlay {
-      display: none;
-    }
+}
+@media only screen and (max-width: 1264px) {
+  .overlay {
+    display: none;
   }
+}
 </style>
 
 <script>

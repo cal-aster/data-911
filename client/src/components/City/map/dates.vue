@@ -45,68 +45,72 @@
 </template>
 
 <style type="scss" scoped>
+.component {
+  height: 32px;
+  min-width: fit-content;
+  padding: 0 8px 0 16px;
+  background-color: var(--v-surface-base) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
+  position: absolute;
+  display: flex;
+  top: 10px;
+  right: 30px;
+  z-index: 5;
+  align-items: center;
+}
+@media only screen and (max-width: 1264px) {
   .component {
-    height: 32px;
-    min-width: fit-content;
-    padding: 0 8px 0 16px;
-    background-color: var(--v-surface-base) !important;
-    border-radius: 4px !important;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
-    position: absolute;
-    display: flex;
-    top: 10px;
-    right: 30px;
-    z-index: 5;
-    align-items: center;
+    display: none;
   }
-  @media only screen and (max-width: 1264px) {
-    .component {
-      display: none;
-    }
-  }
+}
 </style>
 
 <script>
-  import _ from "lodash";
+import _ from "lodash";
 
-  export default {
-    props: {
-      city: {
-        type: Object,
-        default: () => {}
-      },
-      dates: {
-        type: Array,
-        default: () => []
-      }
+export default {
+  props: {
+    city: {
+      type: Object,
+      default: () => {}
     },
-    data() {
-      return {
-        menu: null
-      }
-    },
-    watch: {
-      menu() {
-        if (!this.menu) {
-          if (this.dates.length == 0) {
-            this.$emit('dates', [this.city.max_date])
-          } else {
-            this.$emit('dates', this.dates)
-          }
+    dates: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data() {
+    return {
+      menu: null
+    }
+  },
+  watch: {
+    menu() {
+      if (!this.menu) {
+        if (this.dates.length == 0) {
+          this.$emit('dates', [this.city.max_date])
+        } else {
+          this.$emit('dates', this.dates)
+        }
+      } else {
+        if (this.dates.length == 0) {
+          this.dates = [this.city.max_date]
         }
       }
-    },
-    computed: {
-      fDates() {
-        var sDates = _.cloneDeep(this.dates)
-        sDates.sort()
-        return sDates.join(' to ')
-      },
-      tDates() {
-        var dates = _.cloneDeep(this.dates)
-        dates.sort()
-        return `${dates[0]} ~ ${dates[1] ? dates[1] : dates[0]}`
-      }
     }
-  };
+  },
+  computed: {
+    fDates() {
+      var sDates = _.cloneDeep(this.dates)
+      sDates.sort()
+      return sDates.join(' to ')
+    },
+    tDates() {
+      var dates = _.cloneDeep(this.dates)
+      dates.sort()
+      return `${dates[0]} ~ ${dates[1] ? dates[1] : dates[0]}`
+    }
+  }
+};
 </script>

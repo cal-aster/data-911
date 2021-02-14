@@ -69,7 +69,12 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
     position: absolute;
     top: 10px;
-    right: calc(50% + 30px);
+    right: calc(66.6% + 30px);
+  }
+  @media only screen and (max-width: 1904px) {
+    .card {
+      right: calc(50% + 30px);
+    }
   }
   @media only screen and (max-width: 1264px) {
     .card {
