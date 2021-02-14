@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       tab: 0,
-      city: {},
+      city: null,
       timedMap: false
     };
   },
@@ -75,7 +75,6 @@ export default {
       .get("/city/" + this.$route.params.id)
       .then(response => {
         this.city = response.data
-        this.$meta().setOptions({ title: this.city.city })
         setTimeout(() => {
           this.timedMap = true
         }, 200)

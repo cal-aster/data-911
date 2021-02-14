@@ -111,9 +111,9 @@
             textAlign: $vuetify.breakpoint.xs ? 'center' : 'start'
           }"
         >
-          {{ $vuetify.breakpoint.xs ? 'How' : 'how'}} call centers
+          {{ $vuetify.breakpoint.xs ? 'How are call centers' : 'how call centers are'}}
           <br v-if="$vuetify.breakpoint.xs" />
-          are doing near you{{ $vuetify.breakpoint.xs ? '?' : ''}}
+          doing near you{{ $vuetify.breakpoint.xs ? '?' : ''}}
         </span>
       </v-row>
     </div>
