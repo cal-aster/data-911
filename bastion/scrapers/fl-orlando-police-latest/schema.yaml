@@ -1,0 +1,10 @@
+FL_Orlando:
+  address: "VARCHAR(128)"
+  class: "VARCHAR(32)"
+  date: "VARCHAR(12)"
+  disposition: "VARCHAR(128)"
+  incident: "VARCHAR(32)"
+  latitude: "FLOAT"
+  longitude: "FLOAT"
+  time: "VARCHAR(5)"
+  timestamp: "INT UNSIGNED"

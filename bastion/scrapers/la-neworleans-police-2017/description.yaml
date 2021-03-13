@@ -1,0 +1,81 @@
+api_url: https://data.nola.gov/resource/bqmt-f3jk.json
+attributes:
+  nopd_item:
+    type: string
+  type_:
+    type: integer
+  typetext:
+    type: string
+  priority:
+    type: string
+  mapx:
+    type: string
+  mapy:
+    type: string
+  timecreate:
+    type: string
+  timedispatch:
+    type: string
+  timearrive:
+    type: string
+  timeclosed:
+    type: string
+  disposition:
+    type: string
+  dispositiontext:
+    type: string
+  initialtype:
+    type: integer
+  initialtypetext:
+    type: string
+  initialpriority:
+    type: string
+  selfinitiated:
+    type: string
+  beat:
+    type: string
+  block_address:
+    type: string
+  zip:
+    type: string
+  policedistrict:
+    type: integer
+  location:
+    latitude:
+      type: float
+    longitude:
+      type: float
+  :@computed_region_ewbu_t8bu:
+    type: integer
+  :@computed_region_k37d_then:
+    type: integer
+  :@computed_region_m56f_hbma:
+    type: integer
+  :@computed_region_7fw3_kdpf:
+    type: integer
+  :@computed_region_spev_d8jm:
+    type: integer
+  :@computed_region_sikx_bdeb:
+    type: integer
+  :@computed_region_evki_aju8:
+    type: integer
+  :@computed_region_u4yh_3wk9:
+    type: integer
+city: New Orleans
+data_token: bqmt-f3jk
+data_url: https://data.nola.gov/Public-Safety-and-Preparedness/Calls-for-Service-2017/bqmt-f3jk
+department: police
+description: This dataset captures all New Orleans Police Department Calls for Service. Data is provided by Orleans Parish 
+  Communication District (OPCD), the administrative office of 9-1-1 for the City of New Orleans.
+latitude: 29.951065
+longitude: -90.071533
+notes: In the OPCD system, NOPD may reclassify or change the signal type for up to 36 hours after the incident is marked up. 
+  For information about an incident after this time period, citizens may request police reports from the NOPD Public Records Division.
+population: 391006
+primary_key: nopd_item
+refresh_frequency: daily
+source_url: data.nola.gov
+state: LA
+state_name: Louisiana
+timezone: America/New_Orleans
+zoom: 11

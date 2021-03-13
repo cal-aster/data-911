@@ -1,0 +1,55 @@
+api_url: https://data.cambridgema.gov/resource/ppai-cur6.json
+attributes:
+  type:
+    type: string
+  group:
+    type: string
+  fygroup:
+      type: string
+  primaryagency:
+      type: string
+  address:
+      type: string
+  priority:
+      type: integer
+  datetimereceived:
+      type: string
+  alarmlevel:
+      type: string
+  reportingarea:
+      type: string
+  firebox:
+      type: string
+  policesector:
+      type: string
+  ladderdistrict:
+      type: string
+  enginedistrict:
+      type: string
+  policeroute:
+      type: string
+  datetimeclosed:
+      type: string
+  neighborhood_id:
+      type: integer
+  neighborhood:
+      type: string
+city: Cambridge
+data_token: ppai-cur6
+data_url: https://data.cambridgema.gov/Public-Safety/Computer-Aided-Dispatch-Entries/ppai-cur6
+department: police
+description: This dataset captures all Cambridge, MA Police Department Calls for Service.
+latitude: 39.1031182
+longitude: -84.5120196
+notes: The Computer Aided Dispatch (CAD) Entries data set reflects information approved for
+  general release by the Cambridge Police Department and the Cambridge Fire Department.
+  All entries are inputted by dispatchers in the Emergency Communications Center (ECC).
+  This data set does not reflect all events received by the ECC.
+population: 118977
+primary_key: datetimereceived
+refresh_frequency: quarterly
+source_url: data.cambridgema.gov
+state: MA
+state_name: Massachusetts
+timezone: America/New_York
+zoom: 11

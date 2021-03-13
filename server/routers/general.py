@@ -2,39 +2,47 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.helpers import *
+from src.imports import APIRouter, Response, status, jsonable_encoder
+from services import timestamps, sql_executor
 
 router = APIRouter()
 
+
 @router.get(
     "/health",
-    tags=["status"],
     response_model=str,
     summary="Simple route for health check.",
 )
 async def health():
     """
-        Returns simple response for health check.
+    Returns simple response for health check.
     """
     return Response(status_code=status.HTTP_200_OK)
 
+
 @router.get(
     "/performances",
-    tags=["performances"],
     summary="Depict backend performances",
 )
 async def performances():
+    results = dict()
+    one_day = timestamps.now() - 24 * 3600
+    seven_days = timestamps.now() - 7 * 24 * 3600
+    four_weeks = timestamps.now() - 28 * 24 * 3600
 
-    res = dict()
-    t1d = mng.timestamp() - 24*3600
-    t7d = mng.timestamp() - 7*24*3600
-    t28 = mng.timestamp() - 28*24*3600
+    for (acronym, offset) in [
+        ("t1d", one_day),
+        ("t7d", seven_days),
+        ("t28", four_weeks),
+    ]:
+        results.update(
+            sql_executor.get_unique(
+                f"SELECT MAX(completion) as top_{acronym}, \
+                    MIN(completion) as min_{acronym}, \
+                    AVG(completion) as avg_{acronym} \
+                FROM Trackings WHERE timestamp >= ?",
+                (offset,),
+            )
+        )
 
-    for (suf, tme) in [("t1d", t1d), ("t7d", t7d), ("t28", t28)]:
-        qry = f"SELECT MAX(completion) as top_{suf}, \
-                    MIN(completion) as min_{suf}, \
-                    AVG(completion) as avg_{suf} \
-                FROM Trackings WHERE timestamp >= {tme}"
-        res.update(mng.sql.unique(qry))
-
-    return jsonable_encoder(res)
+    return jsonable_encoder(results)

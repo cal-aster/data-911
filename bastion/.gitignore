@@ -1,0 +1,15 @@
+# Author:  Meryll Dindin
+# Date:    November 04, 2020
+# Project: CalAster
+
+# Development
+*.pyc
+*.ipynb
+__pycache__/
+.ipynb_checkpoints/
+
+# Secrets
+.ebextensions
+.env.development
+.*.staging
+.*.production

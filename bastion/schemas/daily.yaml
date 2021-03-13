@@ -1,0 +1,4 @@
+Daily:
+  city: "VARCHAR(32) NOT NULL"
+  date: "VARCHAR(10) NOT NULL"
+  num_calls: "SMALLINT UNSIGNED NOT NULL"

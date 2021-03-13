@@ -1,0 +1,46 @@
+api_url: https://data.sfgov.org/resource/hz9m-tj6z.json
+attributes:
+  crime_id:
+    type: integer
+  original_crimetype_name:
+    type: string
+  report_date:
+    type: string
+  call_date:
+    type: string
+  offense_date:
+    type: string
+  call_time:
+    type: string
+  call_dttm:
+    type: string
+  disposition:
+    type: string
+  address:
+    type: string
+  city:
+    type: string
+  state:
+    type: string
+  agency_id:
+    type: integer
+  address_type:
+    type: string
+  common_location:
+    type: string
+city: San Francisco
+data_token: hz9m-tj6z
+data_url: https://data.sfgov.org/Public-Safety/Police-Department-Calls-for-Service/hz9m-tj6z
+department: police
+description: This dataset includes Calls for service regarding criminal activity (unverified) from SFPD.
+latitude: 37.773972
+longitude: -122.431297
+notes:
+population: 883305
+primary_key: call_date
+refresh_frequency: daily
+source_url: data.sfgov.org
+state: CA
+state_name: California
+timezone: America/Los_Angeles
+zoom: 11

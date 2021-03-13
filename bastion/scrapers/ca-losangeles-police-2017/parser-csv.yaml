@@ -1,0 +1,24 @@
+area:
+  source: Area Occurred
+  type: string
+class:
+  source: Call Type Code
+  type: string
+date:
+  source: Dispatch Date
+  type: date
+description:
+  source: Call Type Description
+  type: string
+district:
+  source: Reporting District
+  type: string
+incident:
+  source: Incident Number
+  type: string
+time:
+  source: Dispatch Time
+  type: time
+timestamp:
+  source: (Dispatch_Date Dispatch_Time)
+  type: timestamp

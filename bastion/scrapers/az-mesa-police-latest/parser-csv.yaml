@@ -1,0 +1,36 @@
+address:
+  source: Event Address
+  type: string
+beat:
+  source: Dispatch Group
+  type: string
+classification: 
+  source: Event Type Description
+  type: string
+date: 
+  source: Creation Datetime
+  type: date
+division: 
+  source: Division
+  type: string
+incident:
+  source: Event Number 
+  type: string
+latitude: 
+  source: Latitude
+  type: float
+longitude: 
+  source: Longitude
+  type: float
+priority:
+  source: Call Priority
+  type: string
+response:
+  source: Response Time Seconds
+  type: integer
+time:
+  source: Creation Datetime 
+  type: time
+timestamp: 
+  source: Creation Datetime
+  type: timestamp

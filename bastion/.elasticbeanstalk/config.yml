@@ -1,0 +1,10 @@
+branch-defaults:
+  default:
+    environment: 911-BASTION
+  master:
+    environment: 911-BASTION
+global:
+  application_name: data911
+  default_ec2_keyname: data911
+  default_platform: Docker running on 64bit Amazon Linux
+  workspace_type: Application

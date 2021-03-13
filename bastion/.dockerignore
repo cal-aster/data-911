@@ -1,0 +1,10 @@
+# Author:  Meryll Dindin
+# Date:    November 04, 2020
+# Project: CalAster
+
+*
+
+# Codebase
+!src/
+!main.py
+!requirements.txt

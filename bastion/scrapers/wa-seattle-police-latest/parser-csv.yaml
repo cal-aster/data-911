@@ -1,0 +1,45 @@
+beat:
+  source: Beat
+  type: string
+class:
+  source: Initial Call Type
+  type: string
+class_end:
+  source: Final Call Type
+  type: string
+date:
+  source: Original Time Queued
+  type: date
+date_arrival:
+  source: Arrived Time
+  type: date
+description:
+  source: Event Clearance Description
+  type: string
+incident:
+  source: CAD Event Number
+  type: integer
+priority:
+  source: Priority
+  type: integer
+sector:
+  source: Sector
+  type: string
+time:
+  source: Original Time Queued
+  type: time
+time_arrival:
+  source: Arrived Time
+  type: time
+timestamp:
+  source: Original Time Queued
+  type: timestamp
+timestamp_arrival:
+  source: Arrived Time
+  type: timestamp
+type:
+  source: Call Type
+  type: string
+zone:
+  source: Precinct
+  type: string

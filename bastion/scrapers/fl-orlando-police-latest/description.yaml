@@ -1,0 +1,40 @@
+api_url: https://data.cityoforlando.net/resource/69ge-5wp8.json
+attributes:
+  incident_number:
+    type: string
+  incident_date_time:
+    type: string
+  incident_location:
+    type: string
+  incident_type:
+    type: string
+  incident_disposition_class:
+    type: string
+  incident_disposition:
+    type: string
+  status:
+    type: string
+  location:
+    latitude:
+      type: string
+    longitude:
+      type: string
+city: Orlando
+data_token: 69ge-5wp8
+data_url: https://data.cityoforlando.net/Orlando-Police/OPD-Calls-For-Service/69ge-5wp8
+department: police
+description: This dataset comes from the Orlando Police Department records management system.
+latitude: 28.5383355
+longitude: -81.3792365
+notes: It includes all calls for service regardless of where or who initiates the call.
+  This includes 911 calls, non-emergency calls and officer-initiated calls.
+  Calls that are of a sensitive nature when they come in or are sensitive based on the case
+  that is opened from the call are excluded to protect the privacy of the victims.
+population: 285713
+primary_key: null
+refresh_frequency: daily
+source_url: data.cityoforlando.net
+state: FL
+state_name: Florida
+timezone: America/New_York
+zoom: 11

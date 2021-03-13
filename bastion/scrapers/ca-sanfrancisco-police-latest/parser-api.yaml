@@ -1,0 +1,21 @@
+address:
+  source: address
+  type: string
+class:
+  source: original_crimetype_name
+  type: string
+date:
+  source: call_date
+  type: date
+disposition:
+  source: disposition
+  type: string
+incident:
+  source: crime_id
+  type: string
+time:
+  source: call_time
+  type: time
+timestamp:
+  source: call_dttm
+  type: timestamp

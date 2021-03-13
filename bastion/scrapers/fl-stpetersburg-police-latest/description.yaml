@@ -1,0 +1,97 @@
+api_url: https://stat.stpete.org/resource/2eks-pg5j.json
+attributes:
+  council_district:
+    type: integer
+  classification:
+    type: string
+  crime_date:
+    type: string
+  crime_time:
+    type: string
+  display_address:
+    type: string
+  disposition_text:
+    type: string
+  event_number:
+    type: string
+  id:
+    type: string
+  latitude:
+    type: float
+  longitude:
+    type: float
+  location:
+    latitude:
+      type: float
+    longitude:
+      type: float
+    human_address:
+      type: string
+  neighborhood_name:
+    type: string
+  submit_an_anonymous_tip:
+    url:
+      type: string
+  sub_engagement:
+    type: string
+  type_of_engagement:
+    type: string
+  :@computed_region_igyx_wxip:
+    type: integer
+  :@computed_region_nwvq_vxk9:
+    type: integer
+  :@computed_region_4yrn_6hem:
+    type: integer
+  :@computed_region_begu_5bij:
+    type: integer
+  :@computed_region_cc7w_3bap:
+    type: integer
+  :@computed_region_qcp9_8m35:
+    type: integer
+  :@computed_region_4fq9_q4gq:
+    type: integer
+  :@computed_region_nq98_q63y:
+    type: integer
+  :@computed_region_c7g9_amwp:
+    type: integer
+  :@computed_region_m6mj_3xda:
+    type: integer
+  :@computed_region_wifj_7igh:
+    type: integer
+  :@computed_region_5xuv_jweh:
+    type: integer
+  :@computed_region_nqsz_z74w:
+    type: integer
+  :@computed_region_8nrd_7xbz:
+    type: integer
+  :@computed_region_5enq_rt25:
+    type: integer
+  :@computed_region_t9b9_3nyv:
+    type: integer
+  :@computed_region_i8d9_b6mz:
+    type: integer
+  :@computed_region_rgb2_g8nz:
+    type: integer
+  :@computed_region_ua35_kzh4:
+    type: integer
+city: St Petersburg
+data_token: 2eks-pg5j
+data_url: https://stat.stpete.org/dataset/Police-Calls/2eks-pg5j
+department: police
+description: This dataset captures all StPetersburg Police Department Calls for Service.
+latitude: 27.77049692
+longitude: -82.63733078
+notes: Under Florida State Statute 119.071, victim information (i.e. addresses) associated with
+  Sexual Battery, Sexual Offenses, Child Abuse, and Adult Abuse are considered confidential and
+  exempt from public release. The data includes all officer responses to Priority 1, 2, 3, 4, 6,
+  7 and 9, calls for service. These calls for service don’t necessarily result in official police
+  reports under UCR (Uniform Crime Reporting) standards. The calls do not include the Forensic
+  Technicians, Off Duty, Administrative or similarly classified calls.
+population: 265098
+primary_key: crime_date
+refresh_frequency: daily
+source_url: stat.stpete.org
+state: FL
+state_name: Florida
+timezone: America/Miami
+zoom: 11

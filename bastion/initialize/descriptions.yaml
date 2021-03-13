@@ -1,0 +1,234 @@
+- api_url: https://data.sfgov.org/resource/hz9m-tj6z.json
+  attributes: '{"crime_id": {"type": "integer"}, "original_crimetype_name": {"type":
+    "string"}, "report_date": {"type": "string"}, "call_date": {"type": "string"},
+    "offense_date": {"type": "string"}, "call_time": {"type": "string"}, "call_dttm":
+    {"type": "string"}, "disposition": {"type": "string"}, "address": {"type": "string"},
+    "city": {"type": "string"}, "state": {"type": "string"}, "agency_id": {"type":
+    "integer"}, "address_type": {"type": "string"}, "common_location": {"type": "string"}}'
+  data_token: hz9m-tj6z
+  data_url: https://data.sfgov.org/Public-Safety/Police-Department-Calls-for-Service/hz9m-tj6z
+  description: This dataset includes Calls for service regarding criminal activity
+    (unverified) from SFPD.
+  id: 4916b9a0596f4936b6c5f7e322ac1600
+  notes: null
+  primary_key: null
+  refresh_frequency: daily
+  source_url: data.sfgov.org
+- api_url: https://data.sfgov.org/resource/nuek-vuh3.json
+  attributes: '{"call_number": {"type": "integer"}, "unit_id": {"type": "string"},
+    "incident_number": {"type": "integer"}, "call_type": {"type": "string"}, "call_date":
+    {"type": "string"}, "watch_date": {"type": "string"}, "received_dttm": {"type":
+    "string"}, "entry_dttm": {"type": "string"}, "dispatch_dttm": {"type": "string"},
+    "response_dttm": {"type": "string"}, "on_scene_dttm": {"type": "string"}, "transport_dttm":
+    {"type": "string"}, "hospital_dttm": {"type": "string"}, "call_final_disposition":
+    {"type": "string"}, "available_dttm": {"type": "string"}, "address": {"type":
+    "string"}, "city": {"type": "string"}, "zipcode_of_incident": {"type": "integer"},
+    "battalion": {"type": "string"}, "station_area": {"type": "integer"}, "box": {"type":
+    "integer"}, "original_priority": {"type": "string"}, "priority": {"type": "integer"},
+    "final_priority": {"type": "integer"}, "als_unit": {"type": "boolean"}, "call_type_group":
+    {"type": "string"}, "number_of_alarms": {"type": "integer"}, "unit_type": {"type":
+    "string"}, "unit_sequence_in_call_dispatch": {"type": "integer"}, "fire_prevention_district":
+    {"type": "integer"}, "supervisor_district": {"type": "integer"}, "neighborhoods_analysis_boundaries":
+    {"type": "string"}, "location": {"latitude": {"type": "string"}, "longitude":
+    {"type": "string"}, "human_address": {"type": "string"}}, "rowid": {"type": "string"},
+    ":@computed_region_rxqg_mtj9": {"type": "integer"}, ":@computed_region_yftq_j783''":
+    {"type": "integer"}, ":@computed_region_jx4q_fizf": {"type": "integer"}, ":@computed_region_ajp5_b2md":
+    {"type": "integer"}, ":@computed_region_bh8s_q3mv": {"type": "integer"}, ":@computed_region_fyvs_ahh9":
+    {"type": "integer"}, ":@computed_region_p5aj_wyqh": {"type": "integer"}}'
+  data_token: nuek-vuh3
+  data_url: https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3
+  description: This Fire Calls-For-Service dataset includes all fire units responses
+    to calls in San Francisco.
+  id: 5c7b40484cbb4718bb1b2600d6d3dd76
+  notes: Each record includes the call number, incident number, address, unit identifier,
+    call type, and disposition. All relevant time intervals are also included. Because
+    this dataset is based on responses, and since most calls involved multiple units,
+    there are multiple records for each call number. Addresses are associated with
+    a block number, intersection or call box, not a specific address.
+  primary_key: incident_number
+  refresh_frequency: daily
+  source_url: data.sfgov.org
+- api_url: https://data.mesaaz.gov/resource/ex94-c5ad.json
+  attributes: '{"event_number": {"type": "string"}, "creation_date_time": {"type":
+    "string"}, "creation_month": {"type": "string"}, "creation_year": {"type": "string"},
+    "event_type_code": {"type": "string"}, "event_type_description": {"type": "string"},
+    "call_priority": {"type": "string"}, "event_address": {"type": "string"}, "street_number":
+    {"type": "string"}, "street_direction": {"type": "string"}, "street_name": {"type":
+    "string"}, "location_1": {"latitude": {"type": "float"}, "longitude": {"type":
+    "float"}}, "street_type": {"type": "string"}, "latitude": {"type": "float"}, "longitude":
+    {"type": "float"}, "dispatch_group": {"type": "string"}, "division": {"type":
+    "string"}, "response_time_seconds": {"type": "integer"}, "response_time_minutes":
+    {"type": "integer"}, ":@computed_region_j3bw_v69e": {"type": "integer"}}'
+  data_token: ex94-c5ad
+  data_url: https://data.mesaaz.gov/Police/Police-Computer-Aided-Dispatch-Events/ex94-c5ad
+  description: Calls for service dispatched to Mesa Police Patrol Officers. Calls
+    are modified for public use, obfuscating the address number through rounding it
+    to the 100 block.
+  id: dff8bb98fc124a10aeacc22798c57225
+  notes: Note that these are calls for service and may not necessarily correspond
+    to the data located in the Police Incidents dataset. Crimes reported in this data
+    set have not been adjudicated in a court of law for final determination.
+  primary_key: null
+  refresh_frequency: daily
+  source_url: data.mesaaz.gov
+- api_url: https://data.smgov.net/resource/ia9m-wspt.json
+  attributes: '{"incident_number": {"type": "string"}, "call_type": {"type": "string"},
+    "incident_date": {"type": "string"}, "location": {"type": "string"}, "beat": {"type":
+    "string"}, "reporting_district": {"type": "string"}, "received_time": {"type":
+    "string"}, "cleared_time": {"type": "string"}, "disposition": {"type": "string"},
+    "latitude": {"type": "float"}, "longitude": {"type": "float"}, "map_point": {"latitude":
+    {"type": "string"}, "longitude": {"type": "string"}}, "census_block_2010_geoid":
+    {"type": "string"}, "census_tract_2010_geoid": {"type": "string"}, ":@computed_region_28yu_qtqf":
+    {"type": "integer"}, ":@computed_region_a96n_jaww": {"type": "integer"}}'
+  data_token: ia9m-wspt
+  data_url: https://data.smgov.net/Public-Safety/Police-Calls-for-Service/ia9m-wspt
+  description: This dataset captures all Santa Monica Police Department Calls for
+    Service.
+  id: 29731bbd15d643f08742413ee2d3cdb4
+  notes: The Santa Monica Police Department Call for Service information includes
+    requests for police service made by the public, as well as officer-initiated activity.
+  primary_key: incident_number
+  refresh_frequency: daily
+  source_url: data.smgov.net
+- api_url: https://data.cityoforlando.net/resource/69ge-5wp8.json
+  attributes: '{"incident_number": {"type": "string"}, "incident_date_time": {"type":
+    "string"}, "incident_location": {"type": "string"}, "incident_type": {"type":
+    "string"}, "incident_disposition_class": {"type": "string"}, "incident_disposition":
+    {"type": "string"}, "status": {"type": "string"}, "location": {"latitude": {"type":
+    "string"}, "longitude": {"type": "string"}}}'
+  data_token: 69ge-5wp8
+  data_url: https://data.cityoforlando.net/Orlando-Police/OPD-Calls-For-Service/69ge-5wp8
+  description: This dataset comes from the Orlando Police Department records management
+    system.
+  id: ac57d55de7874f6eb15a41c25f213592
+  notes: It includes all calls for service regardless of where or who initiates the
+    call. This includes 911 calls, non-emergency calls and officer-initiated calls.
+    Calls that are of a sensitive nature when they come in or are sensitive based
+    on the case that is opened from the call are excluded to protect the privacy of
+    the victims.
+  primary_key: incident_number
+  refresh_frequency: daily
+  source_url: data.cityoforlando.net
+- api_url: https://stat.stpete.org/resource/2eks-pg5j.json
+  attributes: '{"council_district": {"type": "integer"}, "classification": {"type":
+    "string"}, "crime_date": {"type": "string"}, "crime_time": {"type": "string"},
+    "display_address": {"type": "string"}, "disposition_text": {"type": "string"},
+    "event_number": {"type": "string"}, "id": {"type": "string"}, "latitude": {"type":
+    "float"}, "longitude": {"type": "float"}, "location": {"latitude": {"type": "float"},
+    "longitude": {"type": "float"}, "human_address": {"type": "string"}}, "neighborhood_name":
+    {"type": "string"}, "submit_an_anonymous_tip": {"url": {"type": "string"}}, "sub_engagement":
+    {"type": "string"}, "type_of_engagement": {"type": "string"}, ":@computed_region_igyx_wxip":
+    {"type": "integer"}, ":@computed_region_nwvq_vxk9": {"type": "integer"}, ":@computed_region_4yrn_6hem":
+    {"type": "integer"}, ":@computed_region_begu_5bij": {"type": "integer"}, ":@computed_region_cc7w_3bap":
+    {"type": "integer"}, ":@computed_region_qcp9_8m35": {"type": "integer"}, ":@computed_region_4fq9_q4gq":
+    {"type": "integer"}, ":@computed_region_nq98_q63y": {"type": "integer"}, ":@computed_region_c7g9_amwp":
+    {"type": "integer"}, ":@computed_region_m6mj_3xda": {"type": "integer"}, ":@computed_region_wifj_7igh":
+    {"type": "integer"}, ":@computed_region_5xuv_jweh": {"type": "integer"}, ":@computed_region_nqsz_z74w":
+    {"type": "integer"}, ":@computed_region_8nrd_7xbz": {"type": "integer"}, ":@computed_region_5enq_rt25":
+    {"type": "integer"}, ":@computed_region_t9b9_3nyv": {"type": "integer"}, ":@computed_region_i8d9_b6mz":
+    {"type": "integer"}, ":@computed_region_rgb2_g8nz": {"type": "integer"}, ":@computed_region_ua35_kzh4":
+    {"type": "integer"}}'
+  data_token: 2eks-pg5j
+  data_url: https://stat.stpete.org/dataset/Police-Calls/2eks-pg5j
+  description: This dataset captures all StPetersburg Police Department Calls for
+    Service.
+  id: ebe406c2af674c3ba20d329caa04f7d7
+  notes: "Under Florida State Statute 119.071, victim information (i.e. addresses)\
+    \ associated with Sexual Battery, Sexual Offenses, Child Abuse, and Adult Abuse\
+    \ are considered confidential and exempt from public release. The data includes\
+    \ all officer responses to Priority 1, 2, 3, 4, 6, 7 and 9, calls for service.\
+    \ These calls for service don\u2019t necessarily result in official police reports\
+    \ under UCR (Uniform Crime Reporting) standards. The calls do not include the\
+    \ Forensic Technicians, Off Duty, Administrative or similarly classified calls."
+  primary_key: null
+  refresh_frequency: daily
+  source_url: stat.stpete.org
+- api_url: https://data.cambridgema.gov/resource/ppai-cur6.json
+  attributes: '{"type": {"type": "string"}, "group": {"type": "string"}, "fygroup":
+    {"type": "string"}, "primaryagency": {"type": "string"}, "address": {"type": "string"},
+    "priority": {"type": "integer"}, "datetimereceived": {"type": "string"}, "alarmlevel":
+    {"type": "string"}, "reportingarea": {"type": "string"}, "firebox": {"type": "string"},
+    "policesector": {"type": "string"}, "ladderdistrict": {"type": "string"}, "enginedistrict":
+    {"type": "string"}, "policeroute": {"type": "string"}, "datetimeclosed": {"type":
+    "string"}, "neighborhood_id": {"type": "integer"}, "neighborhood": {"type": "string"}}'
+  data_token: ppai-cur6
+  data_url: https://data.cambridgema.gov/Public-Safety/Computer-Aided-Dispatch-Entries/ppai-cur6
+  description: This dataset captures all Cambridge, MA Police Department Calls for
+    Service.
+  id: ec128cfbb7c34b759bfd086619bc651f
+  notes: The Computer Aided Dispatch (CAD) Entries data set reflects information approved
+    for general release by the Cambridge Police Department and the Cambridge Fire
+    Department. All entries are inputted by dispatchers in the Emergency Communications
+    Center (ECC). This data set does not reflect all events received by the ECC.
+  primary_key: null
+  refresh_frequency: quarterly
+  source_url: data.cambridgema.gov
+- api_url: https://data.baltimorecity.gov/resource/xviu-ezkt.json
+  attributes: '{"recordid": {"type": "float"}, "callnumber": {"type": "string"}, "calldatetime":
+    {"type": "string"}, "priority": {"type": "string"}, "district": {"type": "string"},
+    "description": {"type": "string"}, "incidentlocation": {"type": "string"}, "zipcode":
+    {"type": "integer"}, "neighborhood": {"type": "string"}, "policedistrict": {"type":
+    "string"}, "policepost": {"type": "string"}, "councildistrict": {"type": "string"},
+    "sheriffdistricts": {"type": "string"}, "community_statistical_areas": {"type":
+    "string"}, "census_tracts": {"type": "string"}, "vrizones": {"type": "string"},
+    "location": {"latitude": {"type": "float"}, "longitude": {"type": "float"}, "human_address":
+    {"type": "string"}}, ":@computed_region_5kre_ccpb": {"type": "float"}, ":@computed_region_gwq4_fjxs":
+    {"type": "float"}, ":@computed_region_s6p5_2pgr": {"type": "float"}}'
+  data_token: xviu-ezkt
+  data_url: https://data.baltimorecity.gov/Public-Safety/911-Police-Calls-for-Service/xviu-ezkt
+  description: This dataset captures all Baltimore Police Emergency and Non-Emergency
+    calls to 911.
+  id: c83397203a3f4f3080e03c9c9e8161f1
+  notes: null
+  primary_key: callnumber
+  refresh_frequency: daily
+  source_url: data.baltimorecity.gov
+- api_url: https://data.cincinnati-oh.gov/resource/gexm-h6bt.json
+  attributes: '{"address_x": {"type": "string"}, "agency": {"type": "string"}, "arrival_time_primary_unit":
+    {"type": "float"}, "beat": {"type": "string"}, "closed_time_incident": {"type":
+    "float"}, "community_council_neighborhood": {"type": "string"}, "cpd_neighborhood":
+    {"type": "string"}, "create_time_incident": {"type": "float"}, "dispatch_time_primary_unit":
+    {"type": "float"}, "disposition_text": {"type": "string"}, "district": {"type":
+    "string"}, "event_number": {"type": "string"}, "incident_type_desc": {"type":
+    "string"}, "incident_type_id": {"type": "string"}, "latitude_x": {"type": "float"},
+    "longitude_x": {"type": "float"}, "priority": {"type": "string"}, "priority_color":
+    {"type": "string"}, "sna_neighborhood": {"type": "string"}}'
+  data_token: gexm-h6bt
+  data_url: https://data.cincinnati-oh.gov/Safety/PDI-Police-Data-Initiative-Police-Calls-for-Servic/gexm-h6bt
+  description: This dataset captures all Cincinnati Police Department Calls for Service.
+    The City of Cincinnati's Computer Aided Dispatch (CAD) system records police incident
+    response activity, which includes all calls for service to emergency operators,
+    911, alarms, police radio and non-emergency calls. CAD records all dispatch information,
+    which is used by dispatchers, field supervisors, and on-scene officers to determine
+    the priority, severity, and response needs surrounding the incident. Once an officer
+    responds to a call, he/she updates the disposition to reflect findings on-scene.
+    This dataset includes both proactive and reactive police incident data.
+  id: e955781d87d84ebaa8627e3b01def0be
+  notes: In compliance with privacy laws, all Public Safety datasets are anonymized
+    and appropriately redacted prior to publication on the City of Cincinnati Open
+    Data Portal. This means that for all public safety datasets (1) the last two digits
+    of all addresses have been replaced with , and in cases where there is a single
+    digit street address, the entire address number is replaced with X; and (2) Latitude
+    and Longitude have been randomly skewed to represent values within the same block
+    area (but not the exact location) of the incident.
+  primary_key: null
+  refresh_frequency: daily
+  source_url: data.cincinnati-oh.gov
+- api_url: https://data.seattle.gov/resource/33kz-ixgy.json
+  attributes: '{"arrived_time": {"type": "string"}, "beat": {"type": "string"}, "cad_event_number":
+    {"type": "int"}, "call_type": {"type": "string"}, "event_clearance_description":
+    {"type": "string"}, "final_call_type": {"type": "string"}, "initial_call_type":
+    {"type": "string"}, "original_time_queued": {"type": "string"}, "precinct": {"type":
+    "string"}, "priority": {"type": "int"}, "sector": {"type": "string"}}'
+  data_token: 33kz-ixgy
+  data_url: https://data.seattle.gov/Public-Safety/Call-Data/33kz-ixgy
+  description: This dataset captures all Seattle Police Department Calls for Service.
+  id: 6af8aa6437e2444086ceb2ab8b7d43c9
+  notes: This data represents police response activity. Each row is a record of a
+    Call for Service (CfS) logged with the Seattle Police Department (SPD) Communications
+    Center. Calls originated from the community and range from in progress or active
+    emergencies to requests for problem solving. Additionally, officers will log calls
+    from their observations of the field.
+  primary_key: cad_event_number
+  refresh_frequency: daily
+  source_url: data.seattle.gov

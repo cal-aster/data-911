@@ -1,0 +1,43 @@
+api_url: https://data.seattle.gov/resource/33kz-ixgy.json
+attributes:
+  arrived_time:
+    type: string
+  beat:
+    type: string
+  cad_event_number:
+    type: int
+  call_type:
+    type: string
+  event_clearance_description:
+    type: string
+  final_call_type:
+    type: string
+  initial_call_type:
+    type: string
+  original_time_queued:
+    type: string
+  precinct:
+    type: string
+  priority:
+    type: int
+  sector:
+    type: string
+city: Seattle
+data_token: 33kz-ixgy
+data_url: https://data.seattle.gov/Public-Safety/Call-Data/33kz-ixgy
+department: police
+description: This dataset captures all Seattle Police Department Calls for Service.
+latitude: 47.608013
+longitude: -122.335167
+notes: This data represents police response activity. Each row is a record of
+  a Call for Service (CfS) logged with the Seattle Police Department (SPD) Communications Center.
+  Calls originated from the community and range from in progress or active emergencies to requests
+  for problem solving. Additionally, officers will log calls from their observations of the field.
+population: 744955
+primary_key: cad_event_number
+refresh_frequency: daily
+source_url: data.seattle.gov
+state: WA
+state_name: Washington
+timezone: America/Los_Angeles
+zoom: 11

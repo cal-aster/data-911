@@ -1,0 +1,13 @@
+AZ_Mesa:
+  address: "VARCHAR(128)"
+  beat: "VARCHAR(32)"
+  classification: "VARCHAR(32)"
+  date: "VARCHAR(12)"
+  division: "VARCHAR(32)"
+  incident: "VARCHAR(32)"
+  latitude: "FLOAT"
+  longitude: "FLOAT"
+  priority: "TINYINT"
+  response: "FLOAT"
+  time: "VARCHAR(5)"
+  timestamp: "INT UNSIGNED"

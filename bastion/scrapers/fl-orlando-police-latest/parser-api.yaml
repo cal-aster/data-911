@@ -1,0 +1,28 @@
+address:
+  source: incident_location
+  type: string
+class:
+  source: incident_disposition_class
+  type: string
+date:
+  source: incident_date_time
+  type: date
+disposition:
+  source: incident_disposition
+  type: string
+incident:
+  source: incident_number
+  type: string
+latitude:
+  source: location,latitude
+  type: float
+longitude:
+  source: location,longitude
+  type: float
+time:
+  source: incident_date_time
+  type: time
+timestamp:
+  source: incident_date_time
+  type: timestamp
+

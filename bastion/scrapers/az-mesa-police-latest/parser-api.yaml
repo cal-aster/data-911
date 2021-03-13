@@ -1,0 +1,36 @@
+address:
+  source: event_address
+  type: string
+beat:
+  source: dispatch_group
+  type: string
+classification: 
+  source: event_type_description
+  type: string
+date: 
+  source: creation_datetime
+  type: date
+division: 
+  source: division
+  type: string
+incident:
+  source: event_number 
+  type: string
+latitude: 
+  source: latitude
+  type: float
+longitude: 
+  source: longitude
+  type: float
+priority:
+  source: call_priority
+  type: string
+response:
+  source: response_time_seconds
+  type: integer
+time:
+  source: creation_datetime 
+  type: time
+timestamp: 
+  source: creation_datetime
+  type: timestamp

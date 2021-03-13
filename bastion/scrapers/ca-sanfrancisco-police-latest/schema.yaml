@@ -1,0 +1,9 @@
+CA_SanFrancisco:
+  address: "VARCHAR(128)"
+  class: "VARCHAR(128)"
+  date: "VARCHAR(12)"
+  department: "VARCHAR(32)"
+  disposition: "VARCHAR(3)"
+  incident: "VARCHAR(9)"
+  time: "VARCHAR(5)"
+  timestamp: "INT UNSIGNED"

@@ -1,0 +1,54 @@
+api_url: https://data.smgov.net/resource/ia9m-wspt.json
+attributes:
+  incident_number:
+    type: string
+  call_type:
+    type: string
+  incident_date:
+    type: string
+  location:
+    type: string
+  beat:
+    type: string
+  reporting_district:
+    type: string
+  received_time:
+    type: string
+  cleared_time:
+    type: string
+  disposition:
+    type: string
+  latitude:
+    type: float
+  longitude:
+    type: float
+  map_point:
+    latitude:
+      type: string
+    longitude:
+      type: string
+  census_block_2010_geoid:
+    type: string
+  census_tract_2010_geoid:
+    type: string
+  :@computed_region_28yu_qtqf:
+    type: integer
+  :@computed_region_a96n_jaww:
+    type: integer
+city: Santa Monica
+data_token: ia9m-wspt
+data_url: https://data.smgov.net/Public-Safety/Police-Calls-for-Service/ia9m-wspt
+department: police
+description: This dataset captures all Santa Monica Police Department Calls for Service.
+latitude: 34.009242
+longitude: -118.497604
+notes: The Santa Monica Police Department Call for Service information includes requests
+  for police service made by the public, as well as officer-initiated activity.
+population: 91411
+primary_key: received_time
+refresh_frequency: daily
+source_url: data.smgov.net
+state: CA
+state_name: California
+timezone: America/Los_Angeles
+zoom: 11

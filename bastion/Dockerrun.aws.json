@@ -1,0 +1,14 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Ports": [
+    {
+      "ContainerPort": "5000"
+    }
+  ],
+  "Volumes": [
+    {
+      "HostDirectory": "/efs",
+      "ContainerDirectory": "/app/efs"
+    }
+  ]
+}

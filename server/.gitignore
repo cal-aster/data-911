@@ -2,21 +2,23 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-# Development
+# development
 *.pyc
 *.ipynb
 __pycache__
 .ipynb_checkpoints
 .cache
 
-# Secrets
-.*.development
-.*.staging
-.*.production
+# work in progress
+scrapers/
+src/archive.py
 
-# Database
+# devops
+.devops/*
+!.devops/.env.example
+.ebextensions/
+.elasticbeanstalk/
+Dockerrun.aws.json
+
+# database
 local.db
-
-# DevOps
-.ebextensions
-.elasticbeanstalk

@@ -4,8 +4,8 @@
 
 *
 
-# Application
-!main.py
-!src/
+# application
 !routers/
+!src/
+!main.py
 !requirements.txt

@@ -1,0 +1,72 @@
+address:
+  source: ADDRESS_X
+  type: string
+agency:
+  source: AGENCY
+  type: string
+beat:
+  source: BEAT
+  type: string
+classification:
+  source: INCIDENT_TYPE_ID
+  type: string
+date:
+  source: CREATE_TIME_INCIDENT
+  type: date
+date_arrival:
+  source: ARRIVAL_TIME_PRIMARY_UNIT
+  type: date
+date_closed:
+  source: CLOSED_TIME_INCIDENT
+  type: date
+date_dispatch:
+  source: DISPATCH_TIME_PRIMARY_UNIT
+  type: date
+description:
+  source: INCIDENT_TYPE_DESC
+  type: string
+disposition:
+  source: DISPOSITION_TEXT
+  type: string
+district:
+  source: DISTRICT
+  type: string
+incident:
+  source: EVENT_NUMBER
+  type: string
+latitude:
+  source: LATITUDE_X
+  type: float
+longitude:
+  source: LONGITUDE_X
+  type: float
+neighborhood:
+  source: COMMUNITY_COUNCIL_NEIGHBORHOOD
+  type: string
+priority:
+  source: PRIORITY
+  type: integer
+time:
+  source: CREATE_TIME_INCIDENT
+  type: time
+time_arrival:
+  source: ARRIVAL_TIME_PRIMARY_UNIT
+  type: time
+time_closed:
+  source: CLOSED_TIME_INCIDENT
+  type: time
+time_dispatch:
+  source: DISPATCH_TIME_PRIMARY_UNIT
+  type: time
+timestamp:
+  source: CREATE_TIME_INCIDENT
+  type: timestamp
+timestamp_arrival:
+  source: ARRIVAL_TIME_PRIMARY_UNIT
+  type: timestamp
+timestamp_closed:
+  source: CLOSED_TIME_INCIDENT
+  type: timestamp
+timestamp_dispatch:
+  source: DISPATCH_TIME_PRIMARY_UNIT
+  type: timestamp

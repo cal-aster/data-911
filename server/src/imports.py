@@ -24,19 +24,27 @@ from dateutil import parser
 from functools import partial
 from dotenv import load_dotenv
 from operator import itemgetter
-from itertools  import groupby, chain
+from itertools import groupby, chain
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 from pydantic import BaseModel, Field
-from fastapi import FastAPI, status, Body
-from fastapi import Depends, Path, Query, APIRouter
-from fastapi import Response, HTTPException
+from fastapi import (
+    FastAPI,
+    status,
+    Body,
+    Depends,
+    Path,
+    Query,
+    APIRouter,
+    Response,
+    HTTPException,
+)
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from starlette.requests import Request
 
 # Environment variables
-if os.path.exists(".env.development"):
-    load_dotenv(dotenv_path='.env.development')
+if os.path.exists(".devops/.env.development"):
+    load_dotenv(dotenv_path=".devops/.env.development")

@@ -1,0 +1,9 @@
+CA-LosAngeles:
+  area: "VARCHAR(128)"
+  class: "VARCHAR(4)"
+  date: "VARCHAR(12)"
+  description: "VARCHAR(128)"
+  district: "VARCHAR(4)"
+  incident: "VARCHAR(16)"
+  time: "VARCHAR(5)"
+  timestamp: "INT UNSIGNED"

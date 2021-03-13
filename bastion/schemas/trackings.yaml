@@ -1,0 +1,8 @@
+Trackings:
+    endpoint: "MEDIUMTEXT NOT NULL"
+    client: "TINYTEXT NOT NULL"
+    port: "SMALLINT UNSIGNED"
+    status: "SMALLINT UNSIGNED NOT NULL"
+    method: "VARCHAR(8) NOT NULL"
+    completion: "FLOAT NOT NULL"
+    timestamp: "INT UNSIGNED NOT NULL"

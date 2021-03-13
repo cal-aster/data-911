@@ -4,13 +4,5 @@
 
 *
 
-# Application
-!main.py
-!src/
-!routers/
-!requirements.txt
-
-# Instance
-!.ebextensions/
-!Dockerfile
-!Dockerrun.aws.json
+# deployment
+!artifact.zip

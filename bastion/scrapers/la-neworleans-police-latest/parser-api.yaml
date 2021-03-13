@@ -1,0 +1,69 @@
+address:
+  source: block_address
+  type: string 
+beat:
+  source: beat
+  type: string
+classification:
+  source: typetext
+  type: string
+date:
+  source: timecreate
+  type: date
+date_arrival:
+  source: timearrive
+  type: date
+date_closed:
+  source: timeclosed
+  type: date
+date_dispatch:
+  source: timedispatch
+  type: date
+description:
+  source: dispositiontext
+  type: string
+district:
+  source: policedistrict
+  type: string
+incident:
+  source: nopd_item
+  type: string
+latitude:
+  source: location, coordinates
+  type: duple-1
+longitude:
+  source: location, coordinates
+  type: duple-0
+priority:
+  source: priority
+  type: string
+source:
+  source: selfinitiated
+  type: string
+time:
+  source: timecreate
+  type: time
+time_arrival:
+  source: timearrive
+  type: time
+time_closed:
+  source: timeclosed
+  type: time
+time_dispatch:
+  source: timedispatch
+  type: time
+timestamp:
+  source: timecreate
+  type: timestamp
+timestamp_arrival:
+  source: timearrive
+  type: timestamp
+timestamp_dispatch:
+  source: timedispatch
+  type: timestamp
+timestamp_closed:
+  source: timeclosed
+  type: timestamp
+zipcode:
+  source: zip
+  type: integer

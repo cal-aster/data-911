@@ -1,0 +1,111 @@
+address:
+  source: address
+  type: string
+agency:
+  source: unit_type
+  type: string
+beat:
+  source: battalion
+  type: string
+block:
+  source: box
+  type: string
+class:
+  source: call_type
+  type: string
+date:
+  source: call_date
+  type: date
+date_entry:
+  source: entry_dttm
+  type: date
+date_response:
+  source: response_dttm
+  type: date
+date_transport:
+  source: transport_dttm
+  type: date
+date_arrival:
+  source: on_scene_dttm
+  type: date
+date_dispatch:
+  source: dispatch_dttm
+  type: date
+date_hospital:
+  source: hospital_dttm
+  type: date
+date_closed:
+  source: available_dttm
+  type: date
+description:
+  source: call_type
+  type: string
+district:
+  source: station_area
+  type: string
+incident:
+  source: incident_number
+  type: string
+latitude:
+  source: location,latitude
+  type: float
+longitude:
+  source: location,longitude
+  type: float
+neighborhood:
+  source: neighborhoods_analysis_boundaries
+  type: string
+priority:
+  source: final_priority
+  type: integer
+time:
+  source: received_dttm
+  type: time
+time_entry:
+  source: entry_dttm
+  type: time
+time_response:
+  source: response_dttm
+  type: time
+time_transport:
+  source: transport_dttm
+  type: time
+time_arrival:
+  source: on_scene_dttm
+  type: time
+time_closed:
+  source: available_dttm
+  type: time
+time_dispatch:
+  source: dispatch_dttm
+  type: time
+time_hospital:
+  source: hospital_dttm
+  type: time
+timestamp:
+  source: received_dttm
+  type: timestamp
+timestamp_entry:
+  source: entry_dttm
+  type: timestamp
+timestamp_response:
+  source: response_dttm
+  type: timestamp
+timestamp_transport:
+  source: transport_dttm
+  type: timestamp
+timestamp_arrival:
+  source: on_scene_dttm
+  type: timestamp
+timestamp_closed:
+  source: available_dttm
+  type: timestamp
+timestamp_dispatch:
+  source: dispatch_dttm
+  type: timestamp
+timestamp_hospital:
+  source: hospital_dttm
+  type: timestamp
+zipcode:
+  source: zipcode_of_incident
+  type: integer

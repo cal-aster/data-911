@@ -1,0 +1,24 @@
+area:
+  source: area_occ
+  type: string
+class:
+  source: call_type_code
+  type: string
+date:
+  source: dispatch_date
+  type: date
+description:
+  source: call_type_text
+  type: string
+district:
+  source: rpt_dist
+  type: string
+incident:
+  source: incident_number
+  type: string
+time:
+  source: dispatch_time
+  type: time
+timestamp:
+  source: (dispatch_date dispatch_time)
+  type: timestamp

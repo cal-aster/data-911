@@ -1,0 +1,108 @@
+api_url: https://data.sfgov.org/resource/nuek-vuh3.json
+attributes:
+  call_number:
+    type: integer
+  unit_id:
+    type: string
+  incident_number:
+    type: integer
+  call_type:
+    type: string
+  call_date:
+    type: string
+  watch_date:
+    type: string
+  received_dttm:
+    type: string
+  entry_dttm:
+    type: string
+  dispatch_dttm:
+    type: string
+  response_dttm:
+    type: string
+  on_scene_dttm:
+    type: string
+  transport_dttm:
+    type: string
+  hospital_dttm:
+    type: string
+  call_final_disposition:
+    type: string
+  available_dttm:
+    type: string
+  address:
+    type: string
+  city:
+    type: string
+  zipcode_of_incident:
+    type: integer
+  battalion:
+    type: string
+  station_area:
+    type: integer
+  box:
+    type: integer
+  original_priority:
+    type: string
+  priority:
+    type: integer
+  final_priority:
+    type: integer
+  als_unit:
+    type: boolean
+  call_type_group:
+    type: string
+  number_of_alarms:
+    type: integer
+  unit_type:
+    type: string
+  unit_sequence_in_call_dispatch:
+    type: integer
+  fire_prevention_district:
+    type: integer
+  supervisor_district:
+    type: integer
+  neighborhoods_analysis_boundaries:
+    type: string
+  location:
+    latitude:
+      type: string
+    longitude:
+      type: string
+    human_address:
+      type: string
+  rowid:
+      type: string
+  :@computed_region_rxqg_mtj9:
+      type: integer
+  :@computed_region_yftq_j783':
+      type: integer
+  :@computed_region_jx4q_fizf:
+      type: integer
+  :@computed_region_ajp5_b2md:
+      type: integer
+  :@computed_region_bh8s_q3mv:
+      type: integer
+  :@computed_region_fyvs_ahh9:
+      type: integer
+  :@computed_region_p5aj_wyqh:
+      type: integer
+city: San Francisco
+data_token: nuek-vuh3
+data_url: https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3
+department: fire
+description: This Fire Calls-For-Service dataset includes all fire units responses to calls in San Francisco.
+latitude: 37.773972
+longitude: -122.431297
+notes: Each record includes the call number, incident number, address, unit identifier, call type, and disposition.
+  All relevant time intervals are also included. Because this dataset is based on responses, and since most calls
+  involved multiple units, there are multiple records for each call number. Addresses are associated with a block number,
+  intersection or call box, not a specific address.
+population: 883305
+primary_key: call_date
+refresh_frequency: daily
+source_url: data.sfgov.org
+state: CA
+state_name: California
+timezone: America/Los_Angeles
+zoom: 11

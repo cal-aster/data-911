@@ -1,0 +1,13 @@
+FL_StPetersburg:
+  address: "VARCHAR(128)"
+  class: "VARCHAR(32)"
+  date: "VARCHAR(12)"
+  district: "VARCHAR(16)"
+  incident: "VARCHAR(32)"
+  latitude: "FLOAT"
+  longitude: "FLOAT"
+  neighborhood: "VARCHAR(32)"
+  source: "VARCHAR(32)"
+  time: "VARCHAR(5)"
+  timestamp: "INT UNSIGNED"
+  type: "VARCHAR(32)"

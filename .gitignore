@@ -2,16 +2,16 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-# Development
+# cache
 *.pyc
 *.ipynb
 __pycache__
 .ipynb_checkpoints
 
-# WIP
+# jupyter server
 jupyter/
 
-# Environment
+# environment
 bin/
 etc/
 lib/
@@ -20,10 +20,7 @@ share/
 include/
 pyvenv.cfg
 
-# Sensitive
+# secrets
 aws.pem
-
-# DevOps
-bastion/
 configs/
 control.py

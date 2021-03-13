@@ -1,0 +1,16 @@
+CA_SantaMonica:
+  address: "VARCHAR(128)"
+  beat: "VARCHAR(32)"
+  date: "VARCHAR(12)"
+  date_closed: "VARCHAR(12)"
+  disposition: "VARCHAR(128)"
+  district: "VARCHAR(16)"
+  incident: "VARCHAR(32)"
+  latitude: "FLOAT"
+  longitude: "FLOAT"
+  time: "VARCHAR(5)"
+  timestamp: "INT UNSIGNED"
+  time_closed: "VARCHAR(5)"
+  timestamp_closed: "INT UNSIGNED"
+  type: "VARCHAR(128)"
+

@@ -1,0 +1,31 @@
+attributes:
+  Area Occurred:
+    type: string
+  Call Type Code:
+    type: string
+  Call Type Description:
+    type: string
+  Dispatch Date:
+    type: string
+  dispatch_time:
+    type: string
+  Incident Number:
+    type: string
+  Reporting District:
+    type: string
+city: Los Angeles
+data_token: ryvm-a59m
+data_url: https://data.lacity.org/Public-Safety/LAPD-Calls-for-Service-2017/ryvm-a59m
+department: police
+description: This dataset reflects calls for service incidents in the City of Los Angeles.
+latitude: 34.052235
+longitude: -118.243683
+notes:
+population: 3990456
+primary_key: incident_number
+refresh_frequency: weekly
+source_url: data.lacity.org
+state: CA
+state_name: California
+timezone: America/Los_Angeles
+zoom: 11

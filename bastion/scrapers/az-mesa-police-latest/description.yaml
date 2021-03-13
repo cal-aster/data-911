@@ -1,0 +1,64 @@
+api_url: https://data.mesaaz.gov/resource/ex94-c5ad.json
+attributes:
+  event_number:
+    type: string
+  creation_date_time:
+    type: string
+  creation_month:
+    type: string
+  creation_year:
+    type: string
+  event_type_code:
+    type: string
+  event_type_description:
+    type: string
+  call_priority:
+    type: string
+  event_address:
+    type: string
+  street_number:
+    type: string
+  street_direction:
+    type: string
+  street_name:
+    type: string
+  location_1:
+    latitude:
+      type: float
+    longitude:
+      type: float
+  street_type:
+    type: string
+  latitude:
+    type: float
+  longitude:
+    type: float
+  dispatch_group:
+    type: string
+  division:
+    type: string
+  response_time_seconds:
+    type: integer
+  response_time_minutes:
+    type: integer
+  :@computed_region_j3bw_v69e:
+    type: integer
+city: Mesa
+data_token: ex94-c5ad
+data_url: https://data.mesaaz.gov/Police/Police-Computer-Aided-Dispatch-Events/ex94-c5ad
+department: police
+description: Calls for service dispatched to Mesa Police Patrol Officers. Calls are modified
+  for public use, obfuscating the address number through rounding it to the 100 block.
+latitude: 33.4152
+longitude: -111.8315
+notes: Note that these are calls for service and may not necessarily correspond to the data
+  located in the Police Incidents dataset. Crimes reported in this data set have not been
+  adjudicated in a court of law for final determination.
+population: 508958
+primary_key: creation_datetime
+refresh_frequency: daily
+source_url: data.mesaaz.gov
+state: AZ
+state_name: Arizona
+timezone: America/Denver
+zoom: 11

@@ -1,0 +1,32 @@
+api_url: https://data.lacity.org/resource/r4ka-x5je.json
+attributes:
+  area_occ:
+    type: string
+  call_type_code:
+    type: string
+  call_type_text:
+    type: string
+  dispatch_date:
+    type: string
+  dispatch_time:
+    type: string
+  incident_number:
+    type: string
+  rpt_dist:
+    type: string
+city: Los Angeles
+data_token: r4ka-x5je
+data_url:  https://data.lacity.org/Public-Safety/LAPD-Calls-for-Service-2019/r4ka-x5je
+department: police
+description: This dataset reflects calls for service incidents in the City of Los Angeles.
+latitude: 34.052235
+longitude: -118.243683
+notes:
+population: 3990456
+primary_key: incident_number
+refresh_frequency: weekly
+source_url: data.lacity.org
+state: CA
+state_name: California
+timezone: America/Los_Angeles
+zoom: 11

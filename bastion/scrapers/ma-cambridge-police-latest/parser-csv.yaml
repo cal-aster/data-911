@@ -1,0 +1,42 @@
+address: 
+  source: Address
+  type: string
+area: 
+  source: ReportingArea
+  type: string
+classification: 
+  source: Group
+  type: string
+date: 
+  source: DateTimeReceived
+  type: date
+date_closed:
+  source: DateTimeClosed
+  type: date
+department: 
+  source: PrimaryAgency
+  type: string
+description: 
+  source: Type
+  type: string
+neighborhood:
+  source: Neighborhood
+  type: string
+priority: 
+  source: Priority
+  type: string       
+sector: 
+  source: PoliceSector
+  type: string
+time: 
+  source: DateTimeReceived
+  type: time
+time_closed:
+  source: DateTimeClosed
+  type: time
+timestamp: 
+  source: DateTimeReceived
+  type: timestamp
+timestamp_closed:
+  source: DateTimeClosed
+  type: timestamp

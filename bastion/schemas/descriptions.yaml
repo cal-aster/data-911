@@ -1,0 +1,11 @@
+Descriptions:
+  id: "VARCHAR(32) NOT NULL"
+  api_url: "TINYTEXT"
+  attributes: "JSON"
+  data_token: "VARCHAR(32)"
+  data_url: "TINYTEXT"
+  description: "MEDIUMTEXT"
+  notes: "MEDIUMTEXT"
+  primary_key: "VARCHAR(32)"
+  refresh_frequency: "VARCHAR(16)"
+  source_url: "TINYTEXT"

@@ -1,0 +1,36 @@
+address: 
+  source: display_address
+  type: string
+class:
+  source: classification 
+  type: string
+date:
+  source: crime_date 
+  type: date
+district: 
+  source: council_district
+  type: string
+incident: 
+  source: event_number
+  type: string
+latitude: 
+  source: latitude
+  type: float
+longitude: 
+  source: longitude
+  type: float
+neighborhood: 
+  source: neighborhood_name
+  type: string
+source: 
+  source: sub_engagement
+  type: string
+time: 
+  source: crime_time
+  type: time
+timestamp: 
+  source: crime_date
+  type: timestamp
+type:
+  source: type_of_engagement 
+  type: string

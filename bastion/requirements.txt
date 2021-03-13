@@ -1,0 +1,10 @@
+boto3==1.16.18
+PyMySQL==0.10.1
+Werkzeug==1.0.1
+requests==2.24.0
+starlette==0.13.6
+pydantic==1.7
+fastapi==0.61.2
+PyJWT==1.7.1
+python-dotenv==0.15.0
+PyYAML==5.3.1

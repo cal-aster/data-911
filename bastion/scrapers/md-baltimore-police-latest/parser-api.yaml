@@ -1,0 +1,42 @@
+address:
+  source: incidentlocation 
+  type: string
+block: 
+  source: policepost
+  type: string
+class: 
+  source: priority
+  type: string
+date: 
+  source: calldatetime
+  type: date
+description: 
+  source: description
+  type: string
+district: 
+  source: sheriffdistricts
+  type: string
+incident: 
+  source: callnumber
+  type: string
+latitude: 
+  source: location
+  type: duple-0
+longitude: 
+  source: location
+  type: duple-1
+neighborhood: 
+  source: neighborhood
+  type: string
+time: 
+  source: calldatetime
+  type: time
+timestamp:
+  source: calldatetime 
+  type: timestamp
+zipcode:
+  source: zipcode 
+  type: integer
+zone: 
+  source: vrizones
+  type: string

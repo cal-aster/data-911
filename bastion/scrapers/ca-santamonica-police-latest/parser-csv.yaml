@@ -1,0 +1,42 @@
+address:
+  source: Location
+  type: string
+beat:
+  source: Beat
+  type: string
+date:
+  source: Received Time
+  type: date
+date_closed:
+  source: Received Time
+  type: date
+disposition:
+  source: Disposition
+  type: string
+district:
+  source: Reporting District
+  type: string
+incident:
+  source: Incident Number
+  type: string
+latitude:
+  source: Latitude
+  type: float
+longitude:
+  source: Longitude
+  type: float
+time:
+  source: Received Time
+  type: time
+timestamp:
+  source: Received Time
+  type: timestamp
+time_closed:
+  source: Cleared Time
+  type: time
+timestamp_closed:
+  source: Cleared Time
+  type: timestamp
+type:
+  source: Call Type
+  type: string

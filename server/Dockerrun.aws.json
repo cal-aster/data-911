@@ -5,5 +5,13 @@
       "ContainerPort": "5000"
     }
   ],
-  "Volumes": []
+  "Volumes": [],
+  "Image": {
+    "Name": "data911/server:latest",
+    "Update": "true"
+  },
+  "Authentication": {
+    "Bucket": "docker-us-west-1",
+    "Key": "config.json"
+  }
 }
