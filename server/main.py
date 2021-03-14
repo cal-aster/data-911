@@ -5,7 +5,7 @@
 from routers import cities, general, spatial, temporal
 from src.server import app
 
-### Routes
+### routes
 
 app.include_router(cities.router, prefix="/city", tags=["city"])
 

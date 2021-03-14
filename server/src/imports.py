@@ -27,7 +27,7 @@ from operator import itemgetter
 from itertools import groupby, chain
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-
+from typing import Dict, List, Any, Tuple, Union, Callable
 from pydantic import BaseModel, Field
 from fastapi import (
     FastAPI,

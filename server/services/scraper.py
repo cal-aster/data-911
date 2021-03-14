@@ -16,11 +16,11 @@ from src.imports import (
     Dict,
     List,
 )
-from services.database import Database
+from services.database import SqlExecutor
 
 
 class Cache:
-    def __init__(self, sql: Database) -> None:
+    def __init__(self, sql: SqlExecutor) -> None:
         self.sql = sql
 
     def build_daily(self, city_id: str, table: str, start: str, end: str) -> None:
@@ -288,7 +288,7 @@ class SocrataParser:
 
 
 class Scraper:
-    def __init__(self, city_id, sql: Database = None) -> None:
+    def __init__(self, city_id, sql: SqlExecutor = None) -> None:
         self.sql = sql
         self.city_id = city_id
         # build city config

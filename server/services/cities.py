@@ -14,11 +14,11 @@ from src.imports import (
     Union,
     Tuple,
 )
-from services.database import Database
+from services.database import SqlExecutor
 
 
 class Cities:
-    def __init__(self, sql: Database) -> None:
+    def __init__(self, sql: SqlExecutor) -> None:
         self.sql = sql
         self.spatial_columns = ["timestamp", "longitude", "latitude"]
 

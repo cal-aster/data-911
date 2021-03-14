@@ -10,7 +10,7 @@ class SqlExecutor:
     ENVIRONMENT = os.getenv("ENV")
     PLACEHOLDER = "%s" if os.getenv("ENV") in ["staging", "production"] else "?"
 
-    def __init__(self, database: str = None) -> None:
+    def __init__(self, database: str = os.getenv("SQL_DATABASE")) -> None:
         self.database = database
 
     def connect(self, database: str = None) -> Callable:
