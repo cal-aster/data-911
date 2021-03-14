@@ -2,52 +2,47 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.helpers import *
+from src.imports import APIRouter, Query, Path, jsonable_encoder
+from services import sql_executor, city_manager
 
 router = APIRouter()
 
-@router.get(
-    "/{id}",
-    summary="Returns geojson of spatio-temporal records"
-)
+
+@router.get("/{city_id}", summary="Returns geojson of spatio-temporal records")
 async def raw_spatial_records(
     start: str = Query(..., title="Start date request"),
     end: str = Query(None, title="End date request"),
-    id: str = Path(..., title="Id of a given city")
+    city_id: str = Path(..., title="Id of a given city"),
 ):
     """
-        Returns a list of spatio-temporal records of
-        calls for service from the corresponding table (city) that took place
-        from the corresponding start date to end date.
+    Returns a list of spatio-temporal records of
+    calls for service from the corresponding table (city) that took place
+    from the corresponding start date to end date.
     """
-
-    # Get the name of the table
-    qry = f"SELECT city, state, department FROM Cities WHERE id='{id}'"
-    cty = mng.sql.unique(qry)
-    nme = "".join(cty.get('city').strip().split(' '))
-    nme = f"{cty.get('state').upper()}_{nme}"
-    if cty.get('department') != 'police':
-        nme += f"_{cty.get('department').capitalize()}"
-
-    # Retrieve the calls
-    dts = mng.list_dates(start, end, query=True)
+    city = city_manager.describe(city_id)
+    list_dates = city_manager.list_dates(start, end, formatted_for_query=True)
 
     try:
-        col = ['timestamp', 'longitude', 'latitude']
-        qry = f"SELECT {', '.join(col)} FROM {nme} \
-                WHERE date in {dts} \
-                ORDER BY timestamp DESC"
-        lst = mng.sql.get(qry)
-        tot = len(lst)
-        # Filter the calls that can be visualized
-        lst = [r for r in lst if not mng.has_null(r)]
+        attributes = ["timestamp", "longitude", "latitude"]
+        records = sql_executor.get(
+            f"SELECT {', '.join(attributes)} FROM {city.get('table')} \
+            WHERE date in ? \
+            ORDER BY timestamp DESC",
+            (list_dates,),
+        )
+        records_number = len(records)
+        records = [record for record in records if not city_manager.has_null(record)]
     except:
-        qry = f"SELECT COUNT(timestamp) as cnt FROM {nme} \
-                WHERE date in {dts}"
-        lst = []
-        tot = mng.sql.unique(qry).get('cnt')
+        records = []
+        records_number = sql_executor.get_unique(
+            f"SELECT COUNT(timestamp) as cnt FROM {city.get('table')} \
+            WHERE date in ?",
+            (list_dates,),
+        ).get("cnt")
 
-    return jsonable_encoder({
-        "nRecords": tot,
-        "geojson": mng.build_geojson(lst, 'timestamp')
-    })
+    return jsonable_encoder(
+        {
+            "nRecords": records_number,
+            "geojson": city_manager.build_geojson(records, "timestamp"),
+        }
+    )

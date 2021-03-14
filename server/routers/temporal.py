@@ -10,6 +10,7 @@ from src.imports import (
     parser,
     timedelta,
     chain,
+    relativedelta,
 )
 from services import city_manager, sql_executor
 
@@ -53,7 +54,7 @@ async def hourly(
 
     return jsonable_encoder(
         {
-            "labels": [r for r in sorted(list(list_slots.keys()))],
+            "labels": [date for date in sorted(list(list_slots.keys()))],
             "datasets": [
                 {
                     "backgroundColor": "#63ACFF",
@@ -62,7 +63,8 @@ async def hourly(
                     "pointBackgroundColor": "#4F86D9",
                     "pointRadius": 2,
                     "data": [
-                        int(list_slots.get(k)) for k in sorted(list(list_slots.keys()))
+                        int(list_slots.get(date))
+                        for date in sorted(list(list_slots.keys()))
                     ],
                 }
             ],
@@ -70,40 +72,44 @@ async def hourly(
     )
 
 
-@router.get("/daily/{id}", summary="Return timeseries of calls on a daily basis")
+@router.get("/daily/{city_id}", summary="Return timeseries of calls on a daily basis")
 async def daily(
-    id: str = Path(..., title="Id of a given city"),
+    city_id: str = Path(..., title="Id of a given city"),
     last: str = Query(None, title="End date of the serie YYYY-MM-DD"),
     months: int = 3,
 ):
     """
     Return timeseries of calls on a daily basis
     """
-
-    # Get city name
-    cty = mng.city_table(id)
-
-    # Anchor to the last day available or the date provided
+    city = city_manager.describe(city_id)
+    # anchor to the last day available or the date provided
     if last:
         last = parser.parse(last)
     else:
-        last = parser.parse(cty.get("max_date"))
-    old = last + relativedelta(months=-months)
-
-    # Initialize the response
-    u, v = old.strftime("%Y-%m-%d"), last.strftime("%Y-%m-%d")
-    dts = mng.list_dates(u, v, query=False)
-    res = dict(zip(dts, [0 for _ in range(len(dts))]))
-
-    # Build the query and access data
-    qry = f"SELECT date, num_calls FROM Daily \
-            WHERE city='{id}' AND date BETWEEN '{u}' AND '{v}' \
-            ORDER BY date"
-    res.update({r.get("date"): r.get("num_calls") for r in mng.sql.get(qry)})
+        last = parser.parse(city.get("max_date"))
+    start = last + relativedelta(months=-months)
+    # initialize the response
+    start_date, end_date = start.strftime("%Y-%m-%d"), last.strftime("%Y-%m-%d")
+    list_dates = city_manager.list_dates(
+        start_date, end_date, formatted_for_query=False
+    )
+    list_slots = dict(zip(list_dates, [0 for _ in range(len(list_dates))]))
+    # build the query and access data
+    list_slots.update(
+        {
+            record.get("date"): record.get("num_calls")
+            for record in sql_executor.get(
+                "SELECT date, num_calls FROM Daily \
+                WHERE city=? AND date BETWEEN ? AND ? \
+                ORDER BY date",
+                (city_id, start_date, end_date),
+            )
+        }
+    )
 
     return jsonable_encoder(
         {
-            "labels": [r for r in sorted(list(res.keys()))],
+            "labels": [date for date in sorted(list(list_slots.keys()))],
             "datasets": [
                 {
                     "backgroundColor": "#63ACFF",
@@ -111,45 +117,49 @@ async def daily(
                     "borderWidth": 1,
                     "pointBackgroundColor": "#4F86D9",
                     "pointRadius": 2,
-                    "data": [int(res.get(k)) for k in sorted(list(res.keys()))],
+                    "data": [
+                        int(list_slots.get(date))
+                        for date in sorted(list(list_slots.keys()))
+                    ],
                 }
             ],
         }
     )
 
 
-@router.get("/weekly/{id}", summary="Return timeseries of calls on a weekly basis")
+@router.get("/weekly/{city_id}", summary="Return timeseries of calls on a weekly basis")
 async def weekly(
-    id: str = Path(..., title="Id of a given city"),
+    city_id: str = Path(..., title="Id of a given city"),
     last: str = Query(None, title="End date of the serie YYYY-MM-DD"),
     years: int = 2,
 ):
     """
     Return timeseries of calls on a weekly basis
     """
-
-    # Get city name
-    cty = mng.city_table(id)
-
-    # Anchor to the last available monday
+    city = city_manager.describe(city_id)
+    # anchor to the last available monday
     if last:
         last = parser.parse(last)
     else:
         last = parser.parse(cty.get("max_date"))
-    old = last + relativedelta(years=-years)
+    start = last + relativedelta(years=-years)
     last -= timedelta(days=last.weekday())
-    old -= timedelta(days=old.weekday())
-
-    # Build the query and access data
-    u, v = old.strftime("%Y-%m-%d"), last.strftime("%Y-%m-%d")
-    qry = f"SELECT monday, num_calls FROM Weekly \
-            WHERE city='{id}' AND monday BETWEEN '{old}' AND '{last}' \
-            ORDER BY monday"
-    res = {r.get("monday"): r.get("num_calls") for r in mng.sql.get(qry)}
+    start -= timedelta(days=start.weekday())
+    # build the query and access data
+    start_date, end_date = start.strftime("%Y-%m-%d"), last.strftime("%Y-%m-%d")
+    list_slots = {
+        record.get("monday"): record.get("num_calls")
+        for record in sql_executor.get(
+            "SELECT monday, num_calls FROM Weekly \
+            WHERE city=? AND monday BETWEEN ? AND ? \
+            ORDER BY monday",
+            (city_id, start_date, end_date),
+        )
+    }
 
     return jsonable_encoder(
         {
-            "labels": [r for r in sorted(list(res.keys()))],
+            "labels": [date for date in sorted(list(list_slots.keys()))],
             "datasets": [
                 {
                     "backgroundColor": "#63ACFF",
@@ -157,7 +167,10 @@ async def weekly(
                     "borderWidth": 1,
                     "pointBackgroundColor": "#4F86D9",
                     "pointRadius": 2,
-                    "data": [int(res.get(k)) for k in sorted(list(res.keys()))],
+                    "data": [
+                        int(list_slots.get(date))
+                        for date in sorted(list(list_slots.keys()))
+                    ],
                 }
             ],
         }

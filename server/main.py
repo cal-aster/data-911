@@ -3,7 +3,7 @@
 # Project: CalAster
 
 from routers import cities, general, spatial, temporal
-from src.helpers import *
+from src.server import app
 
 ### Routes
 
