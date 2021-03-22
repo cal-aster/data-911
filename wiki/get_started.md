@@ -26,6 +26,3 @@ make install && make start
 cd data911/client
 make install && make start
 ```
-
-## What you need to know
-

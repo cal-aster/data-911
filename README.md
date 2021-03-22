@@ -1,7 +1,7 @@
 # CalAster - Data911
 `Point of Contact: meryll@calaster.com`
 
-![911 Logo](/wiki/assets/911-logo.jpg)
+![Banner](/wiki/assets/banner.png)
 
 ## What is Data911?
 
