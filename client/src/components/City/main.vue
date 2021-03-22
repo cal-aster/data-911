@@ -8,10 +8,7 @@
       display: flex;
     "
   >
-    <city-header
-      v-if="city"
-      :city="city"
-    />
+    <city-header v-if="city" :city="city" />
     <v-col
       cols="12"
       lg="6"
@@ -25,13 +22,13 @@
       }"
     >
       <city-tabs
-        v-on:tab="(v) => { tab = v }"
+        v-on:tab="
+          v => {
+            tab = v;
+          }
+        "
       />
-      <city-pages
-        v-if="city"
-        :tab="tab"
-        :city="city"
-      />
+      <city-pages v-if="city" :tab="tab" :city="city" />
     </v-col>
     <v-col
       v-if="$vuetify.breakpoint.lgAndUp"
@@ -62,23 +59,21 @@ export default {
     return {
       title: `Data911 - ${this.city.city}, ${this.city.state}`,
       htmlAttrs: {
-        lang: 'en'
+        lang: "en"
       }
-    }
+    };
   },
   created() {
-    this.load()
+    this.load();
   },
   methods: {
     load() {
-      this.$http
-      .get("/city/" + this.$route.params.id)
-      .then(response => {
-        this.city = response.data
+      this.$http.get("/city/" + this.$route.params.id).then(response => {
+        this.city = response.data;
         setTimeout(() => {
-          this.timedMap = true
-        }, 200)
-      })
+          this.timedMap = true;
+        }, 200);
+      });
     }
   }
 };

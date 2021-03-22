@@ -7,27 +7,18 @@
       height: 100%;
     "
   >
-    <v-overlay
-      v-model="overlay"
-      absolute
-      :opacity="0.9"
-      class="overlay"
-    >
+    <v-overlay v-model="overlay" absolute :opacity="0.9" class="overlay">
       <atom-spinner
         v-if="loading"
         :animation-duration="1000"
         :size="60"
         color="#EC7965"
       />
-      <v-card
-        v-else
-        elevation="0"
-        class="card"
-      >
+      <v-card v-else elevation="0" class="card">
         <v-row no-gutters style="margin-bottom: 40px;">
           <span>
-            To avoid any server overload, we limit our visualization feature
-            to a period of 7 days.
+            To avoid any server overload, we limit our visualization feature to
+            a period of 7 days.
             <br /><br />
             We agree, lazy developers ...
           </span>
@@ -48,28 +39,21 @@
       :opacity="0.33"
       class="overlay"
     />
-    <city-map-toggle
-      v-if="city.localized"
-      v-on:toggle="(v) => { type = v }"
-    />
+    <city-map-toggle v-if="city.localized" v-on:toggle="type = $event" />
     <city-map-dates
       v-if="isCityReady && city.localized"
       :city="city"
       :dates="dates"
-      v-on:dates="(v) => { dates = v }"
+      v-on:dates="dates = $event"
     />
-    <city-map-records
-      v-if="city.localized"
-      :data="data"
-      :records="records"
-    />
+    <city-map-records v-if="city.localized" :data="data" :records="records" />
     <mapbox-map
       style="height: 100%;"
       :access-token="token"
       :map-style="style"
       :center="center"
       :zoom="zoom"
-      @mb-created="(v) => { map = v }"
+      @mb-created="map = $event"
     >
       <mapbox-cluster
         v-if="type == 'clusters'"
@@ -131,205 +115,220 @@
 </style>
 
 <script>
-  import _ from "lodash";
-  import Vue from 'vue';
-  import { AtomSpinner, LoopingRhombusesSpinner } from 'epic-spinners';
-  import 'mapbox-gl/dist/mapbox-gl.css';
-  import VueMapbox from '@studiometa/vue-mapbox-gl';
-  Vue.use(VueMapbox);
+import _ from "lodash";
+import Vue from "vue";
+import { AtomSpinner, LoopingRhombusesSpinner } from "epic-spinners";
+import "mapbox-gl/dist/mapbox-gl.css";
+import VueMapbox from "@studiometa/vue-mapbox-gl";
+Vue.use(VueMapbox);
 
-  export default {
-    props: {
-      city: {
-        type: Object,
-        default: () => {}
-      },
-      center: {
-        type: Array,
-        default: () => [0.0, 0.0]
-      },
-      zoom: {
-        type: Number,
-        default: 1
-      }
+export default {
+  props: {
+    city: {
+      type: Object,
+      default: () => {}
     },
-    components: {
-      AtomSpinner,
-      LoopingRhombusesSpinner
+    center: {
+      type: Array,
+      default: () => [0.0, 0.0]
+    },
+    zoom: {
+      type: Number,
+      default: 1
+    }
+  },
+  components: {
+    AtomSpinner,
+    LoopingRhombusesSpinner
+  },
+  data() {
+    return {
+      map: null,
+      dates: [],
+      type: "heatmap",
+      loading: false,
+      blocking: false,
+      data: null,
+      records: 0,
+      token: process.env.VUE_APP_MAPBOX_TOKEN,
+      style: "mapbox://styles/calaster/ckbso5bl203ds1ip7yj0yvhkc?optimize=true"
+    };
+  },
+  watch: {
+    city() {
+      this.dates = [this.city.max_date];
+    },
+    type() {
+      if (this.map.isStyleLoaded()) {
+        if (this.map.getSource("calls")) {
+          this.delHeatmap();
+        }
+        if (this.type === "heatmap") {
+          this.map.on("load", this.addHeatmap());
+        }
+      }
     },
     data() {
-      return {
-        map: null,
-        dates: [],
-        type: 'heatmap',
-        loading: false,
-        blocking: false,
-        data: null,
-        records: 0,
-        token: process.env.VUE_APP_MAPBOX_TOKEN,
-        style: "mapbox://styles/calaster/ckbso5bl203ds1ip7yj0yvhkc?optimize=true"
-      }
-    },
-    watch: {
-      city() {
-        this.dates = [ this.city.max_date ]
-      },
-      type() {
-        if (this.map.isStyleLoaded()) {
-          if (this.map.getSource('calls')) { this.delHeatmap() }
-          if (this.type === 'heatmap') {
-            this.map.on('load', this.addHeatmap())
-          }
+      if (this.map.isStyleLoaded() && this.type === "heatmap") {
+        if (this.map.getSource("calls")) {
+          this.delHeatmap();
         }
-      },
-      data() {
-        if (this.map.isStyleLoaded() && this.type === 'heatmap') {
-          if (this.map.getSource('calls')) { this.delHeatmap() }
-          this.map.on('load', this.addHeatmap())
-        }
-      },
-      dates() {
-        this.fetch()
+        this.map.on("load", this.addHeatmap());
       }
     },
-    computed: {
-      overlay() {
-        return this.loading || this.blocking
-      },
-      isCityReady() {
-        return !(_.isEmpty(this.city))
-      },
-      isDateReady() {
-        return this.dates.length > 0
-      }
+    dates() {
+      this.fetch();
+    }
+  },
+  computed: {
+    overlay() {
+      return this.loading || this.blocking;
     },
-    methods: {
-      days( start, end ) {
-        var d_0 = new Date(start)
-        var d_1 = new Date(end)
-        return (d_1.getTime() - d_0.getTime()) / (1000 * 3600 * 24)
-      },
-      fetch() {
-        if (this.$vuetify.breakpoint.lgAndUp) {
-          var sDates = _.cloneDeep(this.dates)
-          sDates.sort()
-          let nDays = this.days(sDates[0], sDates[1] ? sDates[1] : sDates[0])
-          if (nDays > 7) {
-            this.blocking = true
-          } else {
-            this.loading = true
-            this.blocking = false
-            let url = "/spatial/" + this.$route.params.id + '?'
-            url += `start=${sDates[0]}&end=${sDates[1] ? sDates[1] : sDates[0]}`
-            this.$http
+    isCityReady() {
+      return !_.isEmpty(this.city);
+    },
+    isDateReady() {
+      return this.dates.length > 0;
+    }
+  },
+  methods: {
+    days(start, end) {
+      var d_0 = new Date(start);
+      var d_1 = new Date(end);
+      return (d_1.getTime() - d_0.getTime()) / (1000 * 3600 * 24);
+    },
+    fetch() {
+      if (this.$vuetify.breakpoint.lgAndUp) {
+        var sDates = _.cloneDeep(this.dates);
+        sDates.sort();
+        let nDays = this.days(sDates[0], sDates[1] ? sDates[1] : sDates[0]);
+        if (nDays > 7) {
+          this.blocking = true;
+        } else {
+          this.loading = true;
+          this.blocking = false;
+          let url = "/spatial/" + this.$route.params.id + "?";
+          url += `start=${sDates[0]}&end=${sDates[1] ? sDates[1] : sDates[0]}`;
+          this.$http
             .get(url)
             .then(response => {
-              this.loading = false
-              this.records = response.data.nRecords
-              this.data = response.data.geojson
+              this.loading = false;
+              this.records = response.data.nRecords;
+              this.data = response.data.geojson;
             })
             .catch(error => {
-              this.loading = false
-              console.log(error)
-            })
-          }
+              this.loading = false;
+              console.log(error);
+            });
         }
-      },
-      delHeatmap() {
-        this.map.removeLayer('heatmap')
-        this.map.removeLayer('calls')
-        this.map.removeSource('calls')
-      },
-      addHeatmap() {
-        this.map.addSource('calls', {
-          type: 'geojson',
-          data: this.data
-        });
-        this.map.addLayer({
-          id: 'heatmap',
-          type: 'heatmap',
-          source: 'calls',
+      }
+    },
+    delHeatmap() {
+      this.map.removeLayer("heatmap");
+      this.map.removeLayer("calls");
+      this.map.removeSource("calls");
+    },
+    addHeatmap() {
+      this.map.addSource("calls", {
+        type: "geojson",
+        data: this.data
+      });
+      this.map.addLayer(
+        {
+          id: "heatmap",
+          type: "heatmap",
+          source: "calls",
           maxzoom: 15,
           paint: {
-            'heatmap-weight': {
-              property: 'dbh',
-              type: 'exponential',
+            "heatmap-weight": {
+              property: "dbh",
+              type: "exponential",
               stops: [
                 [1, 0],
                 [62, 1]
               ]
             },
-            'heatmap-intensity': {
+            "heatmap-intensity": {
               stops: [
                 [11, 1],
                 [15, 3]
               ]
             },
-            'heatmap-color': [
-              'interpolate',
-              ['linear'],
-              ['heatmap-density'],
-              0, 'transparent',
-              0.2, '#ECE7BA',
-              0.4, '#ECE077',
-              0.6, '#D8A151',
-              0.8, '#987138'
+            "heatmap-color": [
+              "interpolate",
+              ["linear"],
+              ["heatmap-density"],
+              0,
+              "transparent",
+              0.2,
+              "#ECE7BA",
+              0.4,
+              "#ECE077",
+              0.6,
+              "#D8A151",
+              0.8,
+              "#987138"
             ],
-            'heatmap-radius': {
+            "heatmap-radius": {
               stops: [
                 [11, 15],
                 [15, 20]
               ]
             },
-            'heatmap-opacity': {
+            "heatmap-opacity": {
               default: 1,
               stops: [
                 [14, 1],
                 [15, 0]
               ]
-            },
+            }
           }
-        }, 'waterway-label');
-        this.map.addLayer({
-          id: 'calls',
-          type: 'circle',
-          source: 'calls',
+        },
+        "waterway-label"
+      );
+      this.map.addLayer(
+        {
+          id: "calls",
+          type: "circle",
+          source: "calls",
           minzoom: 14,
           paint: {
-            'circle-radius': {
-              property: 'dbh',
-              type: 'exponential',
+            "circle-radius": {
+              property: "dbh",
+              type: "exponential",
               stops: [
                 [{ zoom: 15, value: 1 }, 5],
                 [{ zoom: 15, value: 62 }, 10],
                 [{ zoom: 22, value: 1 }, 20],
-                [{ zoom: 22, value: 62 }, 50],
+                [{ zoom: 22, value: 62 }, 50]
               ]
             },
-            'circle-color': {
-              property: 'dbh',
-              type: 'exponential',
+            "circle-color": {
+              property: "dbh",
+              type: "exponential",
               stops: [
-                [0, 'rgba(236,222,239,0)'],
-                [10, 'rgb(236,222,239)'],
-                [20, 'rgb(208,209,230)'],
-                [30, 'rgb(166,189,219)'],
-                [40, 'rgb(103,169,207)'],
-                [50, 'rgb(28,144,153)'],
-                [60, 'rgb(1,108,89)']
+                [0, "rgba(236,222,239,0)"],
+                [10, "rgb(236,222,239)"],
+                [20, "rgb(208,209,230)"],
+                [30, "rgb(166,189,219)"],
+                [40, "rgb(103,169,207)"],
+                [50, "rgb(28,144,153)"],
+                [60, "rgb(1,108,89)"]
               ]
             },
-            'circle-stroke-color': 'white',
-            'circle-stroke-width': 1,
-            'circle-opacity': {
+            "circle-stroke-color": "white",
+            "circle-stroke-width": 1,
+            "circle-opacity": {
               stops: [
                 [14, 0],
                 [15, 1]
               ]
             }
           }
-        }, 'waterway-label');
-      }
+        },
+        "waterway-label"
+      );
     }
-  };
+  }
+};
 </script>

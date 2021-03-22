@@ -2,8 +2,10 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.imports import APIRouter, Response, status, jsonable_encoder, Path, Query
-from services import sql_executor
+from fastapi.encoders import jsonable_encoder
+from fastapi import status, Path, Query, APIRouter, Response
+
+from services import sql_handler
 from services.scraper import Cache, Scraper
 
 router = APIRouter()
@@ -24,7 +26,7 @@ async def cities():
         "department",
     ]
     return jsonable_encoder(
-        sql_executor.get(f"SELECT {', '.join(attributes)} FROM Cities ORDER BY city")
+        sql_handler.get(f"SELECT {', '.join(attributes)} FROM Cities ORDER BY city")
     )
 
 
@@ -34,7 +36,7 @@ async def city(city_id: str = Path(..., title="Id of a given city")):
     Returns a specific city
     """
     return jsonable_encoder(
-        sql_executor.get_unique("SELECT * FROM Cities WHERE id=?", (city_id,))
+        sql_handler.get_unique("SELECT * FROM Cities WHERE id=?", (city_id,))
     )
 
 
@@ -44,7 +46,7 @@ async def description(city_id: str = Path(..., title="Id of a given city")):
     API description of a given city
     """
     return jsonable_encoder(
-        sql_executor.get_unique("SELECT * FROM Descriptions WHERE id=?", (city_id,))
+        sql_handler.get_unique("SELECT * FROM Descriptions WHERE id=?", (city_id,))
     )
 
 
@@ -58,15 +60,13 @@ async def update_cache(
     """
     Cache update of a given city
     """
-    scraper = Scraper(city_id, sql=sql_executor)
+    scraper = Scraper(city_id, sql=sql_handler)
     if (limit is None) or (limit == "daily"):
-        Cache(sql_executor).build_daily(scraper.city_id, scraper.table_name, start, end)
+        Cache(sql_handler).build_daily(scraper.city_id, scraper.table_name, start, end)
     if (limit is None) or (limit == "weekly"):
-        Cache(sql_executor).build_weekly(scraper.city_id, start, end)
+        Cache(sql_handler).build_weekly(scraper.city_id, start, end)
     if (limit is None) or (limit == "hourly"):
-        Cache(sql_executor).build_hourly(
-            scraper.city_id, scraper.table_name, start, end
-        )
+        Cache(sql_handler).build_hourly(scraper.city_id, scraper.table_name, start, end)
 
     return Response(status_code=status.HTTP_200_OK)
 
@@ -79,10 +79,10 @@ async def update_city(chunk: int = Query(10000, title="Size of the query")):
     return jsonable_encoder(
         {
             f"{city.get('state').upper()} | {city.get('city').capitalize()}": Scraper(
-                city.get("id"), sql=sql_executor
+                city.get("id"), sql=sql_handler
             ).update(chunk=chunk)
         }
-        for city in sql_executor.get(
+        for city in sql_handler.get(
             "SELECT id, state, city FROM Cities ORDER BY num_calls"
         )
     )
@@ -97,5 +97,5 @@ async def update_city(
     Scraping of a given city
     """
     return jsonable_encoder(
-        {"records": Scraper(city_id, sql=sql_executor).update(chunk=chunk)}
+        {"records": Scraper(city_id, sql=sql_handler).update(chunk=chunk)}
     )

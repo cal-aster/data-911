@@ -1,3 +1,5 @@
+directory=$(shell pwd)
+
 install:
 	pip install --upgrade pip
 	pip install --upgrade setuptools
@@ -6,16 +8,28 @@ install:
 start:
 	uvicorn --reload main:app
 
-build:
-	docker build -t data911/server:latest .
-
 docker:
-	docker run -it -p 8000:5000 --env-file=.devops/.env.development data911/server:latest
+	docker build -t calaster/data911:server_development .
+	docker run -it -p 8000:5000 --env-file=.devops/.env.development -v $(directory):/app calaster/data911:server_development
+
+push:
+	docker build -t calaster/data911:server_development .
+	docker push calaster/data911:server_development
 
 pull:
-	docker pull data911/server:latest
+	docker pull calaster/data911:server_development
 
-deploy:
-	docker build -t data911/server:latest .
-	docker push data911/server:latest
+push-prod:
+	docker build -t calaster/data911:server_production .
+	docker push calaster/data911:server_production
+
+pull-prod:
+	docker pull calaster/data911:server_production
+
+deploy-prod:
+	docker build -t calaster/data911:server_production .
+	docker push calaster/data911:server_production
 	python ../control.py deploy-artifact production calaster
+
+end-prod:
+	python ../control.py terminate production calaster

@@ -2,17 +2,14 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.imports import (
-    APIRouter,
-    jsonable_encoder,
-    Path,
-    Query,
-    parser,
-    timedelta,
-    chain,
-    relativedelta,
-)
-from services import city_manager, sql_executor
+from dateutil import parser
+from datetime import timedelta
+from itertools import chain
+from dateutil.relativedelta import relativedelta
+from fastapi.encoders import jsonable_encoder
+from fastapi import APIRouter, Path, Query
+
+from services import city_manager, sql_handler
 
 router = APIRouter()
 
@@ -45,7 +42,7 @@ async def hourly(
     list_slots.update(
         {
             record.get("datetime"): record.get("num_calls")
-            for record in sql_executor.get(
+            for record in sql_handler.get(
                 "SELECT datetime, num_calls FROM Hourly WHERE city=? AND datetime BETWEEN ? AND ?",
                 (city_id, f"{start_date} 00:00", f"{end_date} 23:00"),
             )
@@ -98,7 +95,7 @@ async def daily(
     list_slots.update(
         {
             record.get("date"): record.get("num_calls")
-            for record in sql_executor.get(
+            for record in sql_handler.get(
                 "SELECT date, num_calls FROM Daily \
                 WHERE city=? AND date BETWEEN ? AND ? \
                 ORDER BY date",
@@ -141,7 +138,7 @@ async def weekly(
     if last:
         last = parser.parse(last)
     else:
-        last = parser.parse(cty.get("max_date"))
+        last = parser.parse(city.get("max_date"))
     start = last + relativedelta(years=-years)
     last -= timedelta(days=last.weekday())
     start -= timedelta(days=start.weekday())
@@ -149,7 +146,7 @@ async def weekly(
     start_date, end_date = start.strftime("%Y-%m-%d"), last.strftime("%Y-%m-%d")
     list_slots = {
         record.get("monday"): record.get("num_calls")
-        for record in sql_executor.get(
+        for record in sql_handler.get(
             "SELECT monday, num_calls FROM Weekly \
             WHERE city=? AND monday BETWEEN ? AND ? \
             ORDER BY monday",

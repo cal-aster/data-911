@@ -2,16 +2,20 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.imports import os, Callable, pymysql, sqlite3, Tuple, List, Dict
+import os
+import pymysql
+import sqlite3
+
+from typing import Callable, Tuple, List, Dict
 
 
-class SqlExecutor:
+class SqlHandler:
 
     ENVIRONMENT = os.getenv("ENV")
     PLACEHOLDER = "%s" if os.getenv("ENV") in ["staging", "production"] else "?"
 
-    def __init__(self, database: str = os.getenv("SQL_DATABASE")) -> None:
-        self.database = database
+    def __init__(self) -> None:
+        pass
 
     def connect(self, database: str = None) -> Callable:
         if self.ENVIRONMENT in ["staging", "production"]:
@@ -26,21 +30,31 @@ class SqlExecutor:
             return pymysql.connect(**self.credentials)
         else:
             if database is not None:
-                if not os.path.exists(self.database):
+                if not os.path.exists(database):
                     raise Exception("No database dump found")
                 else:
-                    self.database = database
-                    return sqlite3.connect(self.database)
+                    return sqlite3.connect(database)
+            elif os.getenv("SQL_DATABASE") is not None:
+                if not os.path.exists(os.getenv("SQL_DATABASE")):
+                    raise Exception("No database dump found")
+                else:
+                    return sqlite3.connect(os.getenv("SQL_DATABASE"))
             else:
                 raise Exception("A database needs to be specified")
+
+    def escape(self, query: str) -> str:
+        if self.ENVIRONMENT == "dev":
+            return query
+        else:
+            return query.replace("?", self.PLACEHOLDER)
 
     def run(self, query: str, values: Tuple = None) -> None:
         driver = self.connect()
         cursor = driver.cursor()
         if values:
-            cursor.execute(query, values)
+            cursor.execute(self.escape(query), values)
         else:
-            cursor.execute(query)
+            cursor.execute(self.escape(query))
         driver.commit()
         cursor.close()
         driver.close()
@@ -50,9 +64,9 @@ class SqlExecutor:
         cursor = driver.cursor()
         for index, query in enumerate(queries):
             if values:
-                cursor.execute(query, values[index])
+                cursor.execute(self.escape(query), values[index])
             else:
-                cursor.execute(query)
+                cursor.execute(self.escape(query))
         driver.commit()
         cursor.close()
         driver.close()
@@ -61,9 +75,9 @@ class SqlExecutor:
         driver = self.connect()
         cursor = driver.cursor()
         if values:
-            cursor.execute(query, values)
+            cursor.execute(self.escape(query), values)
         else:
-            cursor.execute(query)
+            cursor.execute(self.escape(query))
         results = cursor.fetchall()
         attributes = [attribute[0] for attribute in cursor.description]
         results = [
@@ -76,17 +90,14 @@ class SqlExecutor:
     def get_unique(self, query: str, values: Tuple = None) -> Dict:
         driver = self.connect()
         cursor = driver.cursor()
-        try:
-            if values:
-                cursor.execute(query, values)
-            else:
-                cursor.execute(query)
-            result = cursor.fetchone()
-            if result:
-                attributes = [attribute[0] for attribute in cursor.description]
-                result = {key: value for key, value in zip(attributes, result)}
-        except:
-            raise Exception("SQL", query, values)
+        if values:
+            cursor.execute(self.escape(query), values)
+        else:
+            cursor.execute(self.escape(query))
+        result = cursor.fetchone()
+        if result:
+            attributes = [attribute[0] for attribute in cursor.description]
+            result = {key: value for key, value in zip(attributes, result)}
         cursor.close()
         driver.close()
         return result

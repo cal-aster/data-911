@@ -12,13 +12,21 @@
       <v-icon
         small
         v-if="$vuetify.breakpoint.lgAndUp"
-        :color="city.department == 'police' ? 'var(--v-tertiary-base)' :
-                city.department == 'fire' ? '#D56956' : 'var(--v-background-base)'"
+        :color="
+          city.department == 'police'
+            ? 'var(--v-tertiary-base)'
+            : city.department == 'fire'
+            ? '#D56956'
+            : 'var(--v-background-base)'
+        "
         style="margin-right: 10px;"
       >
         {{
-          city.department == 'police' ? 'mdi-police-badge' :
-          city.department == 'fire' ? 'mdi-fire' : 'mdi-pencil'
+          city.department == "police"
+            ? "mdi-police-badge"
+            : city.department == "fire"
+            ? "mdi-fire"
+            : "mdi-pencil"
         }}
       </v-icon>
       <span
@@ -45,7 +53,7 @@
         style="font-weight: bold; margin-right: 26px;"
         class="subtitle-3 tertiary--text"
       >
-        {{ city.num_calls ? city.num_calls.toLocaleString() : '--' }} records
+        {{ city.num_calls ? city.num_calls.toLocaleString() : "--" }} records
       </span>
       <v-spacer />
       <span
@@ -59,42 +67,42 @@
 </template>
 
 <style type="scss" scoped>
+.card {
+  height: 48px;
+  min-width: fit-content;
+  padding: 0px 20px;
+  background-color: var(--v-surface-base) !important;
+  border-radius: 4px !important;
+  border: solid 1px #e5e9ed !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
+  position: absolute;
+  top: 10px;
+  right: calc(66.6% + 30px);
+}
+@media only screen and (max-width: 1904px) {
   .card {
-    height: 48px;
-    min-width: fit-content;
-    padding: 0px 20px;
-    background-color: var(--v-surface-base) !important;
-    border-radius: 4px !important;
-    border: solid 1px #e5e9ed !important;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
-    position: absolute;
-    top: 10px;
-    right: calc(66.6% + 30px);
+    right: calc(50% + 30px);
   }
-  @media only screen and (max-width: 1904px) {
-    .card {
-      right: calc(50% + 30px);
-    }
+}
+@media only screen and (max-width: 1264px) {
+  .card {
+    right: 30px;
   }
-  @media only screen and (max-width: 1264px) {
-    .card {
-      right: 30px;
-    }
+}
+@media only screen and (max-width: 960px) {
+  .card {
+    right: 10px;
   }
-  @media only screen and (max-width: 960px) {
-    .card {
-      right: 10px;
-    }
-  }
+}
 </style>
 
 <script>
-  export default {
-    props: {
-      city: {
-        type: Object,
-        default: () => {}
-      }
+export default {
+  props: {
+    city: {
+      type: Object,
+      default: () => {}
     }
   }
+};
 </script>

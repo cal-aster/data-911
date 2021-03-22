@@ -6,6 +6,7 @@ from src.helpers import *
 
 ### General application routes
 
+
 @app.get(
     "/health",
     tags=["default"],
@@ -14,9 +15,10 @@ from src.helpers import *
 )
 async def health():
     """
-        Returns simple response for health check.
+    Returns simple response for health check.
     """
     return "online"
+
 
 @app.post(
     "/auth",
@@ -26,10 +28,10 @@ async def health():
 )
 async def login(
     username: str = Body(..., embed=True, title="User id"),
-    password: str = Body(..., embed=True, title="User password")
+    password: str = Body(..., embed=True, title="User password"),
 ):
     """
-        Standard authentication login. Returns JWT with encoded user's data.
+    Standard authentication login. Returns JWT with encoded user's data.
     """
     usr: User = app_jwt.authenticate(username, password)
 
@@ -42,7 +44,9 @@ async def login(
 
     return app_jwt.create_token({"identity": usr.id})
 
+
 # RDS routines
+
 
 @app.post(
     "/rds/get",
@@ -52,14 +56,17 @@ async def login(
 async def rds_get(
     query: str = Body(..., embed=True, title="MySQL Query"),
     unique: bool = Query(False, title="Whether to fetch a unique value"),
-    current_user: User = Depends(app_jwt.verify())
+    current_user: User = Depends(app_jwt.verify()),
 ):
     """
-        Returns the results of the query
+    Returns the results of the query
     """
-    if unique: res = app_sql.unique(query)
-    else: res = app_sql.get(query)
+    if unique:
+        res = app_sql.unique(query)
+    else:
+        res = app_sql.get(query)
     return jsonable_encoder(res)
+
 
 @app.post(
     "/rds/run",
@@ -68,14 +75,17 @@ async def rds_get(
 )
 async def rds_run(
     query: Union[str, List[str]] = Body(..., embed=True, title="MySQL Query"),
-    current_user: User = Depends(app_jwt.verify())
+    current_user: User = Depends(app_jwt.verify()),
 ):
     """
-        Returns the results of the query
+    Returns the results of the query
     """
-    if isinstance(query, str): app_sql.run(query)
-    else: app_sql.run_batch(query)
+    if isinstance(query, str):
+        app_sql.run(query)
+    else:
+        app_sql.run_batch(query)
     return "success"
+
 
 @app.post(
     "/rds/add",
@@ -85,29 +95,32 @@ async def rds_run(
 async def rds_add(
     table: str = Body(..., embed=True, title="Name of the table"),
     item: Union[Dict, List[Dict]] = Body(..., embed=True, title="List of items to add"),
-    current_user: User = Depends(app_jwt.verify())
+    current_user: User = Depends(app_jwt.verify()),
 ):
     """
-        Returns the results of the query
+    Returns the results of the query
     """
-    if isinstance(item, dict): app_sql.add(table, item)
-    else: app_sql.add_batch(table, item)
+    if isinstance(item, dict):
+        app_sql.add(table, item)
+    else:
+        app_sql.add_batch(table, item)
     return "success"
 
+
 # Tables routines
+
 
 @app.get(
     "/rds/tables",
     tags=["RDS"],
     summary="Returns the list of tables",
 )
-async def rds_tables(
-    current_user: User = Depends(app_jwt.verify())
-):
+async def rds_tables(current_user: User = Depends(app_jwt.verify())):
     """
-        Returns the schemas of all the available tables
+    Returns the schemas of all the available tables
     """
     return jsonable_encoder(app_sql.describe())
+
 
 @app.post(
     "/rds/tables",
@@ -117,13 +130,14 @@ async def rds_tables(
 async def rds_table_create(
     table: str = Body(..., embed=True, title="Name of the table"),
     schema: Dict = Body(..., embed=True, title="Schema of the table"),
-    current_user: User = Depends(app_jwt.verify())
+    current_user: User = Depends(app_jwt.verify()),
 ):
     """
-        Returns the results of the query
+    Returns the results of the query
     """
     app_sql.create_table(table, schema)
     return "success"
+
 
 @app.delete(
     "/rds/tables",
@@ -132,13 +146,14 @@ async def rds_table_create(
 )
 async def rds_table_delete(
     table: str = Body(..., embed=True, title="Name of the table"),
-    current_user: User = Depends(app_jwt.verify())
+    current_user: User = Depends(app_jwt.verify()),
 ):
     """
-        Returns the results of the query
+    Returns the results of the query
     """
     app_sql.delete_table(table)
     return "success"
+
 
 # Handles the EFS warehouse
 # @app.route('/warehouse', methods=['GET', 'DELETE'])

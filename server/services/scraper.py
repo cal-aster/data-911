@@ -2,25 +2,22 @@
 # Date:    January 23, 2021
 # Project: CalAster
 
-from src.imports import (
-    os,
-    parser,
-    timedelta,
-    dateutil,
-    itertools,
-    Socrata,
-    math,
-    re,
-    Any,
-    Union,
-    Dict,
-    List,
-)
-from services.database import SqlExecutor
+import os
+import re
+import math
+import dateutil
+import itertools
+
+from sodapy import Socrata
+from dateutil import parser
+from datetime import timedelta
+from typing import Any, Union, List, Dict
+
+from services.database import SqlHandler
 
 
 class Cache:
-    def __init__(self, sql: SqlExecutor) -> None:
+    def __init__(self, sql: SqlHandler) -> None:
         self.sql = sql
 
     def build_daily(self, city_id: str, table: str, start: str, end: str) -> None:
@@ -288,7 +285,7 @@ class SocrataParser:
 
 
 class Scraper:
-    def __init__(self, city_id, sql: SqlExecutor = None) -> None:
+    def __init__(self, city_id, sql: SqlHandler = None) -> None:
         self.sql = sql
         self.city_id = city_id
         # build city config

@@ -8,15 +8,11 @@
       display: flex;
     "
   >
-    <dashboard-header
-      :cities="cities"
-    />
-    <dashboard-socials
-      :cities="cities"
-    />
+    <dashboard-header :cities="cities" />
+    <dashboard-socials :cities="cities" />
     <shared-search
       placeholder="Looking for a city?"
-      v-on:search="(v) => { search = v }"
+      v-on:search="search = $event"
       style="
         position: absolute;
         top: 10px;
@@ -52,12 +48,12 @@
               max-height: 232px;
             "
             v-bind:style="{
-              padding: $vuetify.breakpoint.smAndDown ? '0 10px 20px 10px' : '0px 16px 32px 16px'
+              padding: $vuetify.breakpoint.smAndDown
+                ? '0 10px 20px 10px'
+                : '0px 16px 32px 16px'
             }"
           >
-            <dashboard-city
-              :city="city"
-            />
+            <dashboard-city :city="city" />
           </v-col>
         </v-row>
       </perfect-scrollbar>
@@ -68,51 +64,51 @@
 <script>
 export default {
   metaInfo: {
-    title: 'Data911 - Dashboard',
+    title: "Data911 - Dashboard",
     htmlAttrs: {
-      lang: 'en'
+      lang: "en"
     }
   },
   data() {
     return {
       search: "",
       cities: this.$store.state.cities
-    }
+    };
   },
   computed: {
     nCalls() {
-      var count = 0
+      var count = 0;
       this.cities.forEach(x => {
-        count += x.num_calls
-      })
-      return count
+        count += x.num_calls;
+      });
+      return count;
     },
     fCities() {
       return this.cities.filter(x => {
-        return x.city.toLowerCase().includes(this.search.toLowerCase())
-      })
+        return x.city.toLowerCase().includes(this.search.toLowerCase());
+      });
     }
   },
   methods: {
-    days( start, end ) {
-      var d_0 = new Date(start)
-      var d_1 = new Date(end)
-      return (d_1.getTime() - d_0.getTime()) / (1000 * 3600 * 24)
+    days(start, end) {
+      var d_0 = new Date(start);
+      var d_1 = new Date(end);
+      return (d_1.getTime() - d_0.getTime()) / (1000 * 3600 * 24);
     },
     update() {
       this.cities.forEach(x => {
         if (!this.minDate) {
-          this.minDate = x.min_date
+          this.minDate = x.min_date;
         } else if (x.min_date < this.minDate) {
-          this.minDate = x.min_date
+          this.minDate = x.min_date;
         }
         if (!this.maxDate) {
-          this.maxDate = x.max_date
+          this.maxDate = x.max_date;
         } else if (x.max_date > this.maxDate) {
-          this.maxDate = x.max_date
+          this.maxDate = x.max_date;
         }
-      })
-      this.numDays = this.days(this.minDate, this.maxDate)
+      });
+      this.numDays = this.days(this.minDate, this.maxDate);
     }
   }
 };

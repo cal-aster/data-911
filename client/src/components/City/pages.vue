@@ -8,29 +8,22 @@
     "
   >
     <v-tab-item>
-      <city-pages-overview
-        :city="city"
-        style="margin-top: 12px;"
-      />
+      <city-pages-overview :city="city" style="margin-top: 12px;" />
     </v-tab-item>
-    <!-- <v-tab-item>
-    </v-tab-item>
-    <v-tab-item>
-    </v-tab-item> -->
   </v-tabs-items>
 </template>
 
 <script>
-  export default {
-    props: {
-      tab: {
-        type: Number,
-        default: 0
-      },
-      city: {
-        type: Object,
-        default: () => {}
-      }
+export default {
+  props: {
+    tab: {
+      type: Number,
+      default: 0
+    },
+    city: {
+      type: Object,
+      default: () => {}
     }
   }
+};
 </script>

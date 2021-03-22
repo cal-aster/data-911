@@ -1,9 +1,5 @@
 <template>
-  <v-dialog
-    v-model="active"
-    :fullscreen="$vuetify.breakpoint.xs"
-    width="600px"
-  >
+  <v-dialog v-model="active" :fullscreen="$vuetify.breakpoint.xs" width="600px">
     <v-card
       v-if="active"
       :color="$vuetify.breakpoint.xs ? 'surface' : 'background'"
@@ -17,7 +13,9 @@
         no-gutters
         style="background-color: var(--v-tertiary-base) !important;"
         v-bind:style="{
-          padding: $vuetify.breakpoint.xs ? '12px 20px 12px 30px' : '12px 30px 12px 40px',
+          padding: $vuetify.breakpoint.xs
+            ? '12px 20px 12px 30px'
+            : '12px 30px 12px 40px'
         }"
       >
         <span
@@ -38,7 +36,9 @@
       <perfect-scrollbar
         v-bind:style="{
           padding: $vuetify.breakpoint.xs ? '0' : '20px 30px',
-          maxHeight: $vuetify.breakpoint.xs ? 'calc(100vh - 90px)' : 'calc(90vh - 60px)'
+          maxHeight: $vuetify.breakpoint.xs
+            ? 'calc(100vh - 90px)'
+            : 'calc(90vh - 60px)'
         }"
       >
         <shared-performances-statistic
@@ -74,33 +74,31 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      modal: {
-        type: Boolean,
-        default: false
+export default {
+  props: {
+    modal: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      stats: null,
+      active: this.modal
+    };
+  },
+  watch: {
+    active() {
+      this.$emit("modal", this.active);
+      if (this.active) {
+        this.$http.get("/performances").then(response => {
+          this.stats = response.data;
+        });
       }
     },
-    data() {
-      return {
-        stats: null,
-        active: this.modal
-      }
-    },
-    watch: {
-      active() {
-        this.$emit("modal", this.active)
-        if (this.active) {
-          this.$http
-          .get("/performances")
-          .then(response => {
-            this.stats = response.data
-          })
-        }
-      },
-      modal() {
-        this.active = this.modal
-      }
+    modal() {
+      this.active = this.modal;
     }
   }
+};
 </script>

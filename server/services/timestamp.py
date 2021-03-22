@@ -2,7 +2,7 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.imports import datetime
+from datetime import datetime
 
 
 class Timestamps:

@@ -4,6 +4,12 @@
 
 *
 
-# Application
-!dist/
+# application
+!public/
+!src/
 !nginx.conf
+!package-lock.json
+!package.json
+
+# environment
+!.env.*

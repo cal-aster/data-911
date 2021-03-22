@@ -8,7 +8,9 @@
       no-gutters
       style="background-color: var(--v-tertiary-base) !important;"
       v-bind:style="{
-        padding: $vuetify.breakpoint.xs ? '12px 20px 12px 30px' : '12px 30px 12px 40px',
+        padding: $vuetify.breakpoint.xs
+          ? '12px 20px 12px 30px'
+          : '12px 30px 12px 40px'
       }"
     >
       <span
@@ -41,7 +43,9 @@
       v-if="data"
       v-bind:style="{
         padding: $vuetify.breakpoint.xs ? '10px 20px' : '20px 30px',
-        maxHeight: $vuetify.breakpoint.xs ? 'calc(100vh - 60px)' : 'calc(90vh - 60px)'
+        maxHeight: $vuetify.breakpoint.xs
+          ? 'calc(100vh - 60px)'
+          : 'calc(90vh - 60px)'
       }"
     >
       <span
@@ -140,10 +144,7 @@
           padding: 12px 16px;
         "
       />
-      <v-flex
-        v-for="key in Object.keys(data.attributes).sort()"
-        :key="key"
-      >
+      <v-flex v-for="key in Object.keys(data.attributes).sort()" :key="key">
         <v-row
           class="body"
           style="
@@ -168,7 +169,11 @@
           </b>
           <v-spacer />
           <span class="variant--text">
-            {{ data.attributes[key]['type'] ? data.attributes[key]['type'] : '---' }}
+            {{
+              data.attributes[key]["type"]
+                ? data.attributes[key]["type"]
+                : "---"
+            }}
           </span>
         </v-row>
       </v-flex>
@@ -177,25 +182,23 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      city: {
-        type: Object,
-        default: () => {}
-      }
-    },
-    data() {
-      return {
-        data: null
-      }
-    },
-    created() {
-      this.$http
-      .get(`/city/description/${this.city.id}`)
-      .then(response => {
-        this.data = response.data
-        this.data.attributes = JSON.parse(this.data.attributes)
-      })
+export default {
+  props: {
+    city: {
+      type: Object,
+      default: () => {}
     }
+  },
+  data() {
+    return {
+      data: null
+    };
+  },
+  created() {
+    this.$http.get(`/city/description/${this.city.id}`).then(response => {
+      this.data = response.data;
+      this.data.attributes = JSON.parse(this.data.attributes);
+    });
   }
+};
 </script>

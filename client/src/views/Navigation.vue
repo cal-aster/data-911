@@ -13,9 +13,7 @@
             "
           >
             <shared-menu />
-            <router-view
-              v-on:message="popup"
-            />
+            <router-view v-on:message="popup" />
             <shared-github />
             <shared-copyright />
             <v-snackbar
@@ -26,12 +24,7 @@
             >
               {{ message }}
               <template v-slot:action="{ attrs }">
-                <v-btn
-                  dark
-                  text
-                  v-bind="attrs"
-                  @click="snackbar=false"
-                >
+                <v-btn dark text v-bind="attrs" @click="snackbar = false">
                   Close
                 </v-btn>
               </template>
@@ -44,23 +37,23 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        snackbar: false,
-        message: null,
-        color: null
-      }
+export default {
+  data() {
+    return {
+      snackbar: false,
+      message: null,
+      color: null
+    };
+  },
+  methods: {
+    popup(message) {
+      this.snackbar = true;
+      this.message = message.text;
+      this.color = message.color;
     },
-    methods: {
-      popup( message ) {
-        this.snackbar = true
-        this.message = message.text
-        this.color = message.color
-      },
-      redirect() {
-        window.location.href = process.env.VUE_APP_WEBSITE_BASE_URL
-      }
+    redirect() {
+      window.location.href = process.env.VUE_APP_WEBSITE_BASE_URL;
     }
-  };
+  }
+};
 </script>

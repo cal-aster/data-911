@@ -2,8 +2,10 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.imports import APIRouter, Query, Path, jsonable_encoder
-from services import sql_executor, city_manager
+from fastapi.encoders import jsonable_encoder
+from fastapi import APIRouter, Query, Path
+
+from services import sql_handler, city_manager
 
 router = APIRouter()
 
@@ -20,24 +22,27 @@ async def raw_spatial_records(
     from the corresponding start date to end date.
     """
     city = city_manager.describe(city_id)
-    list_dates = city_manager.list_dates(start, end, formatted_for_query=True)
+    list_dates = city_manager.list_dates(start, end)
+    placeholders = ", ".join(["?" for _ in list_dates])
 
     try:
         attributes = ["timestamp", "longitude", "latitude"]
-        records = sql_executor.get(
+        records = sql_handler.get(
             f"SELECT {', '.join(attributes)} FROM {city.get('table')} \
-            WHERE date in ? \
-            ORDER BY timestamp DESC",
-            (list_dates,),
+            WHERE date IN (%s) \
+            ORDER BY timestamp DESC"
+            % placeholders,
+            list_dates,
         )
         records_number = len(records)
         records = [record for record in records if not city_manager.has_null(record)]
     except:
         records = []
-        records_number = sql_executor.get_unique(
+        records_number = sql_handler.get_unique(
             f"SELECT COUNT(timestamp) as cnt FROM {city.get('table')} \
-            WHERE date in ?",
-            (list_dates,),
+            WHERE date IN (%s)"
+            % placeholders,
+            list_dates,
         ).get("cnt")
 
     return jsonable_encoder(

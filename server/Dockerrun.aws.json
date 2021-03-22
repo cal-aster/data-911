@@ -7,11 +7,7 @@
   ],
   "Volumes": [],
   "Image": {
-    "Name": "data911/server:latest",
+    "Name": "calaster/data911:server_production",
     "Update": "true"
-  },
-  "Authentication": {
-    "Bucket": "docker-us-west-1",
-    "Key": "config.json"
   }
 }

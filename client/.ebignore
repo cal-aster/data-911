@@ -4,11 +4,5 @@
 
 *
 
-# Application
-!dist/
-!nginx.conf
-
-# Instance
-!Dockerfile
-!Dockerrun.aws.json
-!.ebextensions/
+# artifact
+!artifact.zip

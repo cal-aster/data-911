@@ -7,9 +7,9 @@ dist
 node_modules
 
 # Secrets
-.*.development
-.*.staging
-.*.production
+.devops/
+.env.*
+!.env.example
 
 # DevOps
 .ebextensions

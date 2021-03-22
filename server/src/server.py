@@ -2,8 +2,18 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.imports import FastAPI, CORSMiddleware, Request, time
-from services import sql_executor, timestamps
+import os
+import time
+
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.requests import Request
+
+from services import sql_handler, timestamps
+
+if os.path.exists(".devops/.env.development"):
+    load_dotenv(dotenv_path=".devops/.env.development")
 
 app = FastAPI()
 app.add_middleware(
@@ -13,8 +23,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-### Request tracking
 
 
 @app.middleware("http")
@@ -28,7 +36,7 @@ async def tracker(request: Request, call_next):
     except:
         origin = "unknown"
 
-    sql_executor.add(
+    sql_handler.add(
         "Trackings",
         {
             "endpoint": str(request.url.path),

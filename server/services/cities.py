@@ -2,23 +2,18 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.imports import (
-    parser,
-    uuid,
-    math,
-    Dict,
-    timedelta,
-    datetime,
-    List,
-    Any,
-    Union,
-    Tuple,
-)
-from services.database import SqlExecutor
+import uuid
+import math
+
+from dateutil import parser
+from typing import Dict, List, Any, Union, Tuple
+from datetime import timedelta, datetime
+
+from services.database import SqlHandler
 
 
 class Cities:
-    def __init__(self, sql: SqlExecutor) -> None:
+    def __init__(self, sql: SqlHandler) -> None:
         self.sql = sql
         self.spatial_columns = ["timestamp", "longitude", "latitude"]
 
@@ -101,7 +96,7 @@ class Cities:
         if end == None:
             end = start
         start_date, end_date = parser.parse(start), parser.parse(end)
-        days_difference = (v - u).days
+        days_difference = (end_date - start_date).days
         list_dates = [
             (start_date + timedelta(days=days)).strftime("%Y-%m-%d")
             for days in range(days_difference + 1)

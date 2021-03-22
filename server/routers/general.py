@@ -2,8 +2,10 @@
 # Date:    November 04, 2020
 # Project: CalAster
 
-from src.imports import APIRouter, Response, status, jsonable_encoder
-from services import timestamps, sql_executor
+from fastapi.encoders import jsonable_encoder
+from fastapi import status, APIRouter, Response
+
+from services import timestamps, sql_handler
 
 router = APIRouter()
 
@@ -36,7 +38,7 @@ async def performances():
         ("t28", four_weeks),
     ]:
         results.update(
-            sql_executor.get_unique(
+            sql_handler.get_unique(
                 f"SELECT MAX(completion) as top_{acronym}, \
                     MIN(completion) as min_{acronym}, \
                     AVG(completion) as avg_{acronym} \

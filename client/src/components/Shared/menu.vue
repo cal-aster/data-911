@@ -8,11 +8,7 @@
         transition="slide-x-reverse-transition"
       >
         <template v-slot:activator>
-          <v-btn
-            v-model="menu"
-            class="navigation"
-            active-class="active-menu"
-          >
+          <v-btn v-model="menu" class="navigation" active-class="active-menu">
             <v-icon v-if="menu">
               mdi-close
             </v-icon>
@@ -72,12 +68,7 @@
         active-class="active-menu"
         @click="menu = !menu"
       >
-        <v-img
-          contain
-          src="@/assets/logo.png"
-          max-height="28"
-          max-width="28"
-        />
+        <v-img contain src="@/assets/logo.png" max-height="28" max-width="28" />
       </v-btn>
     </div>
     <v-navigation-drawer
@@ -110,15 +101,8 @@
           style="align-self: center; margin-left: 12px;"
         />
         <v-spacer />
-        <v-btn
-          icon
-          @click="menu = false"
-          style="align-self: center;"
-        >
-          <v-icon
-            style="margin-right: 12px;"
-            color="variant"
-          >
+        <v-btn icon @click="menu = false" style="align-self: center;">
+          <v-icon style="margin-right: 12px;" color="variant">
             mdi-close
           </v-icon>
         </v-btn>
@@ -142,7 +126,12 @@
             justify-content: center;
           "
         >
-          <a @click="$router.push('/').catch(() => {}); menu = false;">
+          <a
+            @click="
+              $router.push('/').catch(() => {});
+              menu = false;
+            "
+          >
             <span class="headline-3" style="font-weight: bold;">
               Home
             </span>
@@ -156,7 +145,12 @@
             justify-content: center;
           "
         >
-          <a @click="$router.push('/dashboard').catch(() => {}); menu = false;">
+          <a
+            @click="
+              $router.push('/dashboard').catch(() => {});
+              menu = false;
+            "
+          >
             <span class="headline-3" style="font-weight: bold;">
               Dashboard
             </span>
@@ -170,7 +164,12 @@
             justify-content: center;
           "
         >
-          <a @click="$router.push('/team').catch(() => {}); menu = false;">
+          <a
+            @click="
+              $router.push('/team').catch(() => {});
+              menu = false;
+            "
+          >
             <span class="headline-3" style="font-weight: bold;">
               Team
             </span>
@@ -182,66 +181,66 @@
 </template>
 
 <style style="scss">
+.dial {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+}
+.navigation {
+  border-radius: 4px !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
+  height: 48px !important;
+  border: 1px solid #e5e9ed !important;
+  padding: 0px 16px !important;
+  background-color: var(--v-surface-base) !important;
+}
+.navigation span {
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0.8px;
+  text-align: center;
+  color: var(--v-primary-base) !important;
+  text-transform: none !important;
+}
+.navigation:hover {
+  border: solid 1px var(--v-secondary-base) !important;
+  color: var(--v-surface-base) !important;
+  background-color: var(--v-surface-base) !important;
+  opacity: 1 !important;
+}
+.navigation:hover span {
+  color: var(--v-primary-base) !important;
+}
+.navigation:active {
+  border: solid 2px var(--v-secondary-base) !important;
+  color: transparent !important;
+}
+.active {
+  border: solid 1px var(--v-secondary-base) !important;
+  color: var(--v-surface-base) !important;
+  background-color: var(--v-surface-base) !important;
+}
+.active-menu {
+  border: solid 1px transparent !important;
+  color: var(--v-primary-base) !important;
+  background-color: var(--v-surface-base) !important;
+}
+@media only screen and (max-width: 960px) {
   .dial {
-    position: absolute;
-    top: 10px;
-    left: 30px;
+    left: 10px;
   }
-  .navigation {
-    border-radius: 4px !important;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
-    height: 48px !important;
-    border: 1px solid #e5e9ed !important;
-    padding: 0px 16px !important;
-    background-color: var(--v-surface-base) !important;
-  }
-  .navigation span {
-    font-size: 14px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.25;
-    letter-spacing: 0.8px;
-    text-align: center;
-    color: var(--v-primary-base) !important;
-    text-transform: none !important;
-  }
-  .navigation:hover {
-    border: solid 1px var(--v-secondary-base) !important;
-    color: var(--v-surface-base) !important;
-    background-color: var(--v-surface-base) !important;
-    opacity: 1 !important;
-  }
-  .navigation:hover span {
-    color: var(--v-primary-base) !important;
-  }
-  .navigation:active {
-    border: solid 2px var(--v-secondary-base) !important;
-    color: transparent !important;
-  }
-  .active {
-    border: solid 1px var(--v-secondary-base) !important;
-    color: var(--v-surface-base) !important;
-    background-color: var(--v-surface-base) !important;
-  }
-  .active-menu {
-    border: solid 1px transparent !important;
-    color: var(--v-primary-base) !important;
-    background-color: var(--v-surface-base) !important;
-  }
-  @media only screen and (max-width: 960px) {
-    .dial {
-      left: 10px;
-    }
-  }
+}
 </style>
 
 <script>
-  export default {
-    data() {
-      return {
-        menu: false
-      }
-    }
+export default {
+  data() {
+    return {
+      menu: false
+    };
   }
+};
 </script>

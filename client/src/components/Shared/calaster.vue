@@ -1,7 +1,5 @@
 <template>
-  <div
-    style="display: contents;"
-  >
+  <div style="display: contents;">
     <span class="tertiary--text">Cal</span>
     <span class="primary--text">Aster</span>
   </div>

@@ -10,7 +10,11 @@
         class="body primary--text"
         style="font-weight: bold; font-size: 18px;"
       >
-        {{ $vuetify.breakpoint.xs ? 'Daily over 3 months' : 'Daily number of calls over 3 months' }}
+        {{
+          $vuetify.breakpoint.xs
+            ? "Daily over 3 months"
+            : "Daily number of calls over 3 months"
+        }}
       </span>
       <v-spacer />
       <v-menu
@@ -95,59 +99,54 @@
 </template>
 
 <style type="scss" scoped>
-  .card {
-    width: 100%;
-    min-height: 160px;
-    background-color: var(--v-surface-base) !important;
-    border-radius: 4px !important;
-    border: solid 1px #e5e9ed !important;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
-  }
+.card {
+  width: 100%;
+  min-height: 160px;
+  background-color: var(--v-surface-base) !important;
+  border-radius: 4px !important;
+  border: solid 1px #e5e9ed !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
+}
 </style>
 
 <script>
-  import { HollowDotsSpinner } from 'epic-spinners'
+import { HollowDotsSpinner } from "epic-spinners";
 
-  export default {
-    props: {
-      city: {
-        type: Object,
-        default: () => {}
-      }
-    },
-    data() {
-      return {
-        data: null,
-        menu: false,
-        date: null
-      }
-    },
-    components: {
-      HollowDotsSpinner
-    },
-    created() {
+export default {
+  props: {
+    city: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data() {
+    return {
+      data: null,
+      menu: false,
+      date: null
+    };
+  },
+  components: {
+    HollowDotsSpinner
+  },
+  created() {
+    this.date = this.city.max_date;
+  },
+  watch: {
+    date() {
+      this.menu = false;
+      this.load(this.date);
+    }
+  },
+  methods: {
+    load(date) {
+      this.data = null;
       this.$http
-      .get(`/temporal/daily/${this.city.id}`)
-      .then(response => {
-        this.data = response.data
-      })
-      this.date = this.city.max_date
-    },
-    watch: {
-      date() {
-        this.menu = false
-        this.load(this.date)
-      }
-    },
-    methods: {
-      load( date ) {
-        this.data = null
-        this.$http
         .get(`/temporal/daily/${this.city.id}?last=${date}`)
         .then(response => {
-          this.data = response.data
-        })
-      }
+          this.data = response.data;
+        });
     }
   }
+};
 </script>

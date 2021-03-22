@@ -52,25 +52,25 @@
 </template>
 
 <style type="scss" scoped>
-  .card {
-    background-color: var(--v-surface-base) !important;
-    border-radius: 4px !important;
-    border: solid 1px #e5e9ed !important;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
-  }
+.card {
+  background-color: var(--v-surface-base) !important;
+  border-radius: 4px !important;
+  border: solid 1px #e5e9ed !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
+}
 </style>
 
 <script>
-  export default {
-    props: {
-      title: {
-        type: String,
-        default: "---"
-      },
-      value: {
-        type: String,
-        default: null
-      }
+export default {
+  props: {
+    title: {
+      type: String,
+      default: "---"
+    },
+    value: {
+      type: String,
+      default: null
     }
   }
+};
 </script>

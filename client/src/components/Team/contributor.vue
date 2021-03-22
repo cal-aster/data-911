@@ -1,12 +1,7 @@
 <template>
-  <v-card
-    class="card"
-    width="164px"
-  >
+  <v-card class="card" width="164px">
     <v-hover v-slot="{ hover }">
-      <v-avatar
-        size="164px"
-      >
+      <v-avatar size="164px">
         <v-img
           :src="picture"
           :lazy-src="lazy"
@@ -59,12 +54,12 @@
 </template>
 
 <style type="scss" scoped>
-  .card {
-    cursor: pointer;
-    border-radius: 4px !important;
-    border: 1px solid #e5e9ed !important;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
-  }
+.card {
+  cursor: pointer;
+  border-radius: 4px !important;
+  border: 1px solid #e5e9ed !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14) !important;
+}
 </style>
 
 <script>
@@ -72,7 +67,7 @@ export default {
   props: {
     picture: {
       type: String,
-      default: null,
+      default: null
     },
     lazy: {
       type: String,
@@ -80,19 +75,19 @@ export default {
     },
     firstname: {
       type: String,
-      default: null,
+      default: null
     },
     lastname: {
       type: String,
-      default: null,
+      default: null
     },
     role: {
       type: String,
-      default: null,
+      default: null
     },
     linkedin: {
       type: String,
-      default: null,
+      default: null
     }
   }
 };

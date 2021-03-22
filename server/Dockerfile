@@ -19,4 +19,4 @@ COPY . /app
 
 EXPOSE 5000
 
-CMD [ "gunicorn", "-w 4", "-t 300", "-k uvicorn.workers.UvicornWorker", "--bind=0.0.0.0:5000", "main:app" ]
+CMD [ "gunicorn", "-w 5", "-t 300", "-k uvicorn.workers.UvicornWorker", "--bind=0.0.0.0:5000", "main:app" ]

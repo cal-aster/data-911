@@ -4,16 +4,15 @@
 
 ## Project setup
 ```
-npm install
+make install
 ```
 
 ## Compiles and hot-reloads for development
 ```
-npm run serve
+make start
 ```
 
 ## Dockerize and run locally
 ```
-docker build -t data911:client_development .
-docker run -it -p 8080:80 data911:client_development
+make docker
 ```

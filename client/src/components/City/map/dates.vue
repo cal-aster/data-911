@@ -9,11 +9,7 @@
       min-width="450px"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-row
-          v-bind="attrs"
-          v-on="on"
-          no-gutters
-        >
+        <v-row v-bind="attrs" v-on="on" no-gutters>
           <span
             class="subtitle-3"
             style="
@@ -24,7 +20,7 @@
               margin-right: 12px;
             "
           >
-            {{ dates.length == 0 ? 'Pick some dates' : tDates }}
+            {{ dates.length == 0 ? "Pick some dates" : tDates }}
           </span>
           <v-icon color="rgb(0, 0, 0, 0.33)">
             mdi-calendar
@@ -83,33 +79,33 @@ export default {
   data() {
     return {
       menu: null
-    }
+    };
   },
   watch: {
     menu() {
       if (!this.menu) {
         if (this.dates.length == 0) {
-          this.$emit('dates', [this.city.max_date])
+          this.$emit("dates", [this.city.max_date]);
         } else {
-          this.$emit('dates', this.dates)
+          this.$emit("dates", this.dates);
         }
       } else {
         if (this.dates.length == 0) {
-          this.dates = [this.city.max_date]
+          this.dates = [this.city.max_date];
         }
       }
     }
   },
   computed: {
     fDates() {
-      var sDates = _.cloneDeep(this.dates)
-      sDates.sort()
-      return sDates.join(' to ')
+      var sDates = _.cloneDeep(this.dates);
+      sDates.sort();
+      return sDates.join(" to ");
     },
     tDates() {
-      var dates = _.cloneDeep(this.dates)
-      dates.sort()
-      return `${dates[0]} ~ ${dates[1] ? dates[1] : dates[0]}`
+      var dates = _.cloneDeep(this.dates);
+      dates.sort();
+      return `${dates[0]} ~ ${dates[1] ? dates[1] : dates[0]}`;
     }
   }
 };
