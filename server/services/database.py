@@ -5,6 +5,7 @@
 import os
 import pymysql
 import sqlite3
+import itertools
 
 from typing import Callable, Tuple, List, Dict
 
@@ -12,6 +13,7 @@ from typing import Callable, Tuple, List, Dict
 class SqlHandler:
 
     ENVIRONMENT = os.getenv("ENV")
+    MAX_COUNT_PLACEHOLDERS = 65535
     PLACEHOLDER = "%s" if os.getenv("ENV") in ["staging", "production"] else "?"
 
     def __init__(self) -> None:
@@ -109,22 +111,33 @@ class SqlHandler:
         values = tuple([item.get(key) for key in attributes])
         self.run(query, values)
 
-    def add_batch(self, table: str, items: List[Dict], batch_size: int = 1000) -> None:
+    def add_batch(self, table: str, items: List[Dict], batch_size: int = None) -> None:
         if len(items) > 0:
+            attributes = sorted(list(items[0].keys()))
+            placeholder = ", ".join([self.PLACEHOLDER for _ in attributes])
+            batch_size = (
+                int(self.MAX_COUNT_PLACEHOLDERS / len(items[0].keys()))
+                if batch_size is None
+                else batch_size
+            )
+
             driver = self.connect()
             cursor = driver.cursor()
             for index in range(0, len(items), batch_size):
                 excerpt = items[index : index + batch_size]
                 if len(excerpt) > 0:
-                    for item in excerpt:
-                        attributes = sorted(list(items[0].keys()))
-                        placeholder = ",".join([self.PLACEHOLDER for _ in attributes])
-                        values = tuple([item.get(key) for key in attributes])
-                        attributes = ",".join(attributes)
-                        query = (
-                            f"INSERT INTO {table} ({attributes}) VALUES ({placeholder})"
-                        )
-                        cursor.execute(query, values)
+                    placeholders = ", ".join([f"({placeholder})" for _ in excerpt])
+                    cursor.execute(
+                        f"INSERT INTO {table} ({','.join(attributes)}) VALUES {placeholders}",
+                        tuple(
+                            itertools.chain.from_iterable(
+                                [
+                                    [item.get(key) for key in attributes]
+                                    for item in excerpt
+                                ]
+                            )
+                        ),
+                    )
             driver.commit()
             cursor.close()
             driver.close()

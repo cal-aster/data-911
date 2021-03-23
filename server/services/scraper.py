@@ -9,7 +9,7 @@ import dateutil
 import itertools
 
 from sodapy import Socrata
-from dateutil import parser
+from dateutil import parser, rrule
 from datetime import timedelta
 from typing import Any, Union, List, Dict
 
@@ -299,7 +299,7 @@ class Scraper:
         )
         # reconstruct the name of table
         self.table_name = "".join(self.city.get("city").strip().split(" "))
-        self.table_name = f"{self.city.get('state').upper()}_{self.tbl}"
+        self.table_name = f"{self.city.get('state').upper()}_{self.table_name}"
         if self.city.get("department") != "police":
             self.table_name += f"_{self.city.get('department').capitalize()}"
 
@@ -354,7 +354,8 @@ class Scraper:
                     (end, count + self.city.get("num_calls"), self.city_id),
                 )
                 # build hourly, daily and weekly cache
-                Cache(self.sql).update(self.city_id, self.table_name, start, end)
+                if (start is not None) and (end is not None):
+                    Cache(self.sql).update(self.city_id, self.table_name, start, end)
 
             return count
 
