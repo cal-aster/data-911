@@ -1,0 +1,45 @@
+beat:
+  source: beat
+  type: string
+class:
+  source: initial_call_type
+  type: string
+class_end:
+  source: final_call_type
+  type: string
+date:
+  source: original_time_queued
+  type: date
+date_arrival:
+  source: arrived_time
+  type: date
+description:
+  source: event_clearance_description
+  type: string
+incident:
+  source: cad_event_number
+  type: integer
+priority:
+  source: priority
+  type: integer
+sector:
+  source: sector
+  type: string
+time:
+  source: original_time_queued
+  type: time
+time_arrival:
+  source: arrived_time
+  type: time
+timestamp:
+  source: original_time_queued
+  type: timestamp
+timestamp_arrival:
+  source: arrived_time
+  type: timestamp
+type:
+  source: call_type
+  type: string
+zone:
+  source: precinct
+  type: string

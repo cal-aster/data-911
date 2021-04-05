@@ -3,7 +3,7 @@
 # Project: CalAster
 
 from services.cities import Cities
-from services.database import SqlHandler
+from services.mysql import SqlHandler
 from services.timestamp import Timestamps
 
 sql_handler = SqlHandler()

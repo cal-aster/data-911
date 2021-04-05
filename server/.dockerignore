@@ -7,6 +7,5 @@
 # application
 !routers/
 !services/
-!src/
 !main.py
 !requirements.txt

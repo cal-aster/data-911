@@ -3,4 +3,4 @@
 # Project: CalAster
 
 # CSV archives
-*/*.csv
+**/*.csv

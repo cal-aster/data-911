@@ -9,10 +9,6 @@ __pycache__
 .ipynb_checkpoints
 .cache
 
-# work in progress
-scrapers/
-src/archive.py
-
 # devops
 .devops/*
 !.devops/.env.example
