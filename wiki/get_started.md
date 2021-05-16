@@ -20,6 +20,7 @@ make install && make start
 ```
 
 ## Start the frontend
+
 **client**: Front-end service for visualization, based on Vue.js and Vuetify.
 
 ```bash

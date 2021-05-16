@@ -1,7 +1,3 @@
-# Author:  Meryll Dindin
-# Date:    November 04, 2020
-# Project: CalAster
-
 FROM python:3.8-slim
 
 LABEL maintainer="Meryll Dindin meryll@calaster.com"

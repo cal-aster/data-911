@@ -5,10 +5,5 @@
       "ContainerPort": "5000"
     }
   ],
-  "Volumes": [
-    {
-      "HostDirectory": "/efs",
-      "ContainerDirectory": "/app/efs"
-    }
-  ]
+  "Volumes": []
 }

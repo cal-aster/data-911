@@ -1,4 +1,5 @@
 # CalAster - Data911
+
 `Point of Contact: meryll@calaster.com`
 
 ![Banner](/wiki/assets/banner.png)
@@ -10,18 +11,19 @@ The three-digit telephone number "9-1-1" has been designated as the "Universal E
 See it live: [Data911](https://911.calaster.com)
 
 Learn more here:
- 1. [NENA](https://www.nena.org/)
- 2. [APCO](https://www.apcointl.org/)
- 3. [EENA](https://eena.org/)
+
+1.  [NENA](https://www.nena.org/)
+2.  [APCO](https://www.apcointl.org/)
+3.  [EENA](https://eena.org/)
 
 In the 9-1-1 world, the saying goes by "If you have seen a PSAP, then you have seen one PSAP." The direct consequences are that, among the 6000+ PSAPs out there, each one has a different approach to digitalization, making it excessively hard for engineers and data scientists to come up with analyses at scale. Our vision is first and foremost a visualization platform of standardized and unified 9-1-1 data streams, enabling others to come up with other ideas once the data is in a good enough place.
 
 ## What we're hoping to do next
 
- 1. Add cities open data endpoints
- 2. Build new features out of the current data structures to be visualized and compared accross cities: most frequent categories of calls, hour at which most incidents occur, priority distributions, ...
- 3. Expand our spatial understanding of 911 dynamics: distributions, clustering, dispatching, ...
- 4. Enrich our data structure with new streams: known agencies (hospitals, fire stations, police stations, ...), staffing, city-wide statistics, ...
+1.  Add cities open data endpoints
+2.  Build new features out of the current data structures to be visualized and compared accross cities: most frequent categories of calls, hour at which most incidents occur, priority distributions, ...
+3.  Expand our spatial understanding of 911 dynamics: distributions, clustering, dispatching, ...
+4.  Enrich our data structure with new streams: known agencies (hospitals, fire stations, police stations, ...), staffing, city-wide statistics, ...
 
 ## How to get started
 
@@ -36,6 +38,7 @@ New wireless and IP-based communications devices are being developed at a rapid 
 As a result, through cumbersome adaptations, E9-1-1 is being asked to perform functions it was not designed to handle. In short, the nation’s 9-1-1 systems are in need of a significant overhaul.
 
 Learn more here:
- 1. [NENA](https://www.nena.org/page/NG911_Project)
+
+1.  [NENA](https://www.nena.org/page/NG911_Project)
 
 ![NG911 Infographic](/wiki/assets/NG911-infographic.jpg)

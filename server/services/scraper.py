@@ -1,17 +1,13 @@
-# Author:  Meryll Dindin
-# Date:    January 23, 2021
-# Project: CalAster
-
+import itertools
+import math
 import os
 import re
-import math
-import dateutil
-import itertools
-
-from sodapy import Socrata
-from dateutil import parser, rrule
 from datetime import timedelta
-from typing import Any, Union, List, Dict
+from typing import Any, Dict, List, Union
+
+import dateutil
+from dateutil import parser
+from sodapy import Socrata
 
 from services.database import SqlHandler
 

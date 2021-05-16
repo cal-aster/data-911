@@ -1,10 +1,5 @@
-# Author:  Meryll Dindin
-# Date:    November 04, 2020
-# Project: CalAster
-
+from fastapi import APIRouter, Path, Query, Response, status
 from fastapi.encoders import jsonable_encoder
-from fastapi import status, Path, Query, APIRouter, Response
-
 from services import sql_handler
 from services.scraper import Cache, Scraper
 

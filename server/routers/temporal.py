@@ -1,14 +1,10 @@
-# Author:  Meryll Dindin
-# Date:    November 04, 2020
-# Project: CalAster
-
-from dateutil import parser
 from datetime import timedelta
 from itertools import chain
-from dateutil.relativedelta import relativedelta
-from fastapi.encoders import jsonable_encoder
-from fastapi import APIRouter, Path, Query
 
+from dateutil import parser
+from dateutil.relativedelta import relativedelta
+from fastapi import APIRouter, Path, Query
+from fastapi.encoders import jsonable_encoder
 from services import city_manager, sql_handler
 
 router = APIRouter()

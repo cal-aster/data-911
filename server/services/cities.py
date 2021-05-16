@@ -1,13 +1,9 @@
-# Author:  Meryll Dindin
-# Date:    November 04, 2020
-# Project: CalAster
-
-import uuid
 import math
+import uuid
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Tuple, Union
 
 from dateutil import parser
-from typing import Dict, List, Any, Union, Tuple
-from datetime import timedelta, datetime
 
 from services.database import SqlHandler
 

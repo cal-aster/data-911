@@ -1,13 +1,9 @@
-# Author:  Meryll Dindin
-# Date:    November 04, 2020
-# Project: CalAster
-
-import os
-import pymysql
-import sqlite3
 import itertools
+import os
+import sqlite3
+from typing import Callable, Dict, List, Tuple
 
-from typing import Callable, Tuple, List, Dict
+import pymysql
 
 
 class SqlHandler:

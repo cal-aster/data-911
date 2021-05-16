@@ -1,12 +1,18 @@
-# Author:  Meryll Dindin
-# Date:    November 04, 2020
-# Project: CalAster
+import csv
+import json
+import re
+import uuid
+from math import isnan
+from urllib.request import urlretrieve
 
-from scrapers.imports import *
+import yaml
+from dateutil import parser
+from sodapy import Socrata
+
 
 class Parser:
-
-    def __init__(self): pass
+    def __init__(self):
+        pass
 
     @staticmethod
     def is_null(value):
@@ -14,7 +20,12 @@ class Parser:
         if value is None or value != value:
             return True
         elif isinstance(value, str):
-            return value == 'nan' or value == 'None' or value == 'NaN' or value.strip() == ''
+            return (
+                value == "nan"
+                or value == "None"
+                or value == "NaN"
+                or value.strip() == ""
+            )
         elif isinstance(value, float):
             return isnan(value)
         else:
@@ -24,10 +35,10 @@ class Parser:
 
         if self.is_null(value):
             return None
-        elif not(isinstance(value, str)):
+        elif not (isinstance(value, str)):
             return None
         else:
-            return re.sub(' +', ' ', re.sub(r'[^\w]', ' ', value)).strip()
+            return re.sub(" +", " ", re.sub(r"[^\w]", " ", value)).strip()
 
     def to_integer(self, value):
 
@@ -48,9 +59,11 @@ class Parser:
         if self.is_null(value):
             return None
         else:
-            dup = [r.strip() for r in re.sub('[()]', '', value).split(',')]
-            try: return [float('.'.join(r.split())) for r in dup][int(index)]
-            except: return None
+            dup = [r.strip() for r in re.sub("[()]", "", value).split(",")]
+            try:
+                return [float(".".join(r.split())) for r in dup][int(index)]
+            except:
+                return None
 
     def to_regex(self, value, index):
 
@@ -61,29 +74,37 @@ class Parser:
             if grp is None:
                 return None
             else:
-                try: return [float(r.strip()) for r in grp.group(1).split(',')][int(index)]
-                except: return None
+                try:
+                    return [float(r.strip()) for r in grp.group(1).split(",")][
+                        int(index)
+                    ]
+                except:
+                    return None
 
     def to_date(self, value):
 
         if self.is_null(value):
             return None
         else:
-            return parser.parse(value.replace(':000', ' '), fuzzy=True).strftime("%Y-%m-%d")
+            return parser.parse(value.replace(":000", " "), fuzzy=True).strftime(
+                "%Y-%m-%d"
+            )
 
     def to_timestamp(self, value):
 
         if self.is_null(value):
             return None
         else:
-            return int(parser.parse(value.replace(':000', ' '), fuzzy=True).timestamp())
+            return int(parser.parse(value.replace(":000", " "), fuzzy=True).timestamp())
 
     def to_time(self, value):
 
         if self.is_null(value):
             return None
         else:
-            return parser.parse(value.replace(':000', ' '), fuzzy=True).strftime("%H:%M")
+            return parser.parse(value.replace(":000", " "), fuzzy=True).strftime(
+                "%H:%M"
+            )
 
     def parse(self, record, config):
 
@@ -91,47 +112,67 @@ class Parser:
 
         def extract(record, source):
 
-            if len(source) == 1: return record.get(source[0])
-            else: return extract(record.get(source[0]), source[1:])
+            if len(source) == 1:
+                return record.get(source[0])
+            else:
+                return extract(record.get(source[0]), source[1:])
 
         for key, itm in config.items():
-            if itm.get('type') == 'string':
-                res.update({
-                    key: self.to_string(extract(record, itm.get("source").split(',')))
-                })
-            elif itm.get('type') == 'integer':
-                res.update({
-                    key: self.to_integer(extract(record, itm.get("source").split(',')))
-                })
-            elif itm.get('type') == 'float':
-                res.update({
-                    key: self.to_float(extract(record, itm.get("source").split(',')))
-                })
-            elif itm.get('type') == 'date':
-                res.update({
-                    key: self.to_date(extract(record, itm.get("source").split(',')))
-                })
-            elif itm.get('type') == 'timestamp':
-                res.update({
-                    key: self.to_timestamp(extract(record, itm.get("source").split(',')))
-                })
-            elif itm.get('type') == 'time':
-                res.update({
-                    key: self.to_time(extract(record, itm.get("source").split(',')))
-                })
-            elif itm.get('type').startswith('duple'):
-                res.update({
-                    key: self.to_duple(extract(record, itm.get("source").split(',')), itm.get('type').split('-')[1])
-                })
-            elif itm.get('type').startswith('regex'):
-                res.update({
-                    key: self.to_regex(extract(record, itm.get("source").split(',')), itm.get('type').split('-')[1])
-                })
+            if itm.get("type") == "string":
+                res.update(
+                    {key: self.to_string(extract(record, itm.get("source").split(",")))}
+                )
+            elif itm.get("type") == "integer":
+                res.update(
+                    {
+                        key: self.to_integer(
+                            extract(record, itm.get("source").split(","))
+                        )
+                    }
+                )
+            elif itm.get("type") == "float":
+                res.update(
+                    {key: self.to_float(extract(record, itm.get("source").split(",")))}
+                )
+            elif itm.get("type") == "date":
+                res.update(
+                    {key: self.to_date(extract(record, itm.get("source").split(",")))}
+                )
+            elif itm.get("type") == "timestamp":
+                res.update(
+                    {
+                        key: self.to_timestamp(
+                            extract(record, itm.get("source").split(","))
+                        )
+                    }
+                )
+            elif itm.get("type") == "time":
+                res.update(
+                    {key: self.to_time(extract(record, itm.get("source").split(",")))}
+                )
+            elif itm.get("type").startswith("duple"):
+                res.update(
+                    {
+                        key: self.to_duple(
+                            extract(record, itm.get("source").split(",")),
+                            itm.get("type").split("-")[1],
+                        )
+                    }
+                )
+            elif itm.get("type").startswith("regex"):
+                res.update(
+                    {
+                        key: self.to_regex(
+                            extract(record, itm.get("source").split(",")),
+                            itm.get("type").split("-")[1],
+                        )
+                    }
+                )
 
         return res
 
-class CsvParser:
 
+class CsvParser:
     def __init__(self, source_url, data_token, sql_helper=None):
 
         self.fmt = Parser()
@@ -141,14 +182,14 @@ class CsvParser:
 
     def download_csv(self, path):
 
-        url = 'https://{}/api/views/{}/rows.csv?accessType=DOWNLOAD'
+        url = "https://{}/api/views/{}/rows.csv?accessType=DOWNLOAD"
         urlretrieve(url.format(self.url, self.tkn), path)
 
     def browse(self, wrapper, columns, config, chunk=1000):
 
         lst = []
         for idx, row in enumerate(wrapper):
-            if (idx % chunk == 0 and idx > 0):
+            if idx % chunk == 0 and idx > 0:
                 yield lst
                 del lst[:]
             rec = dict(zip(columns, row))
@@ -163,20 +204,20 @@ class CsvParser:
         with open(path) as bdy:
             fle = csv.reader(bdy)
             col = [r.strip() for r in next(fle)]
-            for _ in range(offset): next(fle)
+            for _ in range(offset):
+                next(fle)
             sze = min(chunk, limit) if limit else chunk
             for lst in self.browse(fle, col, cfg, chunk=sze):
                 cnt += len(lst)
                 if self.sql and table:
                     self.sql.add(table, lst)
-                if limit:
-                    if cnt >= limit:
-                        break
+                if limit and cnt >= limit:
+                    break
 
         return cnt
 
-class SocrataParser:
 
+class SocrataParser:
     def __init__(self, source_url, data_token, api_token, timeout=60, sql_helper=None):
 
         self.fmt = Parser()
@@ -187,12 +228,12 @@ class SocrataParser:
 
     def download_csv(self, path):
 
-        url = 'https://{}/api/views/{}/rows.csv?accessType=DOWNLOAD'
+        url = "https://{}/api/views/{}/rows.csv?accessType=DOWNLOAD"
         urlretrieve(url.format(self.url, self.tkn), path)
 
     def size(self):
 
-        return int(self.api.get(self.tkn, select="count(*)")[0].get('count'))
+        return int(self.api.get(self.tkn, select="count(*)")[0].get("count"))
 
     def parse(self, table=None, offset=0, limit=10000, order=None, config=None):
 
@@ -206,19 +247,19 @@ class SocrataParser:
         else:
             return res, prc
 
-class Tabler:
 
+class Tabler:
     def __init__(self, directory, sql_helper=None):
 
         self.drc = directory
         self.sql = sql_helper
 
         # Load configuration
-        pth = "/".join(['scrapers', self.drc, 'description.yaml'])
+        pth = "/".join(["scrapers", self.drc, "description.yaml"])
         self.cfg = yaml.safe_load(open(pth))
-        cty = "".join(self.cfg.get('city').strip().split(' '))
+        cty = "".join(self.cfg.get("city").strip().split(" "))
         self.tbl = f"{self.cfg.get('state').upper()}_{cty}"
-        if self.cfg.get('department') != 'police':
+        if self.cfg.get("department") != "police":
             self.tbl += f"_{self.cfg.get('department').capitalize()}"
 
         # Load city ID if existing
@@ -227,46 +268,56 @@ class Tabler:
                   AND state='{self.cfg.get('state')}' \
                   AND department='{self.cfg.get('department')}'"
         self.cid = self.sql.unique(qry)
-        if self.cid: self.cid = self.cid.get('id')
+        if self.cid:
+            self.cid = self.cid.get("id")
 
     def initialize(self):
 
         # Add new entry to the Cities table
-        if self.cid is None: self.cid = uuid.uuid4().hex
-        else: self.sql.run(f"DELETE FROM Cities WHERE id='{self.cid}'")
-        self.sql.add("Cities", {
-            "id": self.cid,
-            "city": self.cfg.get('city'),
-            "longitude": self.cfg.get('longitude'),
-            "latitude": self.cfg.get('latitude'),
-            "zoom": self.cfg.get('zoom'),
-            "num_calls": 0,
-            "state": self.cfg.get('state'),
-            "state_name": self.cfg.get('state_name'),
-            "timezone": self.cfg.get('timezone'),
-            "population": self.cfg.get('population'),
-            "department": self.cfg.get('department')
-        })
+        if self.cid is None:
+            self.cid = uuid.uuid4().hex
+        else:
+            self.sql.run(f"DELETE FROM Cities WHERE id='{self.cid}'")
+        self.sql.add(
+            "Cities",
+            {
+                "id": self.cid,
+                "city": self.cfg.get("city"),
+                "longitude": self.cfg.get("longitude"),
+                "latitude": self.cfg.get("latitude"),
+                "zoom": self.cfg.get("zoom"),
+                "num_calls": 0,
+                "state": self.cfg.get("state"),
+                "state_name": self.cfg.get("state_name"),
+                "timezone": self.cfg.get("timezone"),
+                "population": self.cfg.get("population"),
+                "department": self.cfg.get("department"),
+            },
+        )
 
         # Add the description
         qry = f"SELECT id FROM Descriptions WHERE id='{self.cid}'"
         did = self.sql.unique(qry)
-        if did: self.sql.run(f"DELETE FROM Descriptions WHERE id='{self.cid}'")
-        self.sql.add("Descriptions", {
-            "id": self.cid,
-            "api_url": self.cfg.get('api_url'),
-            "attributes": json.dumps(self.cfg.get('attributes')),
-            "data_token": self.cfg.get('data_token'),
-            "data_url": self.cfg.get('data_url'),
-            "description": self.cfg.get('description'),
-            "notes": self.cfg.get('notes'),
-            "primary_key": self.cfg.get('primary_key'),
-            "refresh_frequency": self.cfg.get('refresh_frequency'),
-            "source_url": self.cfg.get('source_url')
-        })
+        if did:
+            self.sql.run(f"DELETE FROM Descriptions WHERE id='{self.cid}'")
+        self.sql.add(
+            "Descriptions",
+            {
+                "id": self.cid,
+                "api_url": self.cfg.get("api_url"),
+                "attributes": json.dumps(self.cfg.get("attributes")),
+                "data_token": self.cfg.get("data_token"),
+                "data_url": self.cfg.get("data_url"),
+                "description": self.cfg.get("description"),
+                "notes": self.cfg.get("notes"),
+                "primary_key": self.cfg.get("primary_key"),
+                "refresh_frequency": self.cfg.get("refresh_frequency"),
+                "source_url": self.cfg.get("source_url"),
+            },
+        )
 
         # Create the new table
-        pth = "/".join(['scrapers', self.drc, 'schema.yaml'])
+        pth = "/".join(["scrapers", self.drc, "schema.yaml"])
         self.sql.table_create(self.tbl, pth)
 
     def drop_duplicates(self, key):
@@ -279,40 +330,39 @@ class Tabler:
 
     def test_csv(self, offset):
 
-        cfg = yaml.safe_load(open("/".join(['scrapers', self.drc, 'parser-csv.yaml'])))
-        with open("/".join(['scrapers', self.drc, 'archive.csv'])) as bdy:
+        cfg = yaml.safe_load(open("/".join(["scrapers", self.drc, "parser-csv.yaml"])))
+        with open("/".join(["scrapers", self.drc, "archive.csv"])) as bdy:
             fle = csv.reader(bdy)
             col = [r.strip() for r in next(fle)]
-            for _ in range(offset): next(fle)
+            for _ in range(offset):
+                next(fle)
             row = next(fle)
-            try: return dict(zip(col, row)), Parser().parse(dict(zip(col, row)), cfg)
-            except: return dict(zip(col, row))
+            try:
+                return dict(zip(col, row)), Parser().parse(dict(zip(col, row)), cfg)
+            except:
+                return dict(zip(col, row))
 
     def load_csv(self):
 
-        pth = "/".join(['scrapers', self.drc, 'archive.csv'])
+        pth = "/".join(["scrapers", self.drc, "archive.csv"])
         # Initialize the CSV parser
         api = CsvParser(
-            self.cfg.get('source_url'),
-            self.cfg.get('data_token'),
-            sql_helper=self.sql
+            self.cfg.get("source_url"), self.cfg.get("data_token"), sql_helper=self.sql
         ).download_csv(pth)
 
     def from_csv(self):
 
         # Initialize the CSV parser
         api = CsvParser(
-            self.cfg.get('source_url'),
-            self.cfg.get('data_token'),
-            sql_helper=self.sql
+            self.cfg.get("source_url"), self.cfg.get("data_token"), sql_helper=self.sql
         )
 
         # Parse the CSV and add it to the DB
         api.parse(
-            "/".join(['scrapers', self.drc, 'archive.csv']),
+            "/".join(["scrapers", self.drc, "archive.csv"]),
             table=self.tbl,
             chunk=100000,
-            config="/".join(['scrapers', self.drc, 'parser-csv.yaml'])
+            config="/".join(["scrapers", self.drc, "parser-csv.yaml"]),
         )
 
     def update_city(self):
@@ -329,23 +379,21 @@ class Tabler:
     def test_api(self, offset, token, order=None):
 
         return SocrataParser(
-            self.cfg.get('source_url'),
-            self.cfg.get('data_token'),
-            token
+            self.cfg.get("source_url"), self.cfg.get("data_token"), token
         ).parse(
             limit=1,
-            order=order if order else self.cfg.get('primary_key'),
+            order=order if order else self.cfg.get("primary_key"),
             offset=offset,
-            config="/".join(['scrapers', self.drc, 'parser-api.yaml'])
+            config="/".join(["scrapers", self.drc, "parser-api.yaml"]),
         )
 
     def from_api(self, token, order=None, verbose=False):
 
         api = SocrataParser(
-            self.cfg.get('source_url'),
-            self.cfg.get('data_token'),
+            self.cfg.get("source_url"),
+            self.cfg.get("data_token"),
             token,
-            sql_helper=self.sql
+            sql_helper=self.sql,
         )
 
         ups = 1
@@ -353,9 +401,10 @@ class Tabler:
             qry = f"SELECT num_calls as cnt FROM Cities WHERE id='{self.cid}'"
             ups = api.parse(
                 table=self.tbl,
-                order=order if order else self.cfg.get('primary_key'),
-                offset=self.sql.unique(qry).get('cnt'),
-                config="/".join(['scrapers', self.drc, 'parser-api.yaml'])
+                order=order if order else self.cfg.get("primary_key"),
+                offset=self.sql.unique(qry).get("cnt"),
+                config="/".join(["scrapers", self.drc, "parser-api.yaml"]),
             )
-            if verbose: print(f"# Added {ups} records")
+            if verbose:
+                print(f"# Added {ups} records")
             self.update_city()

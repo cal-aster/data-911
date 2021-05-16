@@ -1,8 +1,10 @@
 # Data911 - Server
+
 `Author: Meryll Dindin`
 `Contact: meryll@calaster.com`
 
 ## Project setup
+
 ```
 source ../../bin/activate
 pip install -r requirements.txt
@@ -11,12 +13,14 @@ pip install --upgrade setuptools
 ```
 
 ## Compiles and hot-reloads for development
+
 ```
 source ../../bin/activate
 uvicorn --reload main:app
 ```
 
 ## Dockerize and run locally
+
 ```
 docker build -t server .
 docker run -it -p 8000:5000 --env-file=.env.development server

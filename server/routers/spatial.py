@@ -1,11 +1,6 @@
-# Author:  Meryll Dindin
-# Date:    November 04, 2020
-# Project: CalAster
-
+from fastapi import APIRouter, Path, Query
 from fastapi.encoders import jsonable_encoder
-from fastapi import APIRouter, Query, Path
-
-from services import sql_handler, city_manager
+from services import city_manager, sql_handler
 
 router = APIRouter()
 
