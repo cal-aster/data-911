@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Tuple, Union
 
 from dateutil import parser
 
-from services.database import SqlHandler
+from services.mysql import SqlHandler
 
 
 class Cities:

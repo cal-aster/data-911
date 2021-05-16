@@ -1,16 +1,12 @@
-# Author:  Meryll Dindin
-# Date:    November 04, 2020
-# Project: CalAster
-
-# Development
+# development
 dist
 node_modules
 
-# Secrets
+# secrets
+.env
 .devops/
-.env.*
 !.env.example
 
-# DevOps
+# devops
 .ebextensions
 .elasticbeanstalk

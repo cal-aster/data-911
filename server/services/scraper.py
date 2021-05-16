@@ -9,7 +9,7 @@ import dateutil
 from dateutil import parser
 from sodapy import Socrata
 
-from services.database import SqlHandler
+from services.mysql import SqlHandler
 
 
 class Cache:

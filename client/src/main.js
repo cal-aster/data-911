@@ -1,16 +1,19 @@
-import './components';
 import Vue from 'vue';
 import axios from 'axios';
 import App from './App.vue';
-import store from "./store";
+import store from './store';
 import router from './router';
 import vuetify from './plugins/vuetify';
-import VueGtag from "vue-gtag";
+import VueGtag from 'vue-gtag';
 
-Vue.use(VueGtag, {
-  config: { id: "G-ZZDN92GEE8" },
-  enabled: process.env.NODE_ENV === 'production'
-}, router);
+Vue.use(
+  VueGtag,
+  {
+    config: { id: 'G-ZZDN92GEE8' },
+    enabled: process.env.NODE_ENV === 'production',
+  },
+  router,
+);
 
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
