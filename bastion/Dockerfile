@@ -1,14 +1,16 @@
-FROM python:3.8-slim
+FROM python:3.9-slim
 
 LABEL maintainer="Meryll Dindin meryll@calaster.com"
 
 RUN mkdir /app
 VOLUME /app
 WORKDIR /app
-RUN pip install pip --upgrade
-RUN pip install gunicorn uvicorn==0.11.8
+
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
+
 COPY . /app
 
 EXPOSE 5000
