@@ -15,7 +15,7 @@
         md="6"
         v-bind:style="{
           padding: $vuetify.breakpoint.smAndDown ? '0' : '0 20px',
-          margin: $vuetify.breakpoint.smAndDown ? '70px 0 40px 0' : '0'
+          margin: $vuetify.breakpoint.smAndDown ? '70px 0 40px 0' : '0',
         }"
       >
         <div style="width: 100%;">
@@ -37,12 +37,12 @@
         md="5"
         style="height: 100%; padding: 0px;"
         v-bind:style="{
-          marginBottom: $vuetify.breakpoint.smAndDown ? '70px' : '0'
+          marginBottom: $vuetify.breakpoint.smAndDown ? '70px' : '0',
         }"
       >
         <v-row no-gutters>
           <v-spacer />
-          <team-contributor
+          <team-member
             style="align-self: center;"
             firstname="Meryll"
             lastname="Dindin"
@@ -60,7 +60,7 @@
             sm="5"
             style="padding: 0; text-align: -webkit-center;"
           >
-            <team-contributor
+            <team-member
               style="align-self: center;"
               firstname="Neha"
               lastname="Dhingra"
@@ -69,13 +69,13 @@
               :lazy="require('@/assets/contributors/neha-dhingra-lazy.jpg')"
               linkedin="https://www.linkedin.com/in/neha-dhingra-068235173/"
               v-bind:style="{
-                marginTop: $vuetify.breakpoint.xs ? '0' : '80px'
+                marginTop: $vuetify.breakpoint.xs ? '0' : '80px',
               }"
             />
           </v-col>
           <v-spacer />
           <v-col cols="12" sm="5" style="text-align: -webkit-center;">
-            <team-contributor
+            <team-member
               style="align-self: center;"
               firstname="Pierre-Louis"
               lastname="Missler"
@@ -88,7 +88,7 @@
               "
               linkedin="https://www.linkedin.com/in/pierrelouismissler/"
               v-bind:style="{
-                marginTop: $vuetify.breakpoint.xs ? '12px' : '80px'
+                marginTop: $vuetify.breakpoint.xs ? '12px' : '80px',
               }"
             />
           </v-col>
@@ -129,12 +129,17 @@
 </style>
 
 <script>
+import TeamMember from './contributor.vue';
+
 export default {
+  components: {
+    TeamMember,
+  },
   metaInfo: {
-    title: "Data911 - Team",
+    title: 'Data911 - Team',
     htmlAttrs: {
-      lang: "en"
-    }
-  }
+      lang: 'en',
+    },
+  },
 };
 </script>
