@@ -40,21 +40,21 @@ export default {
   props: {
     placeholder: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
-      search: ""
+      search: '',
     };
   },
   watch: {
     search() {
       if (!this.search) {
-        this.search = "";
+        this.search = '';
       }
-      this.$emit("search", this.search);
-    }
-  }
+      this.$emit('search', this.search);
+    },
+  },
 };
 </script>

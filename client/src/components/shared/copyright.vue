@@ -14,7 +14,7 @@
       "
     >
       {{
-        $vuetify.breakpoint.xs ? "&copy; 2021" : "CalAster, Inc. &copy; 2021"
+        $vuetify.breakpoint.xs ? '&copy; 2021' : 'CalAster, Inc. &copy; 2021'
       }}
     </a>
   </v-card>

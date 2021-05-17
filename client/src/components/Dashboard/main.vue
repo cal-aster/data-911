@@ -9,7 +9,7 @@
     "
   >
     <dashboard-header :cities="cities" />
-    <dashboard-socials :cities="cities" />
+    <footer-socials :cities="cities" />
     <shared-search
       placeholder="Looking for a city?"
       v-on:search="search = $event"
@@ -18,13 +18,13 @@
         top: 10px;
       "
       v-bind:style="{
-        right: $vuetify.breakpoint.smAndDown ? '10px' : '30px'
+        right: $vuetify.breakpoint.smAndDown ? '10px' : '30px',
       }"
     />
     <v-row
       no-gutters
       v-bind:style="{
-        padding: $vuetify.breakpoint.smAndDown ? '0' : '0 14px'
+        padding: $vuetify.breakpoint.smAndDown ? '0' : '0 14px',
       }"
     >
       <perfect-scrollbar
@@ -50,10 +50,10 @@
             v-bind:style="{
               padding: $vuetify.breakpoint.smAndDown
                 ? '0 10px 20px 10px'
-                : '0px 16px 32px 16px'
+                : '0px 16px 32px 16px',
             }"
           >
-            <dashboard-city :city="city" />
+            <city-item :city="city" />
           </v-col>
         </v-row>
       </perfect-scrollbar>
@@ -62,32 +62,43 @@
 </template>
 
 <script>
+import DashboardHeader from './header.vue';
+import FooterSocials from './socials.vue';
+import SharedSearch from '@/components/shared/search.vue';
+import CityItem from './city.vue';
+
 export default {
+  components: {
+    DashboardHeader,
+    FooterSocials,
+    SharedSearch,
+    CityItem,
+  },
   metaInfo: {
-    title: "Data911 - Dashboard",
+    title: 'Data911 - Dashboard',
     htmlAttrs: {
-      lang: "en"
-    }
+      lang: 'en',
+    },
   },
   data() {
     return {
-      search: "",
-      cities: this.$store.state.cities
+      search: '',
+      cities: this.$store.state.cities,
     };
   },
   computed: {
     nCalls() {
       var count = 0;
-      this.cities.forEach(x => {
+      this.cities.forEach((x) => {
         count += x.num_calls;
       });
       return count;
     },
     fCities() {
-      return this.cities.filter(x => {
+      return this.cities.filter((x) => {
         return x.city.toLowerCase().includes(this.search.toLowerCase());
       });
-    }
+    },
   },
   methods: {
     days(start, end) {
@@ -96,7 +107,7 @@ export default {
       return (d_1.getTime() - d_0.getTime()) / (1000 * 3600 * 24);
     },
     update() {
-      this.cities.forEach(x => {
+      this.cities.forEach((x) => {
         if (!this.minDate) {
           this.minDate = x.min_date;
         } else if (x.min_date < this.minDate) {
@@ -109,7 +120,7 @@ export default {
         }
       });
       this.numDays = this.days(this.minDate, this.maxDate);
-    }
-  }
+    },
+  },
 };
 </script>

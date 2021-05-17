@@ -8,22 +8,27 @@
     "
   >
     <v-tab-item>
-      <city-pages-overview :city="city" style="margin-top: 12px;" />
+      <overview :city="city" style="margin-top: 12px;" />
     </v-tab-item>
   </v-tabs-items>
 </template>
 
 <script>
+import Overview from './pages/overview.vue';
+
 export default {
+  components: {
+    Overview,
+  },
   props: {
     tab: {
       type: Number,
-      default: 0
+      default: 0,
     },
     city: {
       type: Object,
-      default: () => {}
-    }
-  }
+      default: () => {},
+    },
+  },
 };
 </script>

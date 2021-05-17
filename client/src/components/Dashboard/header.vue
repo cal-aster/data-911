@@ -15,7 +15,7 @@
         color="tertiary"
       />
       <span v-else class="subtitle-3 variant--text">
-        <b>{{ nCalls != 0 ? nCalls.toLocaleString() : "--" }}</b> calls reported
+        <b>{{ nCalls != 0 ? nCalls.toLocaleString() : '--' }}</b> calls reported
         for a total of <b>{{ cities.length }}</b> cities
       </span>
     </v-row>
@@ -42,17 +42,17 @@ export default {
   props: {
     cities: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   computed: {
     nCalls() {
       var cnt = 0;
-      this.cities.forEach(x => {
+      this.cities.forEach((x) => {
         cnt += x.num_calls;
       });
       return cnt;
-    }
-  }
+    },
+  },
 };
 </script>

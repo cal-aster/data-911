@@ -12,8 +12,8 @@
       >
         {{
           $vuetify.breakpoint.xs
-            ? "Daily over 3 months"
-            : "Daily number of calls over 3 months"
+            ? 'Daily over 3 months'
+            : 'Daily number of calls over 3 months'
         }}
       </span>
       <v-spacer />
@@ -75,7 +75,7 @@
         background-color: var(--v-surface-base);
       "
     >
-      <shared-timeserie
+      <time-serie
         v-if="data"
         :data="data"
         style="
@@ -84,7 +84,7 @@
           width: 100% !important;
         "
         v-bind:style="{
-          margin: $vuetify.breakpoint.xs ? '0 0 -8px -8px' : '0'
+          margin: $vuetify.breakpoint.xs ? '0 0 -8px -8px' : '0',
         }"
       />
       <hollow-dots-spinner
@@ -110,24 +110,26 @@
 </style>
 
 <script>
-import { HollowDotsSpinner } from "epic-spinners";
+import { HollowDotsSpinner } from 'epic-spinners';
+import TimeSerie from '@/components/shared/timeserie.vue';
 
 export default {
+  components: {
+    TimeSerie,
+    HollowDotsSpinner,
+  },
   props: {
     city: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   data() {
     return {
       data: null,
       menu: false,
-      date: null
+      date: null,
     };
-  },
-  components: {
-    HollowDotsSpinner
   },
   created() {
     this.date = this.city.max_date;
@@ -136,17 +138,17 @@ export default {
     date() {
       this.menu = false;
       this.load(this.date);
-    }
+    },
   },
   methods: {
     load(date) {
       this.data = null;
       this.$http
         .get(`/temporal/daily/${this.city.id}?last=${date}`)
-        .then(response => {
+        .then((response) => {
           this.data = response.data;
         });
-    }
-  }
+    },
+  },
 };
 </script>

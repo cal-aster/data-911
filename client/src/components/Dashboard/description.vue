@@ -10,7 +10,7 @@
       v-bind:style="{
         padding: $vuetify.breakpoint.xs
           ? '12px 20px 12px 30px'
-          : '12px 30px 12px 40px'
+          : '12px 30px 12px 40px',
       }"
     >
       <span
@@ -45,7 +45,7 @@
         padding: $vuetify.breakpoint.xs ? '10px 20px' : '20px 30px',
         maxHeight: $vuetify.breakpoint.xs
           ? 'calc(100vh - 60px)'
-          : 'calc(90vh - 60px)'
+          : 'calc(90vh - 60px)',
       }"
     >
       <span
@@ -170,9 +170,9 @@
           <v-spacer />
           <span class="variant--text">
             {{
-              data.attributes[key]["type"]
-                ? data.attributes[key]["type"]
-                : "---"
+              data.attributes[key]['type']
+                ? data.attributes[key]['type']
+                : '---'
             }}
           </span>
         </v-row>
@@ -186,19 +186,19 @@ export default {
   props: {
     city: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   data() {
     return {
-      data: null
+      data: null,
     };
   },
   created() {
-    this.$http.get(`/city/description/${this.city.id}`).then(response => {
+    this.$http.get(`/city/description/${this.city.id}`).then((response) => {
       this.data = response.data;
       this.data.attributes = JSON.parse(this.data.attributes);
     });
-  }
+  },
 };
 </script>

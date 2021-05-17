@@ -2,7 +2,7 @@
   <v-card
     class="card"
     v-bind:style="{
-      display: $vuetify.breakpoint.xs ? 'flex' : 'inherit'
+      display: $vuetify.breakpoint.xs ? 'flex' : 'inherit',
     }"
   >
     <v-col
@@ -31,7 +31,7 @@
         align-items: center;
       "
       v-bind:style="{
-        placeContent: $vuetify.breakpoint.xs ? 'flex-end' : 'inherit'
+        placeContent: $vuetify.breakpoint.xs ? 'flex-end' : 'inherit',
       }"
     >
       <span
@@ -65,12 +65,12 @@ export default {
   props: {
     title: {
       type: String,
-      default: "---"
+      default: '---',
     },
     value: {
       type: String,
-      default: null
-    }
-  }
+      default: null,
+    },
+  },
 };
 </script>

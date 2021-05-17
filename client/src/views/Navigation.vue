@@ -37,12 +37,21 @@
 </template>
 
 <script>
+import SharedMenu from '@/components/shared/menu.vue';
+import SharedGithub from '@/components/shared/github.vue';
+import SharedCopyright from '@/components/shared/copyright.vue';
+
 export default {
+  components: {
+    SharedMenu,
+    SharedGithub,
+    SharedCopyright,
+  },
   data() {
     return {
       snackbar: false,
       message: null,
-      color: null
+      color: null,
     };
   },
   methods: {
@@ -53,7 +62,7 @@ export default {
     },
     redirect() {
       window.location.href = process.env.VUE_APP_WEBSITE_BASE_URL;
-    }
-  }
+    },
+  },
 };
 </script>

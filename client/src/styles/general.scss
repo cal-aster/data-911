@@ -5,13 +5,13 @@
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: local("Roboto"), url(../fonts/roboto.ttf) format("truetype");
+  font-family: 'Roboto';
+  src: local('Roboto'), url(../fonts/roboto.ttf) format('truetype');
 }
 
 html {
   font-size: 80%;
-  font-family: "Roboto";
+  font-family: 'Roboto';
   display: block;
 }
 

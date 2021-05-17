@@ -22,7 +22,7 @@
         <v-icon small color="tertiary">
           mdi-github
         </v-icon>
-        {{ $vuetify.breakpoint.mdAndUp ? "Github Documentation" : "" }}
+        {{ $vuetify.breakpoint.mdAndUp ? 'Github Documentation' : '' }}
       </a>
     </span>
   </v-card>

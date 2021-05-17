@@ -11,7 +11,7 @@
               ? 'var(--v-secondary-base)'
               : city.department == 'fire'
               ? 'var(--v-error-base)'
-              : 'var(--v-background-base)'
+              : 'var(--v-background-base)',
         }"
       >
         <v-row no-gutters style="width: 100%;">
@@ -22,11 +22,11 @@
           <v-btn icon @click="modal = true">
             <v-icon size="20" color="surface">
               {{
-                city.department == "police"
-                  ? "mdi-police-badge"
-                  : city.department == "fire"
-                  ? "mdi-fire"
-                  : "mdi-pencil"
+                city.department == 'police'
+                  ? 'mdi-police-badge'
+                  : city.department == 'fire'
+                  ? 'mdi-fire'
+                  : 'mdi-pencil'
               }}
             </v-icon>
           </v-btn>
@@ -52,7 +52,7 @@
                 ? 'var(--v-tertiary-base)'
                 : city.department == 'fire'
                 ? '#D56956'
-                : 'var(--v-background-base)'
+                : 'var(--v-background-base)',
           }"
         >
           <v-spacer />
@@ -60,7 +60,7 @@
             mdi-phone
           </v-icon>
           <span style="font-weight: bold;" class="subtitle-3 surface--text">
-            {{ city.num_calls ? city.num_calls.toLocaleString() : "--" }}
+            {{ city.num_calls ? city.num_calls.toLocaleString() : '--' }}
           </span>
         </v-row>
       </v-card-title>
@@ -98,7 +98,7 @@
       :fullscreen="$vuetify.breakpoint.xs"
       width="780px"
     >
-      <dashboard-description :city="city" v-on:close="modal = false" />
+      <description-dialog :city="city" v-on:close="modal = false" />
     </v-dialog>
   </div>
 </template>
@@ -126,17 +126,22 @@
 </style>
 
 <script>
+import DescriptionDialog from './description.vue';
+
 export default {
+  components: {
+    DescriptionDialog,
+  },
   props: {
     city: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   data() {
     return {
-      modal: false
+      modal: false,
     };
-  }
+  },
 };
 </script>

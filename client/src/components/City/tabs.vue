@@ -44,13 +44,13 @@
 export default {
   data() {
     return {
-      tab: 0
+      tab: 0,
     };
   },
   watch: {
     tab() {
-      this.$emit("tab", this.tab);
-    }
-  }
+      this.$emit('tab', this.tab);
+    },
+  },
 };
 </script>

@@ -100,16 +100,16 @@
             marginTop: $vuetify.breakpoint.xs ? '20px' : '0',
             marginLeft: $vuetify.breakpoint.xs ? '0' : '16px',
             justifyContent: $vuetify.breakpoint.xs ? 'center' : 'start',
-            textAlign: $vuetify.breakpoint.xs ? 'center' : 'start'
+            textAlign: $vuetify.breakpoint.xs ? 'center' : 'start',
           }"
         >
           {{
             $vuetify.breakpoint.xs
-              ? "How are call centers"
-              : "how call centers are"
+              ? 'How are call centers'
+              : 'how call centers are'
           }}
           <br v-if="$vuetify.breakpoint.xs" />
-          doing near you{{ $vuetify.breakpoint.xs ? "?" : "" }}
+          doing near you{{ $vuetify.breakpoint.xs ? '?' : '' }}
         </span>
       </v-row>
     </div>
@@ -168,20 +168,20 @@
 <script>
 export default {
   metaInfo: {
-    title: "Data911",
+    title: 'Data911',
     htmlAttrs: {
-      lang: "en"
-    }
+      lang: 'en',
+    },
   },
   data() {
     return {
-      state: 0
+      state: 0,
     };
   },
   mounted() {
     setInterval(() => {
       this.state = (this.state + 1) % 2;
     }, 3000);
-  }
+  },
 };
 </script>

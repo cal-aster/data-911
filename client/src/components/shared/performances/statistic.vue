@@ -12,7 +12,7 @@
       border: $vuetify.breakpoint.xs ? 'none' : '1px solid #efefef',
       boxShadow: $vuetify.breakpoint.xs
         ? 'none'
-        : '0 1px 4px 0 rgba(0, 0, 0, 0.14)'
+        : '0 1px 4px 0 rgba(0, 0, 0, 0.14)',
     }"
   >
     <v-card-title>
@@ -67,20 +67,20 @@ export default {
   props: {
     title: {
       type: String,
-      default: null
+      default: null,
     },
     min: {
       type: Number,
-      default: 0.0
+      default: 0.0,
     },
     avg: {
       type: Number,
-      default: 0.0
+      default: 0.0,
     },
     max: {
       type: Number,
-      default: 0.0
-    }
+      default: 0.0,
+    },
   },
   methods: {
     format(t) {
@@ -90,7 +90,7 @@ export default {
       } else {
         return `${t.toFixed(2)}s`;
       }
-    }
-  }
+    },
+  },
 };
 </script>

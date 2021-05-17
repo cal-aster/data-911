@@ -39,14 +39,14 @@
       :opacity="0.33"
       class="overlay"
     />
-    <city-map-toggle v-if="city.localized" v-on:toggle="type = $event" />
-    <city-map-dates
+    <cluster-toggle v-if="city.localized" v-on:toggle="type = $event" />
+    <dates-selection
       v-if="isCityReady && city.localized"
       :city="city"
       :dates="dates"
       v-on:dates="dates = $event"
     />
-    <city-map-records v-if="city.localized" :data="data" :records="records" />
+    <records-count v-if="city.localized" :data="data" :records="records" />
     <mapbox-map
       style="height: 100%;"
       :access-token="token"
@@ -59,14 +59,14 @@
         v-if="type == 'clusters'"
         :data="data"
         :clusterCountPaint="{
-          'text-color': 'black'
+          'text-color': 'black',
         }"
         :unclusteredPointPaint="{
-          'circle-color': 'yellow'
+          'circle-color': 'yellow',
         }"
         :clustersPaint="{
           'circle-color': 'rgba(238, 162, 50, 0.5)',
-          'circle-radius': 20
+          'circle-radius': 20,
         }"
       />
     </mapbox-map>
@@ -115,43 +115,51 @@
 </style>
 
 <script>
-import _ from "lodash";
-import Vue from "vue";
-import { AtomSpinner, LoopingRhombusesSpinner } from "epic-spinners";
-import "mapbox-gl/dist/mapbox-gl.css";
-import VueMapbox from "@studiometa/vue-mapbox-gl";
+import Vue from 'vue';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import VueMapbox from '@studiometa/vue-mapbox-gl';
 Vue.use(VueMapbox);
 
+import cloneDeep from 'lodash/cloneDeep';
+import isEmpty from 'lodash/isEmpty';
+import { AtomSpinner, LoopingRhombusesSpinner } from 'epic-spinners';
+import ClusterToggle from './toggle.vue';
+import DatesSelection from './dates.vue';
+import RecordsCount from './records.vue';
+
 export default {
+  components: {
+    ClusterToggle,
+    DatesSelection,
+    RecordsCount,
+    AtomSpinner,
+    LoopingRhombusesSpinner,
+  },
   props: {
     city: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     center: {
       type: Array,
-      default: () => [0.0, 0.0]
+      default: () => [0.0, 0.0],
     },
     zoom: {
       type: Number,
-      default: 1
-    }
-  },
-  components: {
-    AtomSpinner,
-    LoopingRhombusesSpinner
+      default: 1,
+    },
   },
   data() {
     return {
       map: null,
       dates: [],
-      type: "heatmap",
+      type: 'heatmap',
       loading: false,
       blocking: false,
       data: null,
       records: 0,
       token: process.env.VUE_APP_MAPBOX_TOKEN,
-      style: "mapbox://styles/calaster/ckbso5bl203ds1ip7yj0yvhkc?optimize=true"
+      style: 'mapbox://styles/calaster/ckbso5bl203ds1ip7yj0yvhkc?optimize=true',
     };
   },
   watch: {
@@ -160,36 +168,36 @@ export default {
     },
     type() {
       if (this.map.isStyleLoaded()) {
-        if (this.map.getSource("calls")) {
+        if (this.map.getSource('calls')) {
           this.delHeatmap();
         }
-        if (this.type === "heatmap") {
-          this.map.on("load", this.addHeatmap());
+        if (this.type === 'heatmap') {
+          this.map.on('load', this.addHeatmap());
         }
       }
     },
     data() {
-      if (this.map.isStyleLoaded() && this.type === "heatmap") {
-        if (this.map.getSource("calls")) {
+      if (this.map.isStyleLoaded() && this.type === 'heatmap') {
+        if (this.map.getSource('calls')) {
           this.delHeatmap();
         }
-        this.map.on("load", this.addHeatmap());
+        this.map.on('load', this.addHeatmap());
       }
     },
     dates() {
       this.fetch();
-    }
+    },
   },
   computed: {
     overlay() {
       return this.loading || this.blocking;
     },
     isCityReady() {
-      return !_.isEmpty(this.city);
+      return !isEmpty(this.city);
     },
     isDateReady() {
       return this.dates.length > 0;
-    }
+    },
   },
   methods: {
     days(start, end) {
@@ -199,7 +207,7 @@ export default {
     },
     fetch() {
       if (this.$vuetify.breakpoint.lgAndUp) {
-        var sDates = _.cloneDeep(this.dates);
+        var sDates = cloneDeep(this.dates);
         sDates.sort();
         let nDays = this.days(sDates[0], sDates[1] ? sDates[1] : sDates[0]);
         if (nDays > 7) {
@@ -207,16 +215,16 @@ export default {
         } else {
           this.loading = true;
           this.blocking = false;
-          let url = "/spatial/" + this.$route.params.id + "?";
+          let url = '/spatial/' + this.$route.params.id + '?';
           url += `start=${sDates[0]}&end=${sDates[1] ? sDates[1] : sDates[0]}`;
           this.$http
             .get(url)
-            .then(response => {
+            .then((response) => {
               this.loading = false;
               this.records = response.data.nRecords;
               this.data = response.data.geojson;
             })
-            .catch(error => {
+            .catch((error) => {
               this.loading = false;
               console.log(error);
             });
@@ -224,111 +232,111 @@ export default {
       }
     },
     delHeatmap() {
-      this.map.removeLayer("heatmap");
-      this.map.removeLayer("calls");
-      this.map.removeSource("calls");
+      this.map.removeLayer('heatmap');
+      this.map.removeLayer('calls');
+      this.map.removeSource('calls');
     },
     addHeatmap() {
-      this.map.addSource("calls", {
-        type: "geojson",
-        data: this.data
+      this.map.addSource('calls', {
+        type: 'geojson',
+        data: this.data,
       });
       this.map.addLayer(
         {
-          id: "heatmap",
-          type: "heatmap",
-          source: "calls",
+          id: 'heatmap',
+          type: 'heatmap',
+          source: 'calls',
           maxzoom: 15,
           paint: {
-            "heatmap-weight": {
-              property: "dbh",
-              type: "exponential",
+            'heatmap-weight': {
+              property: 'dbh',
+              type: 'exponential',
               stops: [
                 [1, 0],
-                [62, 1]
-              ]
+                [62, 1],
+              ],
             },
-            "heatmap-intensity": {
+            'heatmap-intensity': {
               stops: [
                 [11, 1],
-                [15, 3]
-              ]
+                [15, 3],
+              ],
             },
-            "heatmap-color": [
-              "interpolate",
-              ["linear"],
-              ["heatmap-density"],
+            'heatmap-color': [
+              'interpolate',
+              ['linear'],
+              ['heatmap-density'],
               0,
-              "transparent",
+              'transparent',
               0.2,
-              "#ECE7BA",
+              '#ECE7BA',
               0.4,
-              "#ECE077",
+              '#ECE077',
               0.6,
-              "#D8A151",
+              '#D8A151',
               0.8,
-              "#987138"
+              '#987138',
             ],
-            "heatmap-radius": {
+            'heatmap-radius': {
               stops: [
                 [11, 15],
-                [15, 20]
-              ]
+                [15, 20],
+              ],
             },
-            "heatmap-opacity": {
+            'heatmap-opacity': {
               default: 1,
               stops: [
                 [14, 1],
-                [15, 0]
-              ]
-            }
-          }
+                [15, 0],
+              ],
+            },
+          },
         },
-        "waterway-label"
+        'waterway-label',
       );
       this.map.addLayer(
         {
-          id: "calls",
-          type: "circle",
-          source: "calls",
+          id: 'calls',
+          type: 'circle',
+          source: 'calls',
           minzoom: 14,
           paint: {
-            "circle-radius": {
-              property: "dbh",
-              type: "exponential",
+            'circle-radius': {
+              property: 'dbh',
+              type: 'exponential',
               stops: [
                 [{ zoom: 15, value: 1 }, 5],
                 [{ zoom: 15, value: 62 }, 10],
                 [{ zoom: 22, value: 1 }, 20],
-                [{ zoom: 22, value: 62 }, 50]
-              ]
+                [{ zoom: 22, value: 62 }, 50],
+              ],
             },
-            "circle-color": {
-              property: "dbh",
-              type: "exponential",
+            'circle-color': {
+              property: 'dbh',
+              type: 'exponential',
               stops: [
-                [0, "rgba(236,222,239,0)"],
-                [10, "rgb(236,222,239)"],
-                [20, "rgb(208,209,230)"],
-                [30, "rgb(166,189,219)"],
-                [40, "rgb(103,169,207)"],
-                [50, "rgb(28,144,153)"],
-                [60, "rgb(1,108,89)"]
-              ]
+                [0, 'rgba(236,222,239,0)'],
+                [10, 'rgb(236,222,239)'],
+                [20, 'rgb(208,209,230)'],
+                [30, 'rgb(166,189,219)'],
+                [40, 'rgb(103,169,207)'],
+                [50, 'rgb(28,144,153)'],
+                [60, 'rgb(1,108,89)'],
+              ],
             },
-            "circle-stroke-color": "white",
-            "circle-stroke-width": 1,
-            "circle-opacity": {
+            'circle-stroke-color': 'white',
+            'circle-stroke-width': 1,
+            'circle-opacity': {
               stops: [
                 [14, 0],
-                [15, 1]
-              ]
-            }
-          }
+                [15, 1],
+              ],
+            },
+          },
         },
-        "waterway-label"
+        'waterway-label',
       );
-    }
-  }
+    },
+  },
 };
 </script>

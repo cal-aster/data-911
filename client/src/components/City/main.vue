@@ -18,17 +18,17 @@
         margin: 80px 0px 62px 0px;
       "
       v-bind:style="{
-        padding: $vuetify.breakpoint.smAndDown ? '0 10px' : '0 30px'
+        padding: $vuetify.breakpoint.smAndDown ? '0 10px' : '0 30px',
       }"
     >
-      <city-tabs
+      <tabs-list
         v-on:tab="
-          v => {
+          (v) => {
             tab = v;
           }
         "
       />
-      <city-pages v-if="city" :tab="tab" :city="city" />
+      <tabs-pages v-if="city" :tab="tab" :city="city" />
     </v-col>
     <v-col
       v-if="$vuetify.breakpoint.lgAndUp"
@@ -36,7 +36,7 @@
       xl="8"
       style="padding: 0; margin: 0;"
     >
-      <city-map-main
+      <city-map
         v-if="city && timedMap"
         :city="city"
         :center="[city.longitude, city.latitude]"
@@ -47,20 +47,31 @@
 </template>
 
 <script>
+import CityHeader from './header.vue';
+import TabsList from './tabs.vue';
+import TabsPages from './pages.vue';
+import CityMap from './map/main.vue';
+
 export default {
+  components: {
+    CityHeader,
+    TabsList,
+    TabsPages,
+    CityMap,
+  },
   data() {
     return {
       tab: 0,
       city: null,
-      timedMap: false
+      timedMap: false,
     };
   },
   metaInfo() {
     return {
       title: `Data911 - ${this.city.city}, ${this.city.state}`,
       htmlAttrs: {
-        lang: "en"
-      }
+        lang: 'en',
+      },
     };
   },
   created() {
@@ -68,13 +79,13 @@ export default {
   },
   methods: {
     load() {
-      this.$http.get("/city/" + this.$route.params.id).then(response => {
+      this.$http.get('/city/' + this.$route.params.id).then((response) => {
         this.city = response.data;
         setTimeout(() => {
           this.timedMap = true;
         }, 200);
       });
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,19 +1,19 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   dashboard({ commit }) {
-    return new Promise(resolve => {
-      let cities = []
+    return new Promise((resolve) => {
+      let cities = [];
       axios
-        .get("/city")
-        .then(response => {
-          cities.push(...response.data)
+        .get('/city')
+        .then((response) => {
+          cities.push(...response.data);
         })
-        .catch(error => {
-          console.log(error)
-        })
-      commit("dashboard", cities);
+        .catch((error) => {
+          console.log(error);
+        });
+      commit('dashboard', cities);
       resolve();
     });
-  }
+  },
 };

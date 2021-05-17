@@ -30,45 +30,44 @@
               : index == 2
               ? '0px 0px 0px 8px'
               : '0',
-            marginTop: $vuetify.breakpoint.xs ? (index > 0 ? '6px' : '0') : '0'
+            marginTop: $vuetify.breakpoint.xs ? (index > 0 ? '6px' : '0') : '0',
           }"
         >
-          <city-pages-card :title="stat.label" :value="stat.value" />
+          <statistic-card :title="stat.label" :value="stat.value" />
         </v-col>
       </v-row>
-      <city-pages-hourly
-        v-if="timedHourly"
-        :city="city"
-        style="margin: 12px 0;"
-      />
-      <city-pages-daily
-        v-if="timedDaily"
-        :city="city"
-        style="margin: 12px 0;"
-      />
-      <city-pages-weekly
-        v-if="timedWeekly"
-        :city="city"
-        style="margin: 12px 0;"
-      />
+      <chart-hourly v-if="timedHourly" :city="city" style="margin: 12px 0;" />
+      <chart-daily v-if="timedDaily" :city="city" style="margin: 12px 0;" />
+      <chart-weekly v-if="timedWeekly" :city="city" style="margin: 12px 0;" />
     </v-row>
   </perfect-scrollbar>
 </template>
 
 <script>
+import StatisticCard from './card.vue';
+import ChartHourly from './hourly.vue';
+import ChartDaily from './daily.vue';
+import ChartWeekly from './weekly.vue';
+
 export default {
+  components: {
+    StatisticCard,
+    ChartHourly,
+    ChartDaily,
+    ChartWeekly,
+  },
   props: {
     city: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   data() {
     return {
       series: null,
       timedHourly: false,
       timedDaily: false,
-      timedWeekly: false
+      timedWeekly: false,
     };
   },
   mounted() {
@@ -86,23 +85,23 @@ export default {
     stats() {
       return [
         {
-          label: "Population",
+          label: 'Population',
           value: this.city.population
             ? this.$vuetify.breakpoint.xs
               ? this.city.population.toLocaleString()
-              : this.city.population.toLocaleString() + " inhabitants"
-            : "---"
+              : this.city.population.toLocaleString() + ' inhabitants'
+            : '---',
         },
         {
-          label: "Earliest data",
-          value: this.city.min_date
+          label: 'Earliest data',
+          value: this.city.min_date,
         },
         {
-          label: "Latest data",
-          value: this.city.max_date
-        }
+          label: 'Latest data',
+          value: this.city.max_date,
+        },
       ];
-    }
-  }
+    },
+  },
 };
 </script>

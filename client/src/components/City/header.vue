@@ -22,11 +22,11 @@
         style="margin-right: 10px;"
       >
         {{
-          city.department == "police"
-            ? "mdi-police-badge"
-            : city.department == "fire"
-            ? "mdi-fire"
-            : "mdi-pencil"
+          city.department == 'police'
+            ? 'mdi-police-badge'
+            : city.department == 'fire'
+            ? 'mdi-fire'
+            : 'mdi-pencil'
         }}
       </v-icon>
       <span
@@ -35,7 +35,7 @@
         class="subtitle-3"
         v-bind:class="{
           'tertiary--text': city.department == 'police',
-          'error--text': city.department == 'fire'
+          'error--text': city.department == 'fire',
         }"
       >
         {{ city.department }}
@@ -53,7 +53,7 @@
         style="font-weight: bold; margin-right: 26px;"
         class="subtitle-3 tertiary--text"
       >
-        {{ city.num_calls ? city.num_calls.toLocaleString() : "--" }} records
+        {{ city.num_calls ? city.num_calls.toLocaleString() : '--' }} records
       </span>
       <v-spacer />
       <span
@@ -101,8 +101,8 @@ export default {
   props: {
     city: {
       type: Object,
-      default: () => {}
-    }
-  }
+      default: () => {},
+    },
+  },
 };
 </script>

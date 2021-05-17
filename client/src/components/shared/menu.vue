@@ -239,8 +239,8 @@
 export default {
   data() {
     return {
-      menu: false
+      menu: false,
     };
-  }
+  },
 };
 </script>

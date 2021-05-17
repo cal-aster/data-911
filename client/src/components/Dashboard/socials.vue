@@ -56,7 +56,7 @@
         </v-btn>
       </v-row>
     </v-card>
-    <shared-performances-main :modal="modal" v-on:modal="modal = $event" />
+    <performances :modal="modal" v-on:modal="modal = $event" />
   </div>
 </template>
 
@@ -76,11 +76,16 @@
 </style>
 
 <script>
+import Performances from '@/components/shared/performances/main.vue';
+
 export default {
+  components: {
+    Performances,
+  },
   data() {
     return {
-      modal: false
+      modal: false,
     };
-  }
+  },
 };
 </script>
