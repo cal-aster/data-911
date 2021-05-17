@@ -37,11 +37,11 @@ push-production:
 
 create-production:
 	make push-production
-	python ../control.py create-artifact production polygon
+	python ../control.py create-artifact production calaster
 
 deploy-production:
 	make push-production
-	python ../control.py deploy-artifact production polygon
+	python ../control.py deploy-artifact production calaster
 
 end-production:
-	python ../control.py terminate production polygon
+	python ../control.py terminate production calaster

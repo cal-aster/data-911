@@ -8,28 +8,30 @@ install:
 start:
 	uvicorn --reload main:app
 
-docker:
+build-dev:
 	docker build -t calaster/data911:server_development .
+
+run-dev:
+	make build-dev
 	docker run -it -p 8000:5000 --env-file=.devops/.env.development -v $(directory):/app calaster/data911:server_development
 
-push:
-	docker build -t calaster/data911:server_development .
-	docker push calaster/data911:server_development
-
-pull:
-	docker pull calaster/data911:server_development
-
-push-prod:
+build-production:
 	docker build -t calaster/data911:server_production .
+
+run-production:
+	docker run -it -p 8000:5000 --env-file=.devops/.env.production calaster/data911:server_production
+
+push-production:
+	make build-production
 	docker push calaster/data911:server_production
 
-pull-prod:
-	docker pull calaster/data911:server_production
+create-production:
+	make push-production
+	python ../control.py create-artifact production calaster
 
-deploy-prod:
-	docker build -t calaster/data911:server_production .
-	docker push calaster/data911:server_production
+deploy-production:
+	make push-production
 	python ../control.py deploy-artifact production calaster
 
-end-prod:
+end-production:
 	python ../control.py terminate production calaster

@@ -10,7 +10,6 @@ But before you start, review this contribution guide. This will make the process
 - [Reporting bugs](#reporting-bugs)
 - [Feature requests](#feature-requests)
 - [Pull requests](#pull-requests)
-- [General preferences](#general-preferences)
 - [License](#license)
 - [References](#references)
 
@@ -64,11 +63,6 @@ No pull request is too small or too early. The goal is to make this project move
 6.  [Open a Pull Request](https://github.com/cal-aster/data911/pulls) with a clear title and description.
 
 :warning: Please note that all pull requests should be merged into the dev branch. Any pull request for `staging` or `master` will be rejected.
-
-## General preferences
-
-1.  Use 4 spaces indents on `.py` files.
-2.  Use 2 spaces indents on `.vue` or `.js` files
 
 ## License
 

@@ -1,0 +1,5 @@
+black
+isort
+
+-r bastion/requirements.txt
+-r server/requirements.txt
